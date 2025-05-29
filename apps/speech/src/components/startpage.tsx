@@ -73,14 +73,14 @@ export function Startpage({
             transition={{ duration: 0.5, delay: 0.8 }}
           >
             <p className="text-sm text-[#878787] mb-4">
-              Integrate ElevenLabs v3 into your project
+              Integrate ElevenLabs v3 into your projects
             </p>
             <div className="flex gap-4 justify-center">
               <a
-                href="https://elevenlabs.io/api"
+                href="https://elevenlabs.io/developers"
                 className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-md hover:opacity-90 transition-opacity text-sm"
               >
-                Get API Access
+                Use the API
               </a>
               <a
                 href="https://elevenlabs.io/docs"

@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: Params }) {
 
       <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
         <Tabs />
-        <SampleList sections={data ? [data] : []} />
+        <SampleList sections={data ? [data] : []} isPage />
       </main>
     </div>
   );

@@ -1,5 +1,6 @@
 import { Banner } from "@/components/banner";
 import "./globals.css";
+import { SimpleAudioPlayer } from "@/components/audio-player/simple-audio-player";
 import { Header } from "@/components/header";
 import { GlobalModals } from "@/components/modals/global-modals";
 import { Button } from "@/components/ui/button";
@@ -113,6 +114,7 @@ export default function RootLayout({
             <Banner />
             <Toaster />
             <GlobalModals />
+            <SimpleAudioPlayer />
           </NuqsAdapter>
         </ThemeProvider>
       </body>

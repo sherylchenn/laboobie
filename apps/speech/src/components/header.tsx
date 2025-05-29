@@ -17,7 +17,7 @@ import { Button } from "./ui/button";
 import { UserMenu } from "./user-menu";
 
 const navigationLinks = [
-  { href: "/samples", label: "All Samples" },
+  { href: "/samples", label: "Explore" },
   { href: "/generate", label: "Generate" },
 ] as const;
 

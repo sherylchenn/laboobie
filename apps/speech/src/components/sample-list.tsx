@@ -11,10 +11,10 @@ const ITEMS_PER_PAGE = 6;
 
 export function SampleList({
   sections,
-  small,
+  isPage = false,
 }: {
   sections: Section[];
-  small?: boolean;
+  isPage?: boolean;
 }) {
   const [search, setSearch] = useQueryState("q");
   const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
@@ -77,27 +77,16 @@ export function SampleList({
       {filteredSections.slice(0, visibleItems).map((section, idx) => (
         <section key={section.tag} id={section.tag}>
           <h3 className="text-lg font-regular mb-4">{section.tag}</h3>
-          <div
-            className={`grid grid-cols-1 gap-6 mb-8 ${
-              small ? "lg:grid-cols-4" : "lg:grid-cols-2 xl:grid-cols-3"
-            }`}
-          >
+          <div className="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-2 xl:grid-cols-3">
             {section.samples.map((sample, idx2) => {
               totalItemsCount++;
               return (
                 <Fragment key={`${idx}-${idx2.toString()}`}>
-                  {small ? (
-                    <>
-                      <SampleCardSmall sample={sample} small />
-                    </>
-                  ) : (
-                    <>
-                      <SampleCard
-                        key={`${idx}-${idx2.toString()}`}
-                        sample={sample}
-                      />
-                    </>
-                  )}
+                  <SampleCard
+                    key={`${idx}-${idx2.toString()}`}
+                    sample={sample}
+                    isPage={isPage}
+                  />
                 </Fragment>
               );
             })}

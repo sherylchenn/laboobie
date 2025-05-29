@@ -4,54 +4,24 @@ import { motion } from "motion/react";
 
 const expertise = [
   {
-    name: "React",
+    name: "Audiobook",
     description:
-      "React is a JavaScript library for building user interfaces with a component-based architecture and virtual DOM.",
+      "The old man chuckled softly [laughter] as he opened the dusty tome. 'Ah, young adventurer,' he whispered, 'prepare yourself for magic.'",
   },
   {
-    name: "TypeScript",
+    name: "Podcast",
     description:
-      "TypeScript adds static typing to JavaScript, enabling better tooling, error detection, and code maintainability.",
+      "Welcome back to Tech Talk! [excited] Today we're diving into AI breakthroughs that'll blow your mind. [pause] Trust me on this one.",
   },
   {
-    name: "Next.js",
+    name: "Narration",
     description:
-      "Next.js is a React framework that enables server-side rendering, static site generation, and API routes.",
+      "As the camera pans across the misty mountain range [dramatic pause], we witness nature's raw power in stunning 4K detail.",
   },
   {
-    name: "Node.js",
+    name: "Storytelling",
     description:
-      "Node.js enables JavaScript execution outside browsers, perfect for building scalable network applications.",
-  },
-  {
-    name: "Python",
-    description:
-      "Python is a high-level programming language known for its simplicity, readability and extensive library ecosystem.",
-  },
-  {
-    name: "FastAPI",
-    description:
-      "FastAPI is a modern Python web framework for building APIs with automatic OpenAPI documentation and type checking.",
-  },
-  {
-    name: "Flutter",
-    description:
-      "Flutter is Google's UI toolkit for building natively compiled applications from a single codebase.",
-  },
-  {
-    name: "Angular",
-    description:
-      "Angular is a platform for building mobile and desktop web applications using TypeScript and dependency injection.",
-  },
-  {
-    name: "C++",
-    description:
-      "C++ is a powerful systems programming language supporting object-oriented, procedural and generic programming.",
-  },
-  {
-    name: "Django",
-    description:
-      "Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.",
+      "Once upon a time [warm tone], in a kingdom where robots and humans danced together [giggles], lived a very special little girl.",
   },
 ];
 

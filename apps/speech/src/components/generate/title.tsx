@@ -1,7 +1,7 @@
 "use client";
 
 export function GenerateTitle() {
-  const text = "Generate Cursor Project Rules";
+  const text = "Create your own speech with V3";
 
   return (
     <div className="text-center mb-8">
@@ -22,8 +22,7 @@ export function GenerateTitle() {
           animation: "fadeIn 0.2s ease forwards 0.1s",
         }}
       >
-        Generate the new .mdc files for your project by uploading your <br />
-        .cursorrules, package.json, requirements.txt, or other project files.
+        Explore the best prompts for ElevenLabs V3.
       </p>
       <style jsx>{`
         @keyframes fadeIn {

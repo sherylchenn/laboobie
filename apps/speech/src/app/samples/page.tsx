@@ -16,7 +16,7 @@ export default function Page() {
       <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
         <Tabs />
         <Suspense fallback={null}>
-          <SampleList sections={sections} />
+          <SampleList sections={sections} isPage />
         </Suspense>
       </main>
     </div>
