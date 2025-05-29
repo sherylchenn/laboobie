@@ -16,28 +16,28 @@ import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata: Metadata = {
-  title: "Speech Directory by ElevenLabs",
-  description: "Listen to the best speech samples by ElevenLabs",
+  title: "Speech Directory by ElevenLabs v3",
+  description: "Listen to the best speech samples by ElevenLabs v3",
   icons: [
     {
       rel: "icon",
-      url: "https://cdn.midday.ai/cursor/favicon.png",
+      url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/favicon.ico",
     },
   ],
   openGraph: {
-    title: "Cursor Directory",
-    description: "Find the best cursor rules for your framework and language",
-    url: "https://cursor.directory",
+    title: "Speech Directory by ElevenLabs",
+    description: "Listen to the best speech samples by ElevenLabs v3",
+    url: "https://speech.directory",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://pub-abe1cd4008f5412abb77357f87d7d7bb.r2.dev/opengraph-image-v2.png",
+        url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/og.png",
         width: 800,
         height: 600,
       },
       {
-        url: "https://pub-abe1cd4008f5412abb77357f87d7d7bb.r2.dev/opengraph-image-v2.png",
+        url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/og.png",
         width: 1800,
         height: 1600,
       },
@@ -48,12 +48,12 @@ export const metadata: Metadata = {
     description: "Find the best cursor rules for your framework and language",
     images: [
       {
-        url: "https://pub-abe1cd4008f5412abb77357f87d7d7bb.r2.dev/opengraph-image-v2.png",
+        url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/og.png",
         width: 800,
         height: 600,
       },
       {
-        url: "https://pub-abe1cd4008f5412abb77357f87d7d7bb.r2.dev/opengraph-image-v2.png",
+        url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/og.png",
         width: 1800,
         height: 1600,
       },
