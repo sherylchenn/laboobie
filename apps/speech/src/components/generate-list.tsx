@@ -3,7 +3,7 @@
 import type { Sample } from "@directories/data/samples";
 import { motion } from "motion/react";
 
-export function GenerateList({ rules }: { rules: Sample[] }) {
+export function GenerateList({ samples }: { samples: Sample[] }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -25,7 +25,7 @@ export function GenerateList({ rules }: { rules: Sample[] }) {
           }}
           className="flex flex-row gap-2 sm:gap-4"
         >
-          {[...rules, ...rules].map((item, index) => (
+          {[...samples, ...samples].map((item, index) => (
             <motion.div
               key={`${item}-${index.toString()}`}
               className="px-2 py-2 border border-border w-[180px] sm:w-[240px] h-full"

@@ -45,8 +45,8 @@ export interface Sample {
   content: string;
   author?: {
     name: string;
-    url: string | null;
-    avatar: string | null;
+    url?: string | null;
+    avatar?: string | null;
   };
 }
 

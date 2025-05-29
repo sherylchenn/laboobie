@@ -4,8 +4,8 @@ import { Tabs } from "@/components/tabs";
 import { getPopularSamples } from "@directories/data/popular";
 
 export const metadata = {
-  title: "Popular rules",
-  description: "Popular rules for Cursor for frameworks, libraries and more.",
+  title: "Popular samples",
+  description: "Popular samples from v3.",
 };
 
 export const dynamic = "force-static";
