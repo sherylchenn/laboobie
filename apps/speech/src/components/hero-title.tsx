@@ -1,7 +1,5 @@
 "use client";
 
-import { CardComponent } from "./card";
-
 export function HeroTitle() {
   return (
     <div className="text-center mb-12">

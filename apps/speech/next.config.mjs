@@ -18,10 +18,10 @@ const nextConfig = {
         hostname: "avatars.githubusercontent.com",
       },
       {
-        hostname: "knhgkaawjfqqwmsgmxns.supabase.co",
+        hostname: "vsyitmfvesjmtzwnpshs.supabase.co",
       },
       {
-        hostname: "console.settlemint.com",
+        hostname: "storage.googleapis.com",
       },
     ],
   },

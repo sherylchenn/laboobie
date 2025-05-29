@@ -23,9 +23,7 @@ export function CopyButton({
     execute({ slug });
     navigator.clipboard.writeText(content);
     setCopied(true);
-    toast(
-      "Copied to clipboard. Add a .cursorrules file to your project and paste the sample.",
-    );
+    toast("Copied to clipboard");
 
     setTimeout(() => {
       setCopied(false);

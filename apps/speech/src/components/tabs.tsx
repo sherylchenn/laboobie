@@ -16,10 +16,6 @@ const tabs = [
     name: "Popular",
     path: "/samples/popular",
   },
-  {
-    name: "ElevenLabs",
-    path: "/samples/elevenlabs",
-  },
 ];
 
 export function Tabs() {

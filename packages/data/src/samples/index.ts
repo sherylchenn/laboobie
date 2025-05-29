@@ -1,15 +1,21 @@
 import slugify from "slugify";
 import { audioBookSamples } from "./audioBook";
+import { dialogueSamples } from "./dialogue";
+import { expressiveSamples } from "./expressive";
 
-export const samples: Sample[] = [...audioBookSamples].map(
+export const samples: Sample[] = [
+  ...audioBookSamples,
+  ...dialogueSamples,
+  ...expressiveSamples,
+].map(
   (sample): Sample => ({
     ...sample,
-  })
+  }),
 );
 
 export function getSections() {
   const categories = Array.from(
-    new Set(samples.flatMap((sample) => sample.tags))
+    new Set(samples.flatMap((sample) => sample.tags)),
   );
 
   return categories
@@ -27,7 +33,7 @@ export function getSectionBySlug(slug: string) {
 
 export function getSampleBySlug(slug: string) {
   return samples.find(
-    (sample) => sample.slug === slug || sample.slug === `elevenlabs/${slug}`
+    (sample) => sample.slug === slug || sample.slug === `elevenlabs/${slug}`,
   );
 }
 

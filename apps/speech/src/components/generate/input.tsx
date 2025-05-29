@@ -1,8 +1,8 @@
-import { XAI } from "@/components/ui/xai";
 import { cn } from "@/lib/utils";
 import { getSession } from "@/utils/supabase/auth-client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ElevenLabs } from "../ui/elevenlabs";
 
 export function GenerateInput({
   value,
@@ -17,8 +17,7 @@ export function GenerateInput({
 }) {
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const placeholder =
-    "Drag and drop your .cursorrules, package.json, requirements.txt, etc...";
+  const placeholder = "Describe your speech...";
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -81,7 +80,7 @@ export function GenerateInput({
             >
               sign in
             </Link>{" "}
-            to generate rules
+            to generate
           </p>
         </div>
       )}
@@ -126,7 +125,7 @@ export function GenerateInput({
             )}
 
             <div className="absolute bottom-3 left-0 right-0 px-4 flex justify-between items-center">
-              <XAI />
+              <ElevenLabs width={24} height={24} />
             </div>
           </div>
         </form>

@@ -10,13 +10,8 @@ export function GenerateFooter() {
       transition={{ delay: 0.5, duration: 0.2 }}
       className="text-center text-sm text-[#878787] fixed bottom-6 left-0 right-0 mx-auto w-fit"
     >
-      Built by the team from{" "}
-      <a href="https://midday.ai" className="text-primary">
-        Midday
-      </a>{" "}
-      and{" "}
-      <a href="https://languine.ai" className="text-primary">
-        Languine
+      <a href="https://elevenlabs.io" className="text-primary">
+        ElevenLabs
       </a>
     </motion.div>
   );

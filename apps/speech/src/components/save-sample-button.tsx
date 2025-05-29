@@ -114,9 +114,7 @@ export function SaveSampleButton({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Save Sample</DialogTitle>
-          <DialogDescription>
-            Save a sample on .cursor/rules directory.
-          </DialogDescription>
+          <DialogDescription>Save a sample</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

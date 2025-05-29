@@ -1,8 +1,4 @@
-import WelcomeEmail from "@/emails/templates/welcome";
-import { resend } from "@/lib/resend";
 import { createClient } from "@/utils/supabase/server";
-import { waitUntil } from "@vercel/functions";
-import { differenceInSeconds } from "date-fns";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -19,24 +15,24 @@ export async function GET(request: Request) {
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
 
-      if (
-        data?.session?.user.created_at &&
-        differenceInSeconds(
-          new Date(),
-          new Date(data.session.user.created_at),
-        ) < 20
-      ) {
-        waitUntil(
-          resend.emails.send({
-            from: "Cursor Directory <hello@transactional.cursor.directory>",
-            to: data.session.user.email!,
-            subject: "Welcome to Cursor Directory",
-            react: WelcomeEmail({
-              name: data.session.user.user_metadata.full_name,
-            }),
-          }),
-        );
-      }
+      // if (
+      //   data?.session?.user.created_at &&
+      //   differenceInSeconds(
+      //     new Date(),
+      //     new Date(data.session.user.created_at),
+      //   ) < 20
+      // ) {
+      //   waitUntil(
+      //     resend.emails.send({
+      //       from: "Cursor Directory <hello@transactional.cursor.directory>",
+      //       to: data.session.user.email!,
+      //       subject: "Welcome to Cursor Directory",
+      //       react: WelcomeEmail({
+      //         name: data.session.user.user_metadata.full_name,
+      //       }),
+      //     }),
+      //   );
+      // }
 
       if (isLocalEnv) {
         // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host

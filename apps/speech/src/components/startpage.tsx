@@ -2,7 +2,7 @@
 
 import type { Section } from "@directories/data/samples";
 import { motion } from "motion/react";
-import { GlobalSearchInput } from "./global-search-input";
+import { GenerateInline } from "./generate/inline";
 import { HeroTitle } from "./hero-title";
 import { SampleList } from "./sample-list";
 import { ElevenLabs } from "./ui/elevenlabs";
@@ -30,17 +30,10 @@ export function Startpage({
 
           <HeroTitle />
 
-          <div className="max-w-[620px] mx-auto w-full mb-14">
-            <GlobalSearchInput />
+          <div className="w-full mb-14">
+            <GenerateInline />
           </div>
 
-          {/* <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
-          >
-            <SampleList sections={elevenLabsSamplesSections} />
-          </motion.div> */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

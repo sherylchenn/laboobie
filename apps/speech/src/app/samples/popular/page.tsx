@@ -22,7 +22,7 @@ export default async function Page() {
 
       <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
         <Tabs />
-        <SampleList sections={popularSamples} />
+        <SampleList sections={popularSamples} isPage />
       </main>
     </div>
   );

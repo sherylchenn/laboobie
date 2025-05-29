@@ -24,7 +24,7 @@ export function SamplesSearch() {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleKeyDown}
           className="w-full text-[#585858] text-xs bg-transparent p-2 resize-none focus:outline-none placeholder:text-[#585858]"
-          placeholder="Search rules..."
+          placeholder="Search samples..."
         />
       </form>
     </div>

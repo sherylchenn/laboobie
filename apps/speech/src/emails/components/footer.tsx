@@ -1,9 +1,9 @@
-import { Column, Img, Link, Row, Section, Text } from "@react-email/components";
+import { Section } from "@react-email/components";
 
 export function Footer() {
   return (
     <Section>
-      <Img
+      {/* <Img
         src="https://languine.ai/email/separator.png"
         alt="Separator"
         width="100%"
@@ -48,7 +48,7 @@ export function Footer() {
           © {new Date().getFullYear()} Cursor Directory. All rights reserved.
           This email was sent to you because you signed up for Cursor Directory.
         </Text>
-      </Section>
+      </Section> */}
     </Section>
   );
 }

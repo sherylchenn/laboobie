@@ -16,7 +16,7 @@ import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata: Metadata = {
-  title: "Speech Directory by ElevenLabs v3",
+  title: "Speech Directory | ElevenLabs",
   description: "Listen to the best speech samples by ElevenLabs v3",
   icons: [
     {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
   ],
   openGraph: {
-    title: "Speech Directory by ElevenLabs",
+    title: "Speech Directory | ElevenLabs",
     description: "Listen to the best speech samples by ElevenLabs v3",
     url: "https://speech.directory",
     locale: "en_US",
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Cursor Directory",
-    description: "Find the best cursor rules for your framework and language",
+    title: "Speech Directory | ElevenLabs",
+    description: "Listen to the best speech samples by ElevenLabs v3",
     images: [
       {
         url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/og.png",
@@ -96,20 +96,6 @@ export default function RootLayout({
           <NuqsAdapter>
             <Header />
             {children}
-
-            <a
-              href="https://github.com/pontusab/cursor.directory"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button
-                className="hidden size-[48px] bg-[#F5F5F3]/30 text-black border border-black rounded-full font-medium fixed bottom-4 left-6 z-10 backdrop-blur-lg dark:bg-[#F5F5F3]/30 dark:text-white dark:border-white"
-                variant="outline"
-                size="icon"
-              >
-                <PlusIcon className="w-4 h-4" />
-              </Button>
-            </a>
 
             <Banner />
             <Toaster />
