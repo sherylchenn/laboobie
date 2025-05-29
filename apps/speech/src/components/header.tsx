@@ -18,17 +18,7 @@ import { UserMenu } from "./user-menu";
 
 const navigationLinks = [
   { href: "/rules", label: "Rules" },
-  { href: "/board", label: "Trending" },
-  { href: "/jobs", label: "Jobs" },
-  { href: "/mcp", label: "MCPs" },
   { href: "/generate", label: "Generate" },
-  // { href: "/community", label: "Community" },
-  { href: "/games", label: "Games" },
-  { href: "/learn", label: "Learn" },
-  { href: "/advertise", label: "Advertise" },
-  { href: "/about", label: "About" },
-  { href: "/companies", label: "Companies" },
-  { href: "/events", label: "Events" },
 ] as const;
 
 export function Header() {
@@ -72,23 +62,6 @@ export function Header() {
                 <ChevronDownIcon className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {dropdownNavItems.map((link) => (
-                <DropdownMenuItem key={link.href} asChild>
-                  <Link
-                    href={link.href}
-                    className={cn(
-                      "flex items-center gap-2 text-sm font-medium",
-                      pathname.includes(link.href)
-                        ? "text-primary"
-                        : "text-[#878787]",
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
           </DropdownMenu>
 
           <Suspense fallback={null}>

@@ -1,9 +1,9 @@
 "use client";
 
-import type { Rule } from "@directories/data/rules";
+import type { Sample } from "@directories/data/samples";
 import { motion } from "motion/react";
 
-export function GenerateList({ rules }: { rules: Rule[] }) {
+export function GenerateList({ rules }: { rules: Sample[] }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}

@@ -10,7 +10,7 @@ const readMdFile = (filename: string) => {
   }
 };
 
-export const officialRules = [
+export const officialSamples = [
   {
     tags: ["UI", "Components", "Shadcn"],
     libs: [],
@@ -156,18 +156,18 @@ export const officialRules = [
   },
 ];
 
-export const officialRulesSections = [
+export const officialSamplesSections = [
   {
     tag: "Official",
-    rules: officialRules.filter(
-      (rule) =>
-        rule.content &&
-        rule.content.trim() !== "# Content coming soon" &&
-        rule.content.trim() !== "",
+    samples: officialSamples.filter(
+      (sample) =>
+        sample.content &&
+        sample.content.trim() !== "# Content coming soon" &&
+        sample.content.trim() !== "",
     ),
   },
 ];
 
-export function getOfficialRuleBySlug(slug: string) {
-  return officialRules.find((rule) => rule.slug === `official/${slug}`);
+export function getOfficialSampleBySlug(slug: string) {
+  return officialSamples.find((sample) => sample.slug === `official/${slug}`);
 }

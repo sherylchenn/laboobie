@@ -4,8 +4,7 @@
   "description": "Directory data",
   "main": "src/index.ts",
   "exports": {
-    "./rules": "./src/rules/index.ts",
-    "./mcp": "./src/mcp/index.ts",
+    "./samples": "./src/samples/index.ts",
     "./popular": "./src/popular/index.ts"
   },
   "dependencies": {

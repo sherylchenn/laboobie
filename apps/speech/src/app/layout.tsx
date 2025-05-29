@@ -14,8 +14,8 @@ import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata: Metadata = {
-  title: "Cursor Directory",
-  description: "Find the best cursor rules for your framework and language",
+  title: "Speech Directory by ElevenLabs",
+  description: "Listen to the best speech samples by ElevenLabs",
   icons: [
     {
       rel: "icon",

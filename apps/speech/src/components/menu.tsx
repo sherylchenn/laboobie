@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { getSections } from "@directories/data/rules";
+import { getSections } from "@directories/data/samples";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -15,11 +15,11 @@ export function Menu() {
       <ScrollArea className="flex-grow">
         <div className="space-y-1">
           {allSections.map((section) => (
-            <Link href={`/rules/${section.slug}`} key={section.tag}>
+            <Link href={`/samples/${section.slug}`} key={section.tag}>
               <Button variant="ghost" className="w-full justify-start">
                 {section.tag}
                 <span className="ml-auto text-[#878787]">
-                  {section.rules.length}
+                  {section.samples.length}
                 </span>
               </Button>
             </Link>

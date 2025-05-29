@@ -4,21 +4,21 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
-import { RulesSearch } from "./rules-search";
+import { SamplesSearch } from "./samples-search";
 import { Button } from "./ui/button";
 
 const tabs = [
   {
     name: "All",
-    path: "/rules",
+    path: "/samples",
   },
   {
     name: "Popular",
-    path: "/rules/popular",
+    path: "/samples/popular",
   },
   {
     name: "Official",
-    path: "/rules/official",
+    path: "/samples/official",
   },
 ];
 
@@ -45,7 +45,7 @@ export function Tabs() {
       </div>
 
       <Suspense fallback={null}>
-        <RulesSearch />
+        <SamplesSearch />
       </Suspense>
     </div>
   );

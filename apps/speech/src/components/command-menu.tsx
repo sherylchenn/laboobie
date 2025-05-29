@@ -5,21 +5,21 @@ import { useEffect, useState } from "react";
 import { CommandEmpty, CommandInput } from "./ui/command";
 import { CommandDialog, CommandItem, CommandList } from "./ui/command";
 
-interface Rule {
+interface Sample {
   title: string;
   slug: string; // Added slug property for navigation
-  // Add other properties that a rule might have
+  // Add other properties that a sample might have
 }
 
-const getRules = async () => {
-  const rules = await import("@directories/data/rules").then(
-    (mod) => mod.rules,
+const getSamples = async () => {
+  const samples = await import("@directories/data/samples").then(
+    (mod) => mod.samples,
   );
   // Filter out duplicates based on title
-  const uniqueRules = Array.from(
-    new Map(rules.map((rule) => [rule.title, rule])).values(),
+  const uniqueSamples = Array.from(
+    new Map(samples.map((sample) => [sample.title, sample])).values(),
   );
-  return uniqueRules;
+  return uniqueSamples;
 };
 
 export function CommandMenu({
@@ -29,12 +29,12 @@ export function CommandMenu({
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [rules, setRules] = useState<Rule[]>([]);
+  const [samples, setSamples] = useState<Sample[]>([]);
   const router = useRouter();
 
   useEffect(() => {
     // Load rules when component mounts
-    getRules().then((loadedRules) => setRules(loadedRules));
+    getSamples().then((loadedSamples) => setSamples(loadedSamples));
   }, []);
 
   useEffect(() => {
@@ -50,18 +50,18 @@ export function CommandMenu({
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search for a rule..." />
+      <CommandInput placeholder="Search for a sample..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        {rules.map((rule, index) => (
+        {samples.map((sample, index) => (
           <CommandItem
-            key={rule.title}
+            key={sample.title}
             onSelect={() => {
-              router.push(`/${rule.slug}`);
+              router.push(`/${sample.slug}`);
               setOpen(false);
             }}
           >
-            {rule.title}
+            {sample.title}
           </CommandItem>
         ))}
       </CommandList>

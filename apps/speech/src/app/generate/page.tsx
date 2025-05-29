@@ -2,7 +2,7 @@ import { Generate } from "@/components/generate";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Generate Cursor Project Rule (.mdc) | Cursor Directory",
+  title: "Generate Cursor Project Sample (.mdc) | Cursor Directory",
   description:
     "Generate custom cursor rules for your project by uploading your package.json file. Get tailored cursor rules based on your project's dependencies and tech stack.",
   openGraph: {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Generate Cursor Project Rule (.mdc) | Cursor Directory",
+    title: "Generate Cursor Project Sample (.mdc) | Cursor Directory",
     description:
       "Generate custom cursor rules for your project by uploading your package.json file. Get tailored cursor rules based on your project's dependencies and tech stack.",
     images: [

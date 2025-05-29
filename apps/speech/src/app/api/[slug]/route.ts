@@ -1,12 +1,12 @@
-import { getRuleBySlug, rules } from "@directories/data/rules";
+import { getRuleBySlug, rules } from "@directories/data/samples";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-static";
 export const revalidate = 86400; // Revalidate once every day
 
 export async function generateStaticParams() {
-  return rules.map((rule) => ({
-    slug: rule.slug,
+  return rules.map((sample) => ({
+    slug: sample.slug,
   }));
 }
 
@@ -19,13 +19,13 @@ export async function GET(_: Request, segmentData: { params: Params }) {
     return NextResponse.json({ error: "No slug provided" }, { status: 400 });
   }
 
-  const rule = getRuleBySlug(slug);
+  const sample = getRuleBySlug(slug);
 
-  if (!rule) {
-    return NextResponse.json({ error: "Rule not found" }, { status: 404 });
+  if (!sample) {
+    return NextResponse.json({ error: "Sample not found" }, { status: 404 });
   }
 
-  return new Response(JSON.stringify({ data: rule }), {
+  return new Response(JSON.stringify({ data: sample }), {
     status: 200,
     headers: {
       "Content-Type": "application/json",

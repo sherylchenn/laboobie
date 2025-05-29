@@ -1,6 +1,6 @@
 "use client";
 
-import { generateRule } from "@/actions/generate-rule";
+import { generateRule } from "@/actions/generate-sample";
 import { cn } from "@/lib/utils";
 import { readStreamableValue } from "ai/rsc";
 import { useState } from "react";

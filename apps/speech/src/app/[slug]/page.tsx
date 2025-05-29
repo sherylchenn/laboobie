@@ -1,31 +1,31 @@
 import { Menu } from "@/components/menu";
-import { RuleCard } from "@/components/rule-card";
-import { getRuleBySlug, rules } from "@directories/data/rules";
+import { SampleCard } from "@/components/sample-card";
+import { getSampleBySlug, samples } from "@directories/data/samples";
 
 type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const rule = getRuleBySlug(slug);
+  const sample = getSampleBySlug(slug);
 
   return {
-    title: `${rule?.title} rule by ${rule?.author?.name}`,
-    description: rule?.content,
+    title: `${sample?.title} sample by ${sample?.author?.name}`,
+    description: sample?.content,
   };
 }
 
 export async function generateStaticParams() {
-  return rules.map((rule) => ({
-    slug: rule.slug,
+  return samples.map((sample) => ({
+    slug: sample.slug,
   }));
 }
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
-  const rule = getRuleBySlug(slug);
+  const sample = getSampleBySlug(slug);
 
-  if (!rule) {
-    return <div>Rule not found</div>;
+  if (!sample) {
+    return <div>Sample not found</div>;
   }
 
   return (
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Params }) {
       </div>
 
       <main className="flex-1 p-6 pt-16">
-        <RuleCard rule={rule} isPage={true} />
+        <SampleCard sample={sample} isPage={true} />
       </main>
     </div>
   );

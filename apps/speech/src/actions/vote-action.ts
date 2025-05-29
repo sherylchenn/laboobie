@@ -16,11 +16,11 @@ export const voteAction = actionClient
       headers.get("x-forwarded-for"),
     );
 
-    const hasVoted = await redis.sadd(`rules:${slug}:ip:${clientIP}`, true);
+    const hasVoted = await redis.sadd(`samples:${slug}:ip:${clientIP}`, true);
 
     if (!hasVoted) {
       throw new Error("You have already voted");
     }
 
-    await redis.incr(`rules:${slug}`);
+    await redis.incr(`samples:${slug}`);
   });

@@ -3,10 +3,14 @@ import { useQueryState } from "nuqs";
 export function GlobalSearchInput() {
   const [search, setSearch] = useQueryState("q", { defaultValue: "" });
 
-  const placeholder = "Search for a rule or MCP server...";
+  const placeholder = "Type any text to generate speech with ElevenLabs V3...";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Here you would integrate with ElevenLabs API
+    if (search.trim()) {
+      console.log("Generating speech for:", search);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

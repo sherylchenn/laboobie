@@ -55,42 +55,6 @@ export async function getPopularPosts() {
   };
 }
 
-export async function getCompanyProfile(slug: string, userId?: string) {
-  const supabase = await createClient();
-  const query = supabase.from("companies").select("*").eq("slug", slug);
-
-  if (userId) {
-    query.eq("owner_id", userId);
-  }
-
-  const { data, error } = await query.single();
-
-  return { data, error };
-}
-
-export async function getUserCompanies(userId: string) {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("companies")
-    .select("*")
-    .eq("owner_id", userId);
-
-  return { data, error };
-}
-
-export async function getCompanies() {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("companies")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  return {
-    data,
-    error,
-  };
-}
-
 export async function getFeaturedJobs({
   onlyPremium,
 }: {
@@ -170,44 +134,4 @@ export async function getFeaturedMCPs({
     data: data?.sort(() => Math.random() - 0.5),
     error,
   };
-}
-
-export async function getMCPs({
-  page = 1,
-  limit = 36,
-}: {
-  page?: number;
-  limit?: number;
-} = {}) {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("mcps")
-    .select("*")
-    .eq("active", true)
-    .order("company_id", { ascending: true, nullsFirst: false })
-    .limit(limit)
-    .range((page - 1) * limit, page * limit - 1);
-
-  return { data, error };
-}
-
-export async function getMCPBySlug(slug: string) {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("mcps")
-    .select("*")
-    .eq("slug", slug)
-    .single();
-
-  return { data, error };
-}
-
-export async function getMembers() {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("users")
-    .select("*")
-    .eq("public", true);
-
-  return { data, error };
 }
