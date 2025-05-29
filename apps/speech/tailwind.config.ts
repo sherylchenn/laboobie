@@ -23,6 +23,8 @@ const config = {
       fontFamily: {
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
         mono: "var(--font-geist-mono)",
+        waldenburg: ["var(--font-waldenburg)", "var(--font-waldenburg-hf)"],
+        waldenburghf: "var(--font-waldenburg-hf)",
       },
       colors: {
         border: "hsl(var(--border))",

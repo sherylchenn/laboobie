@@ -34,6 +34,13 @@ export function Startpage({
             <GlobalSearchInput />
           </div>
 
+          {/* <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
+          >
+            <SampleList sections={elevenLabsSamplesSections} />
+          </motion.div> */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,7 +55,7 @@ export function Startpage({
                   transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
                 >
                   <h2 className="text-left text-lg font-medium mb-2">
-                    Popular Model Samples
+                    Trending V3 Samples
                   </h2>
                   <p className="text-left text-sm text-[#878787] mb-8">
                     Click any sample to listen, view prompts & vote for your
@@ -57,30 +64,16 @@ export function Startpage({
                 </motion.div>
               </div>
             </div>
-            <SampleList sections={elevenLabsSamplesSections} />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
-          >
             <SampleList sections={sections} />
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
-          >
-            <SampleList sections={sections} />
-          </motion.div>
-          <motion.div
-            className="text-center py-12 border-t border-[#E5E5E5] dark:border-[#262626]"
+            className="text-center py-12 border-[#E5E5E5] dark:border-[#262626]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
             <p className="text-sm text-[#878787] mb-4">
-              Ready to integrate ElevenLabs V3 into your project?
+              Integrate ElevenLabs v3 into your project
             </p>
             <div className="flex gap-4 justify-center">
               <a

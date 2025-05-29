@@ -5,6 +5,7 @@ import { GlobalModals } from "@/components/modals/global-modals";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import { Waldenburg, WaldenburgHF } from "@/utils/fonts";
 import { OpenPanelComponent } from "@openpanel/nextjs";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -80,7 +81,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={cn(
-        `${GeistSans.variable} ${GeistMono.variable}`,
+        `${GeistSans.variable} ${GeistMono.variable} ${Waldenburg.variable} ${WaldenburgHF.variable}`,
         "whitespace-pre-line antialiased bg-background text-foreground !dark",
       )}
     >

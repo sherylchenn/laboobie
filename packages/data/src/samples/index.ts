@@ -1,23 +1,15 @@
 import slugify from "slugify";
-import { goRules } from "./go";
-import { terraformRules } from "./terraform";
-import { typescriptRules } from "./typescript";
+import { audioBookSamples } from "./audioBook";
 
-export const samples: Sample[] = [
-  ...goRules,
-  ...terraformRules,
-  ...typescriptRules,
-].map(
+export const samples: Sample[] = [...audioBookSamples].map(
   (sample): Sample => ({
     ...sample,
-    libs: [],
-    description: "",
-  }),
+  })
 );
 
 export function getSections() {
   const categories = Array.from(
-    new Set(samples.flatMap((sample) => sample.tags)),
+    new Set(samples.flatMap((sample) => sample.tags))
   );
 
   return categories
@@ -35,16 +27,15 @@ export function getSectionBySlug(slug: string) {
 
 export function getSampleBySlug(slug: string) {
   return samples.find(
-    (sample) => sample.slug === slug || sample.slug === `elevenlabs/${slug}`,
+    (sample) => sample.slug === slug || sample.slug === `elevenlabs/${slug}`
   );
 }
 
 export interface Sample {
   title: string;
-  description?: string;
+  description: string;
   slug: string;
   tags: string[];
-  libs: string[];
   content: string;
   author?: {
     name: string;

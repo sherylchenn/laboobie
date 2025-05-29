@@ -51,10 +51,17 @@ export function SampleCard({
       <div className="flex items-start justify-between mb-2">
         <div className="flex-1">
           <h3 className="font-medium text-base mb-1">{sample.title}</h3>
-          <p className="text-sm text-[#878787]">{sample.description}</p>
+          <p className="text-sm text-[#878787] h-10 line-clamp-2 overflow-hidden">
+            {sample.description}
+          </p>
           {!isPage && (
             <Link href={`/${sample.slug}`}>
-              <div className="text-muted-foreground">View prompt</div>
+              <Button
+                variant="link"
+                className="text-sm text-[#878787] !p-0 hover:text-black dark:hover:text-white transition-colors"
+              >
+                <span>View prompt</span>
+              </Button>
             </Link>
           )}
         </div>
@@ -96,7 +103,6 @@ export function SampleCard({
           </Link>
         </CardContent>
       )}
-
       <CardHeader className="p-0 space-y-1">
         <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-2">
