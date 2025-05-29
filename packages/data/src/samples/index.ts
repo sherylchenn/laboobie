@@ -11,6 +11,7 @@ export const samples: Sample[] = [
   (sample): Sample => ({
     ...sample,
     libs: [],
+    description: "",
   }),
 );
 
@@ -34,12 +35,13 @@ export function getSectionBySlug(slug: string) {
 
 export function getSampleBySlug(slug: string) {
   return samples.find(
-    (sample) => sample.slug === slug || sample.slug === `official/${slug}`,
+    (sample) => sample.slug === slug || sample.slug === `elevenlabs/${slug}`,
   );
 }
 
 export interface Sample {
   title: string;
+  description?: string;
   slug: string;
   tags: string[];
   libs: string[];

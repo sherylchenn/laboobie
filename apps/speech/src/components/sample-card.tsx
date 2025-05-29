@@ -13,11 +13,9 @@ import { ShareButton } from "./share-button";
 export function SampleCard({
   sample,
   isPage,
-  expandedPrompt = true,
 }: {
   sample: Sample;
   isPage?: boolean;
-  expandedPrompt?: boolean;
 }) {
   const [playing, setPlaying] = useState<string | null>(null);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
@@ -44,11 +42,21 @@ export function SampleCard({
   };
 
   return (
-    <Card className="bg-background p-4 flex flex-col max-h-[calc(100vh-8rem)] aspect-square">
+    <Card
+      className={cn(
+        "bg-background p-4 flex flex-col max-h-[calc(100vh-8rem)]",
+        isPage && "aspect-square",
+      )}
+    >
       <div className="flex items-start justify-between mb-2">
         <div className="flex-1">
           <h3 className="font-medium text-base mb-1">{sample.title}</h3>
           <p className="text-sm text-[#878787]">{sample.description}</p>
+          {!isPage && (
+            <Link href={`/${sample.slug}`}>
+              <div className="text-muted-foreground">View prompt</div>
+            </Link>
+          )}
         </div>
         <Button
           onClick={handlePlay}
@@ -68,7 +76,7 @@ export function SampleCard({
           )}
         </Button>
       </div>
-      {expandedPrompt && (
+      {isPage && (
         <CardContent
           className={cn(
             "bg-card h-full mb-2 font-mono p-4 pr-1 text-sm opacity-50 hover:opacity-100 transition-opacity group relative flex-grow",

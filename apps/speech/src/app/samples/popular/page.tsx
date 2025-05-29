@@ -1,7 +1,7 @@
 import { Menu } from "@/components/menu";
 import { SampleList } from "@/components/sample-list";
 import { Tabs } from "@/components/tabs";
-import { getPopularRules } from "@directories/data/popular";
+import { getPopularSamples } from "@directories/data/popular";
 
 export const metadata = {
   title: "Popular rules",
@@ -12,7 +12,7 @@ export const dynamic = "force-static";
 export const revalidate = 86400; // Revalidate once every day
 
 export default async function Page() {
-  const popularRules = await getPopularRules();
+  const popularSamples = await getPopularSamples();
 
   return (
     <div className="flex w-full h-full">
@@ -22,7 +22,7 @@ export default async function Page() {
 
       <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
         <Tabs />
-        <SampleList sections={popularRules} />
+        <SampleList sections={popularSamples} />
       </main>
     </div>
   );

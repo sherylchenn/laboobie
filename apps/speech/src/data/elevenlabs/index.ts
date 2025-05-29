@@ -3,14 +3,14 @@ import { join } from "node:path";
 
 const readMdFile = (filename: string) => {
   try {
-    const filePath = join(process.cwd(), "src/data/official", filename);
+    const filePath = join(process.cwd(), "src/data/elevenlabs", filename);
     return readFileSync(filePath, "utf-8");
   } catch (error) {
     return "";
   }
 };
 
-export const officialSamples = [
+export const elevenLabsSamples = [
   {
     tags: ["UI", "Components", "Shadcn"],
     libs: [],
@@ -41,7 +41,7 @@ export const officialSamples = [
     tags: ["tRPC", "React", "Typescript"],
     libs: [],
     title: "tRPC",
-    slug: "official/trpc",
+    slug: "elevenlabs/trpc",
     content: readMdFile("./trpc.md"),
     author: {
       name: "tRPC",
@@ -93,7 +93,7 @@ export const officialSamples = [
     tags: ["Supabase"],
     libs: [],
     title: "Supabase - Typescript",
-    slug: "official/supabase-typescript",
+    slug: "elevenlabs/supabase-typescript",
     content: readMdFile("./supabase.md"),
     author: {
       name: "Supabase",
@@ -106,7 +106,7 @@ export const officialSamples = [
     tags: ["Trigger.dev"],
     libs: [],
     title: "Trigger.dev - Typescript",
-    slug: "official/trigger-typescript",
+    slug: "elevenlabs/trigger-typescript",
     content: readMdFile("./trigger.md"),
     author: {
       name: "Trigger.dev",
@@ -156,10 +156,10 @@ export const officialSamples = [
   },
 ];
 
-export const officialSamplesSections = [
+export const elevenLabsSamplesSections = [
   {
-    tag: "Official",
-    samples: officialSamples.filter(
+    tag: "ElevenLabs",
+    samples: elevenLabsSamples.filter(
       (sample) =>
         sample.content &&
         sample.content.trim() !== "# Content coming soon" &&
@@ -168,6 +168,8 @@ export const officialSamplesSections = [
   },
 ];
 
-export function getOfficialSampleBySlug(slug: string) {
-  return officialSamples.find((sample) => sample.slug === `official/${slug}`);
+export function getElevenLabsSampleBySlug(slug: string) {
+  return elevenLabsSamples.find(
+    (sample) => sample.slug === `elevenlabs/${slug}`,
+  );
 }

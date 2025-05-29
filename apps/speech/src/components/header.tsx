@@ -17,7 +17,7 @@ import { Button } from "./ui/button";
 import { UserMenu } from "./user-menu";
 
 const navigationLinks = [
-  { href: "/rules", label: "Rules" },
+  { href: "/samples", label: "All Samples" },
   { href: "/generate", label: "Generate" },
 ] as const;
 
@@ -26,7 +26,6 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   const mainNavItems = navigationLinks.slice(0, 5);
-  const dropdownNavItems = navigationLinks.slice(5);
 
   return (
     <div className="flex justify-between items-center mt-2 md:mt-0">

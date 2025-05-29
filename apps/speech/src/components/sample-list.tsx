@@ -1,13 +1,10 @@
 "use client";
 
-import { AdCard } from "@/components/ad-card";
 import { SampleCard } from "@/components/sample-card";
 import { SampleCardSmall } from "@/components/sample-card-small";
-import { ads } from "@/data/ads";
 import type { Section } from "@directories/data/samples";
 import { useQueryState } from "nuqs";
 import { Fragment, useEffect, useState } from "react";
-import { AdCardSmall } from "./ad-card-small";
 import { Button } from "./ui/button";
 
 const ITEMS_PER_PAGE = 6;
@@ -21,13 +18,6 @@ export function SampleList({
 }) {
   const [search, setSearch] = useQueryState("q");
   const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
-
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Set mounted state
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // Reset visible items when search changes
   useEffect(() => {

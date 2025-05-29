@@ -1,7 +1,7 @@
 import { Menu } from "@/components/menu";
 import { SampleList } from "@/components/sample-list";
 import { Tabs } from "@/components/tabs";
-import { officialSamplesSections } from "@/data/official";
+import { elevenLabsSamplesSections } from "@/data/elevenlabs";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default async function Page() {
 
       <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
         <Tabs />
-        <SampleList sections={officialSamplesSections} />
+        <SampleList sections={elevenLabsSamplesSections} />
       </main>
     </div>
   );

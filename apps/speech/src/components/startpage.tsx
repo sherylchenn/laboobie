@@ -9,8 +9,10 @@ import { ElevenLabs } from "./ui/elevenlabs";
 
 export function Startpage({
   sections,
+  elevenLabsSamplesSections,
 }: {
   sections: Section[];
+  elevenLabsSamplesSections: Section[];
 }) {
   return (
     <div>
@@ -31,12 +33,69 @@ export function Startpage({
           <div className="max-w-[620px] mx-auto w-full mb-14">
             <GlobalSearchInput />
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
+          >
+            <div className="flex flex-col gap-4 w-full">
+              <div className="transition-all duration-1000">
+                <motion.div
+                  className="mb-0"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+                >
+                  <h2 className="text-left text-lg font-medium mb-2">
+                    Popular Model Samples
+                  </h2>
+                  <p className="text-left text-sm text-[#878787] mb-8">
+                    Click any sample to listen, view prompts & vote for your
+                    favorites
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+            <SampleList sections={elevenLabsSamplesSections} />
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
           >
             <SampleList sections={sections} />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
+          >
+            <SampleList sections={sections} />
+          </motion.div>
+          <motion.div
+            className="text-center py-12 border-t border-[#E5E5E5] dark:border-[#262626]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          >
+            <p className="text-sm text-[#878787] mb-4">
+              Ready to integrate ElevenLabs V3 into your project?
+            </p>
+            <div className="flex gap-4 justify-center">
+              <a
+                href="https://elevenlabs.io/api"
+                className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-md hover:opacity-90 transition-opacity text-sm"
+              >
+                Get API Access
+              </a>
+              <a
+                href="https://elevenlabs.io/docs"
+                className="px-4 py-2 border border-[#E5E5E5] dark:border-[#262626] rounded-md hover:border-[#878787] dark:hover:border-[#404040] transition-colors text-sm"
+              >
+                View Documentation
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>

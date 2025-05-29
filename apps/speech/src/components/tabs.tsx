@@ -17,8 +17,8 @@ const tabs = [
     path: "/samples/popular",
   },
   {
-    name: "Official",
-    path: "/samples/official",
+    name: "ElevenLabs",
+    path: "/samples/elevenlabs",
   },
 ];
 
