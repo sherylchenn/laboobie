@@ -3,6 +3,7 @@ import { getSession } from "@/utils/supabase/auth-client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ElevenLabs } from "../ui/elevenlabs";
+import { Textarea } from "../ui/textarea";
 
 export function GenerateInput({
   value,
@@ -70,39 +71,20 @@ export function GenerateInput({
 
   return (
     <div className="relative h-full">
-      {isAuth === false && (
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10">
-          <p className="text-sm font-mono">
-            Please{" "}
-            <Link
-              href="/login?next=/generate"
-              className="text-primary underline"
-            >
-              sign in
-            </Link>{" "}
-            to generate
-          </p>
-        </div>
-      )}
-      <div
-        className={cn(
-          "w-full max-w-2xl mx-auto h-[100px] border border-[#2C2C2]",
-          isAuth === false && "blur-sm",
-        )}
-      >
+      <div className="w-full max-w-2xl mx-auto h-[100px]">
         <form
-          className={cn("h-full", isAuth === false && "pointer-events-none")}
+          className="h-full"
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onSubmit={handleSubmit}
         >
           <div className="relative h-full">
-            <textarea
+            <Textarea
               value={value}
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full text-[#585858] text-xs bg-transparent p-4 resize-none focus:outline-none"
+              className="w-full text-xs p-4 resize-none focus:outline-none h-full rounded-lg border-[#1A1A1A]"
             />
 
             {!value && (
@@ -123,10 +105,6 @@ export function GenerateInput({
                 ))}
               </div>
             )}
-
-            <div className="absolute bottom-3 left-0 right-0 px-4 flex justify-between items-center">
-              <ElevenLabs width={24} height={24} />
-            </div>
           </div>
         </form>
         <style jsx>{`

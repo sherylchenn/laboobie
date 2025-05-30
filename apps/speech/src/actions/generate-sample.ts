@@ -6,7 +6,7 @@ import { xai } from "@ai-sdk/xai";
 import { smoothStream, streamText } from "ai";
 import { createStreamableValue } from "ai/rsc";
 
-export async function generateRule(dependencies: string) {
+export async function generateSample(dependencies: string) {
   const session = await getSession();
   if (!session?.user) {
     throw new Error("Authentication required");

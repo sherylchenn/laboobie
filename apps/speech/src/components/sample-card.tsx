@@ -47,7 +47,7 @@ export const SampleCard = observer(
     return (
       <Card
         className={cn(
-          "bg-background p-4 flex flex-col max-h-[calc(100vh-8rem)]",
+          "bg-background p-4 flex flex-col max-h-[calc(100vh-8rem)] rounded-lg",
           isPage && "aspect-square",
         )}
       >
