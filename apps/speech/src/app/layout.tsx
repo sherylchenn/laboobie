@@ -1,19 +1,17 @@
-import { Banner } from "@/components/banner";
-import "./globals.css";
 import { SimpleAudioPlayer } from "@/components/audio-player/simple-audio-player";
+import { Banner } from "@/components/banner";
 import { Header } from "@/components/header";
 import { GlobalModals } from "@/components/modals/global-modals";
-import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Waldenburg, WaldenburgHF } from "@/utils/fonts";
-import { OpenPanelComponent } from "@openpanel/nextjs";
+import { Analytics } from "@vercel/analytics/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import { PlusIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Speech Directory | ElevenLabs",
@@ -104,12 +102,7 @@ export default function RootLayout({
           </NuqsAdapter>
         </ThemeProvider>
       </body>
-
-      <OpenPanelComponent
-        clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID!}
-        trackScreenViews
-        disabled={process.env.NODE_ENV === "development"}
-      />
+      <Analytics />
     </html>
   );
 }
