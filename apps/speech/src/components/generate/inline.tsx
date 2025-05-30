@@ -4,11 +4,9 @@ import { generateRule } from "@/actions/generate-sample";
 import { cn } from "@/lib/utils";
 import { readStreamableValue } from "ai/rsc";
 import { useState } from "react";
-import { GenerateFooter } from "./footer";
 import { GenerateInput } from "./input";
 import { GenerateList } from "./list";
 import { GeneratedResults } from "./results";
-import { GenerateTitle } from "./title";
 
 export function GenerateInline() {
   const [value, setValue] = useState<string>("");
@@ -69,14 +67,6 @@ export function GenerateInline() {
           }}
         />
       )}
-
-      <div
-        className={cn("transition-all duration-1000", {
-          "blur-sm opacity-0": hasResult,
-        })}
-      >
-        <GenerateFooter />
-      </div>
     </div>
   );
 }
