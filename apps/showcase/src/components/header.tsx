@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
@@ -29,8 +30,15 @@ export function Header() {
   return (
     <div className="flex justify-between items-center mt-2 md:mt-0">
       <div className="md:fixed z-20 flex justify-between items-center top-0 px-6 py-2 w-full bg-background backdrop-filter backdrop-blur-sm bg-opacity-30">
-        <Link href="/" className="font-medium font-mono text-sm">
-          ElevenLabs showcase
+        <Link href="/">
+          <div className="relative w-[100px] h-[40px]">
+            <Image
+              src="/logo.svg"
+              alt="ElevenLabs Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-5">
@@ -48,19 +56,6 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="gap-2 hover:bg-transparent text-[#878787] px-0 focus-visible:ring-0"
-              >
-                More
-                <ChevronDownIcon className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-          </DropdownMenu>
         </div>
       </div>
       <MobileMenu />

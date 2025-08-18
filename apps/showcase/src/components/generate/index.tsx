@@ -1,6 +1,5 @@
 "use client";
 
-import { generateSample } from "@/actions/generate-sample";
 import { cn } from "@/lib/utils";
 import { readStreamableValue } from "ai/rsc";
 import { useState } from "react";
@@ -22,10 +21,10 @@ export function Generate() {
       setError(null);
       setResult("");
 
-      const stream = await generateSample(packageJson || value);
-      for await (const delta of readStreamableValue(stream.output)) {
-        setResult((currentResult) => `${currentResult}${delta}`);
-      }
+      // const stream = await generateSample(packageJson || value);
+      // for await (const delta of readStreamableValue(stream.output)) {
+      //   setResult((currentResult) => `${currentResult}${delta}`);
+      // }
 
       setFinished(true);
     } catch (err) {

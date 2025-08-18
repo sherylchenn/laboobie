@@ -1,9 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { readStreamableValue } from "ai/rsc";
 import { useState } from "react";
-import { GenerateInput } from "./input";
 import { GenerateList } from "./list";
 import { GeneratedResults } from "./results";
 
@@ -43,15 +41,6 @@ export function GenerateInline() {
             "blur-sm opacity-0": hasResult,
           })}
         >
-          <div className="max-w-[620px] mx-auto w-full">
-            <GenerateInput
-              value={value}
-              setValue={setValue}
-              onSubmit={handleGenerate}
-              isLoading={isLoading}
-            />
-          </div>
-
           <GenerateList />
         </div>
       </div>

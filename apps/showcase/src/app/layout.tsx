@@ -92,13 +92,30 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NuqsAdapter>
-            <Header />
-            {children}
+            {/* Fixed global background layers */}
+            <div
+              aria-hidden
+              className="hero-aurora pointer-events-none fixed inset-0 z-0"
+            />
+            <div
+              aria-hidden
+              className="hero-noise pointer-events-none fixed inset-0 z-0"
+            />
+            <div
+              aria-hidden
+              className="hero-vignette pointer-events-none fixed inset-0 z-0"
+            />
 
-            <Banner />
-            <Toaster />
-            <GlobalModals />
-            <SimpleAudioPlayer />
+            {/* Foreground content */}
+            <div className="relative z-10">
+              <Header />
+              {children}
+
+              <Banner />
+              <Toaster />
+              <GlobalModals />
+              <SimpleAudioPlayer />
+            </div>
           </NuqsAdapter>
         </ThemeProvider>
       </body>

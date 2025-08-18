@@ -17,7 +17,7 @@ export function Startpage({
   return (
     <div>
       <div className="flex flex-col gap-4 w-full relative mx-auto h-screen">
-        <div className="transition-all duration-1000">
+        <div className="transition-all duration-1000 relative z-10">
           <div
             className="flex justify-center items-center mb-8"
             style={{
@@ -66,7 +66,7 @@ export function Startpage({
             transition={{ duration: 0.5, delay: 0.8 }}
           >
             <p className="text-sm text-[#878787] mb-4">
-              Integrate ElevenLabs v3 into your projects
+              Integrate ElevenLabs into your projects
             </p>
             <div className="flex gap-4 justify-center">
               <a
