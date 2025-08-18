@@ -14,12 +14,10 @@ export interface ShowcaseTab {
 const defaultTabIds = [
   "featured",
   "conversational-ai",
-  "voice-cloning",
-  "audiobooks",
-  "video",
   "music",
-  "multilingual",
-  "api",
+  "text-to-speech",
+  "voice-cloning",
+  "speech-to-text",
 ] as const;
 
 const defaultTabs: ShowcaseTab[] = defaultTabIds.map((id) => ({ id }));

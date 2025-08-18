@@ -1,13 +1,13 @@
-title: "xtovoice"
-shortDescription: "A real-time shopping assistant powered by ElevenLabs Conversational AI."
+title: "xtovoice.com"
+shortDescription: "A f-time shopping assistant powered by ElevenLabs Conversational AI."
 longDescription: |
   This demo shows how to build a latency-sensitive voice agent for product search.
   It uses the **Realtime API** for turn-taking, and the **Voice Library** for a branded voice.
-coverImage: "/images/projects/conversational-ai/gibberlink/cover.jpg"
+coverImage: "/images/projects/voice-cloning/x-to-voice/cover.png"
 isFeatured: true
 galleryImages:
-  - "/images/projects/gibberlink/cover.jpg"
-  - "/images/projects/gibberlink/2.png"
+  - "/images/projects/voice-cloning/x-to-voice/cover.jpg"
+  - "/images/projects/voice-cloning/x-to-voice/2.png"
 date: "2025-08-01"
 platform: "web"
 externalTech:

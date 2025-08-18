@@ -1,0 +1,30 @@
+title: "talktosanta.io"
+shortDescription: "A real-time shopping assistant powered by ElevenLabs Conversational AI."
+longDescription: |
+  This demo shows how to build a latency-sensitive voice agent for product search.
+  It uses the **Realtime API** for turn-taking, and the **Voice Library** for a branded voice.
+coverImage: "/images/projects/conversational-ai/talk-to-santa/cover.png"
+isFeatured: true
+galleryImages:
+  - "/images/projects/conversational-ai/talk-to-santa/cover.png"
+  - "/images/projects/conversational-ai/talk-to-santa/2.png"
+date: "2025-08-01"
+platform: "web"
+externalTech:
+  - "Next.js"
+  - "Vercel"
+  - "WebRTC"
+tags:
+  - "agent"
+authors:
+  - name: "Boris Starkov"
+    url: "https://github.com/PennyroyalTea"
+    avatar: "https://avatars.githubusercontent.com/u/100000000?v=4"
+  - name: "Anton Pidkuiko"
+    url: "https://github.com/antonpk1"
+    avatar: "https://avatars.githubusercontent.com/u/105124934?v=4"
+demoUrl: "https://www.gbrl.ai"
+repoUrl: "https://github.com/PennyroyalTea/gibberlink"
+videoUrl: "https://www.youtube.com/watch?v=EtNagNezo8w"
+xUrl: "https://x.com/ggerganov/status/1894057587441566081"
+useCases: ["customer support", "shopping assistant"]

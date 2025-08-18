@@ -30,8 +30,6 @@ const CATEGORY_MAP: Record<string, CategoryMeta> = {
     iconSrc: "/icons/voice-cloning.svg",
     Icon: Mic,
   },
-  audiobooks: { id: "audiobooks", label: "Audiobooks", Icon: BookOpen },
-  video: { id: "video", label: "Video", Icon: Video },
   music: {
     id: "music",
     label: "Music",

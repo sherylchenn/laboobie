@@ -38,7 +38,6 @@ export function Startpage({
     const keywordMap: Record<string, string[]> = {
       "conversational-ai": ["conversation", "chat", "assistant"],
       "voice-cloning": ["voice", "clone", "cloning"],
-      audiobooks: ["book", "audiobook", "narration", "story"],
       video: ["video", "visual"],
       music: ["music", "song", "audio"],
       multilingual: [
