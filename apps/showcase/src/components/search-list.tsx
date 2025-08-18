@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useQueryState } from "nuqs";
-import slugify from "slugify";
 import type { Project } from "../../../../packages/data/src/projects";
 
 export function SearchList({ data }: { data: Project[] }) {
@@ -10,9 +9,13 @@ export function SearchList({ data }: { data: Project[] }) {
 
   const filteredData = data.filter((item) => {
     const searchTerm = search?.toLowerCase() ?? "";
+    const desc = (
+      item.shortDescription ??
+      item.longDescription ??
+      ""
+    ).toLowerCase();
     return (
-      item.title.toLowerCase().includes(searchTerm) ||
-      (item.description?.toLowerCase() ?? "").includes(searchTerm)
+      item.title.toLowerCase().includes(searchTerm) || desc.includes(searchTerm)
     );
   });
 
@@ -21,14 +24,16 @@ export function SearchList({ data }: { data: Project[] }) {
       {filteredData.map((item) => (
         <div key={item.slug}>
           <Link
-            href={`/projects/${slugify(item.slug, { lower: true })}`}
+            href={`/${item.slug}`}
             className="flex h-full items-center p-4 transition-colors border border-border hover:bg-accent"
           >
             <div className="flex items-start gap-4 w-full">
               <div className="flex flex-col flex-1">
                 <h3 className="font-medium text-primary">{item.title}</h3>
-                {item.description && (
-                  <p className="text-sm text-[#878787]">{item.description}</p>
+                {(item.shortDescription || item.longDescription) && (
+                  <p className="text-sm text-[#878787]">
+                    {item.shortDescription ?? item.longDescription}
+                  </p>
                 )}
               </div>
             </div>

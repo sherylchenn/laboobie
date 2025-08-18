@@ -1,8 +1,10 @@
+import { getSections } from "@showcase/data/projects";
 import { NextResponse } from "next/server";
-import { projects } from "../../../../../packages/data/src/projects";
 
 export const dynamic = "force-static";
 
 export function GET() {
-  return NextResponse.json({ data: projects });
+  const sections = getSections();
+  const all = sections.flatMap((s) => s.projects);
+  return NextResponse.json({ data: all });
 }

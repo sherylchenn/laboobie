@@ -35,7 +35,7 @@ export function GenerateList({ projects }: { projects: Project[] }) {
                   {item.title}
                 </span>
                 <span className="text-primary font-mono text-[10px] sm:text-[11px] truncate px-1 pt-2">
-                  {item?.content?.slice(0, 100)}
+                  {item?.longDescription?.slice(0, 100)}
                 </span>
               </div>
             </motion.div>

@@ -8,12 +8,11 @@ import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import type { Project } from "../../../../packages/data/src/projects";
-import { CopyButton } from "./copy-button";
 import { ShareButton } from "./share-button";
 
-function truncateContent(content: string, limit: number) {
-  if (content.length <= limit) return content;
-  return `${content.slice(0, limit)}...`;
+function truncate(text: string, limit: number) {
+  if (text.length <= limit) return text;
+  return `${text.slice(0, limit)}...`;
 }
 
 export function ProjectCardSmall({
@@ -25,6 +24,12 @@ export function ProjectCardSmall({
   isPage?: boolean;
   small?: boolean;
 }) {
+  const preview = sample.shortDescription ?? sample.longDescription ?? "";
+  const byline =
+    sample.authors && sample.authors.length > 0
+      ? sample.authors[0]?.name
+      : undefined;
+
   return (
     <Card
       className={cn(
@@ -46,19 +51,12 @@ export function ProjectCardSmall({
           )}
         >
           <ShareButton slug={sample.slug} small={small} />
-          <CopyButton
-            content={sample.content}
-            slug={sample.slug}
-            small={small}
-          />
         </div>
 
         <Link href={`/${sample.slug}`}>
           <div className="h-full overflow-y-auto">
             <code className={cn("block pr-3", small ? "text-xs" : "text-sm")}>
-              {small
-                ? truncateContent(sample.content, small ? 70 : 200)
-                : sample.content}
+              {small ? truncate(preview, small ? 70 : 200) : preview}
             </code>
           </div>
         </Link>
@@ -67,7 +65,7 @@ export function ProjectCardSmall({
       <CardHeader className="p-0 space-y-1">
         <div className="flex items-center justify-between">
           <CardTitle className={cn("truncate", small ? "text-xs" : "text-sm")}>
-            {sample.title || sample.author?.name}
+            {sample.title || byline}
           </CardTitle>
         </div>
       </CardHeader>
