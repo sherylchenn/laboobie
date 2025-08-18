@@ -19,7 +19,7 @@ export function Banner() {
   const banners = [
     {
       id: "elevenlabs",
-      href: "https://dub.sh/elevenlabs-home",
+      href: "https://elevenlabs.io",
       logo: (
         <svg
           width={20}
