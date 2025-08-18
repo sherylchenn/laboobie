@@ -3,10 +3,10 @@ shortDescription: "A real-time shopping assistant powered by ElevenLabs Conversa
 longDescription: |
   This demo shows how to build a latency-sensitive voice agent for product search.
   It uses the **Realtime API** for turn-taking, and the **Voice Library** for a branded voice.
-coverImage: "/images/projects/voice-agent-shop/cover.jpg"
+coverImage: "/images/projects/conversational-ai/gibberlink/cover.jpg"
 isFeatured: true
 galleryImages:
-  - "/images/projects/gibberlink/1.png"
+  - "/images/projects/gibberlink/cover.jpg"
   - "/images/projects/gibberlink/2.png"
 date: "2025-08-01"
 platform: "web"

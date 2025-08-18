@@ -126,12 +126,6 @@ function toProject(
   const coverVal = (data as Record<string, unknown>).coverImage;
   if (typeof coverVal === "string") cover = coverVal as string;
 
-  // If YAML cover is missing or points to a non-existent public path, try fallback discovery
-  if (!cover || !isExistingPublicPath(cover)) {
-    const discovered = resolveCoverImageFallback(category, projectBaseName);
-    if (discovered) cover = discovered;
-  }
-
   return {
     title: String(data.title ?? projectBaseName),
     shortDescription: data.shortDescription
@@ -180,19 +174,12 @@ function findProjectYamlFile(
   projectFolderName: string,
 ): string | null {
   const candidates = [
-    path.join(projectDir, "index.yml"),
-    path.join(projectDir, "index.yaml"),
-    path.join(projectDir, "project.yml"),
-    path.join(projectDir, "project.yaml"),
-    path.join(projectDir, `${projectFolderName}.yml`),
-    path.join(projectDir, `${projectFolderName}.yaml`),
+    path.join(projectDir, "meta.yml"),
+    path.join(projectDir, "meta.yaml"),
   ];
   for (const p of candidates) {
     if (fs.existsSync(p) && fs.statSync(p).isFile()) return p;
   }
-  // fallback: first yml in folder
-  const files = fs.readdirSync(projectDir).filter((f) => isYamlFile(f));
-  if (files.length > 0) return path.join(projectDir, files[0] as string);
   return null;
 }
 
@@ -210,19 +197,7 @@ function loadAllProjects(): Project[] {
     if (!fs.existsSync(categoryDir)) continue;
     const entries = fs.readdirSync(categoryDir, { withFileTypes: true });
 
-    // Case 1: YAML files directly under the category directory
-    for (const entry of entries) {
-      if (entry.isFile() && isYamlFile(entry.name)) {
-        const file = entry.name;
-        const filePath = path.join(categoryDir, file);
-        const raw = readYamlFile(filePath);
-        if (!raw) continue;
-        const baseName = path.basename(file, path.extname(file));
-        all.push(toProject(category, baseName, raw));
-      }
-    }
-
-    // Case 2: Project subdirectories containing YAML inside
+    // Only project subdirectories with meta.yml/meta.yaml
     for (const entry of entries) {
       if (!entry.isDirectory()) continue;
       const projectFolderName = entry.name;

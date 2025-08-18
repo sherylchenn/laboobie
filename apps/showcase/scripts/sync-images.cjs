@@ -29,6 +29,13 @@ function copyDir(src, dest) {
   }
 }
 
+function hasMetaYaml(dir) {
+  return (
+    fs.existsSync(path.join(dir, "meta.yml")) ||
+    fs.existsSync(path.join(dir, "meta.yaml"))
+  );
+}
+
 function syncOnce() {
   if (!fs.existsSync(SOURCE_DIR)) return;
   ensureDir(DEST_BASE);
@@ -40,16 +47,19 @@ function syncOnce() {
   for (const category of categories) {
     const catDir = path.join(SOURCE_DIR, category);
     const entries = fs.readdirSync(catDir, { withFileTypes: true });
+
+    // Case A: legacy layout (YAML file at category root)
     for (const entry of entries) {
       if (entry.isFile() && /\.(ya?ml)$/i.test(entry.name)) {
         const base = path.basename(entry.name, path.extname(entry.name));
-        const imagesDir = path.join(catDir, base, "images");
+        const projectDir = path.join(catDir, base);
+        const imagesDir = path.join(projectDir, "images");
+        // Copy images subdir
         if (fs.existsSync(imagesDir) && fs.statSync(imagesDir).isDirectory()) {
           const destDir = path.join(DEST_BASE, category, base);
           copyDir(imagesDir, destDir);
         }
-        // Also support a direct cover.* inside the project folder (without images subdir)
-        const projectDir = path.join(catDir, base);
+        // Copy cover.* directly under project dir
         if (
           fs.existsSync(projectDir) &&
           fs.statSync(projectDir).isDirectory()
@@ -67,6 +77,31 @@ function syncOnce() {
             );
           }
         }
+      }
+    }
+
+    // Case B: strict layout (<project-id>/meta.yml next to images/)
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const projectId = entry.name;
+      const projectDir = path.join(catDir, projectId);
+      if (!hasMetaYaml(projectDir)) continue;
+      const imagesDir = path.join(projectDir, "images");
+      if (fs.existsSync(imagesDir) && fs.statSync(imagesDir).isDirectory()) {
+        const destDir = path.join(DEST_BASE, category, projectId);
+        copyDir(imagesDir, destDir);
+      }
+      const files = fs.readdirSync(projectDir);
+      const cover = files.find((f) =>
+        /^cover\.(png|jpe?g|webp|avif)$/i.test(f),
+      );
+      if (cover) {
+        const destDir = path.join(DEST_BASE, category, projectId);
+        ensureDir(destDir);
+        fs.copyFileSync(
+          path.join(projectDir, cover),
+          path.join(destDir, cover),
+        );
       }
     }
   }
@@ -93,6 +128,7 @@ function watch() {
 
   console.log(`[images] watching ${SOURCE_DIR}`);
   syncOnce();
+  console.log("[images] initial sync complete");
   try {
     fs.watch(SOURCE_DIR, { recursive: true }, () => trigger());
   } catch (e) {
