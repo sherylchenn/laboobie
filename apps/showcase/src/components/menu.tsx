@@ -27,10 +27,14 @@ export function Menu({ sections }: { sections: Section[] }) {
             const href = `/projects/${section.slug}`;
             const isActive = pathname === href;
             return (
-              <Link href={href} key={section.tag}>
+              <Link
+                href={href}
+                key={section.tag}
+                className="block cursor-pointer"
+              >
                 <div
                   className={cn(
-                    "w-full inline-flex items-center justify-start gap-2 rounded-full px-3 py-1.5 text-sm",
+                    "w-full inline-flex items-center justify-start gap-2 rounded-full px-3 py-1.5 text-sm cursor-pointer",
                     isActive
                       ? "bg-white/10 text-white shadow-[0_4px_12px_rgba(0,0,0,0.25)]"
                       : "text-foreground/80",

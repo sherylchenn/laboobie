@@ -59,7 +59,11 @@ export function ShowcaseTabs({
         {tabs.map((tab) => {
           const meta = getCategoryMeta(tab.id);
           return (
-            <TabsTrigger key={tab.id} value={tab.id} className={cn("gap-2")}>
+            <TabsTrigger
+              key={tab.id}
+              value={tab.id}
+              className={cn("gap-2 cursor-pointer")}
+            >
               <CategoryIcon
                 meta={meta}
                 className="h-4 w-4 text-[#666] dark:text-[#999]"
