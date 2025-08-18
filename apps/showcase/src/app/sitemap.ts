@@ -1,4 +1,4 @@
-import { getSections } from "@directories/data/samples";
+import { getSections } from "@showcase/data/samples";
 import type { MetadataRoute } from "next";
 
 const BASE_URL = "https://speech.directory";

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { getSections } from "@directories/data/samples";
+import { getSections } from "@showcase/data/samples";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 

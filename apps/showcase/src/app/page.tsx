@@ -1,6 +1,6 @@
 import { Startpage } from "@/components/startpage";
 import { elevenLabsSamplesSections } from "@/data/elevenlabs";
-import { getPopularSamples } from "@directories/data/popular";
+import { getPopularSamples } from "@showcase/data/popular";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

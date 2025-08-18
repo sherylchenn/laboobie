@@ -1,6 +1,6 @@
 "use client";
 
-import type { Sample } from "@directories/data/samples";
+import type { Sample } from "@showcase/data/samples";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
 import slugify from "slugify";

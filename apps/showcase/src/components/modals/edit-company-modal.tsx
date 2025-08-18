@@ -7,7 +7,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CompanyForm } from "../forms/company";
 import { Button } from "../ui/button";
 
 type CompanyData = {
@@ -33,8 +32,6 @@ export function EditCompanyModal({ data }: { data: CompanyData }) {
         <DialogHeader>
           <DialogTitle>Edit Company</DialogTitle>
         </DialogHeader>
-
-        <CompanyForm data={data} />
       </DialogContent>
     </Dialog>
   );

@@ -12,7 +12,7 @@ interface Sample {
 }
 
 const getSamples = async () => {
-  const samples = await import("@directories/data/samples").then(
+  const samples = await import("@showcase/data/samples").then(
     (mod) => mod.samples,
   );
   // Filter out duplicates based on title

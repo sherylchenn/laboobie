@@ -1,7 +1,7 @@
 import { Menu } from "@/components/menu";
 import { SampleList } from "@/components/sample-list";
 import { Tabs } from "@/components/tabs";
-import { getSectionBySlug, getSections } from "@directories/data/samples";
+import { getSectionBySlug, getSections } from "@showcase/data/samples";
 
 type Params = Promise<{ section: string }>;
 

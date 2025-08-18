@@ -2,6 +2,10 @@
   "name": "showcase",
   "private": true,
   "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "dev": "cd apps/showcase && bun run dev",
+    "start": "cd apps/showcase && bun run dev"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4"
   }

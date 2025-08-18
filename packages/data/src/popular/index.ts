@@ -1,4 +1,3 @@
-import { redis } from "@showcase/kv/redis";
 import { getSections } from "../samples";
 
 export async function getPopularSamples() {
@@ -8,10 +7,9 @@ export async function getPopularSamples() {
     sections.map(async (section) => {
       const samplesWithCounts = await Promise.all(
         section.samples.map(async (sample) => {
-          const count = await redis.get(`samples:${sample.slug}`);
           return {
             ...sample,
-            count: Number(count) || 0,
+            count: 0,
           };
         }),
       );

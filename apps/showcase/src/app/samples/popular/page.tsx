@@ -1,7 +1,7 @@
 import { Menu } from "@/components/menu";
 import { SampleList } from "@/components/sample-list";
 import { Tabs } from "@/components/tabs";
-import { getPopularSamples } from "@directories/data/popular";
+import { getPopularSamples } from "@showcase/data/popular";
 
 export const metadata = {
   title: "Popular samples",

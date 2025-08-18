@@ -1,7 +1,7 @@
 import { Menu } from "@/components/menu";
 import { SampleList } from "@/components/sample-list";
 import { Tabs } from "@/components/tabs";
-import { getSections } from "@directories/data/samples";
+import { getSections } from "@showcase/data/samples";
 import { Suspense } from "react";
 
 const sections = getSections();

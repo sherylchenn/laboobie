@@ -1,6 +1,6 @@
 "use client";
 
-import type { Sample } from "@directories/data/samples";
+import type { Sample } from "@showcase/data/samples";
 import { motion } from "motion/react";
 
 export function GenerateList({ samples }: { samples: Sample[] }) {

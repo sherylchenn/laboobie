@@ -14,7 +14,6 @@ import { Suspense, useState } from "react";
 import { CommandMenu } from "./command-menu";
 import { MobileMenu } from "./mobile-menu";
 import { Button } from "./ui/button";
-import { UserMenu } from "./user-menu";
 
 const navigationLinks = [
   { href: "/samples", label: "Explore" },
@@ -31,7 +30,7 @@ export function Header() {
     <div className="flex justify-between items-center mt-2 md:mt-0">
       <div className="md:fixed z-20 flex justify-between items-center top-0 px-6 py-2 w-full bg-background backdrop-filter backdrop-blur-sm bg-opacity-30">
         <Link href="/" className="font-medium font-mono text-sm">
-          speech.directory
+          ElevenLabs showcase
         </Link>
 
         <div className="hidden md:flex items-center gap-5">
@@ -62,10 +61,6 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
           </DropdownMenu>
-
-          <Suspense fallback={null}>
-            <UserMenu />
-          </Suspense>
         </div>
       </div>
       <MobileMenu />

@@ -1,10 +1,8 @@
 "use client";
 
-import { votePostAction } from "@/actions/vote-post-action";
 import { SignInModal } from "@/components/modals/sign-in-modal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { isAuthenticated as isAuthenticatedClient } from "@/utils/supabase/client-session";
 import { useOptimisticAction } from "next-safe-action/hooks";
 import { useEffect, useState } from "react";
 
@@ -15,10 +13,6 @@ export function BoardVotes({
 }: { votes: number; postId: number; hasVoted: boolean }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-
-  useEffect(() => {
-    setIsAuthenticated(isAuthenticatedClient());
-  }, []);
 
   const { execute, optimisticState } = useOptimisticAction(votePostAction, {
     currentState: {

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Section } from "@directories/data/samples";
+import type { Section } from "@showcase/data/samples";
 import { motion } from "motion/react";
 import { GenerateInline } from "./generate/inline";
 import { HeroTitle } from "./hero-title";

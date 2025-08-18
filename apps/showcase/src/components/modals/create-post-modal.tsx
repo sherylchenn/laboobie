@@ -1,6 +1,5 @@
 "use client";
 
-import { PostForm } from "@/components/forms/post";
 import {
   Dialog,
   DialogContent,
@@ -28,8 +27,6 @@ export function CreatePostModal({
         <DialogHeader>
           <DialogTitle>Add a post</DialogTitle>
         </DialogHeader>
-
-        <PostForm onSuccess={handleSuccess} />
       </DialogContent>
     </Dialog>
   );

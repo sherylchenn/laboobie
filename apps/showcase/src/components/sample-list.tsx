@@ -2,7 +2,7 @@
 
 import { SampleCard } from "@/components/sample-card";
 import { SampleCardSmall } from "@/components/sample-card-small";
-import type { Section } from "@directories/data/samples";
+import type { Section } from "@showcase/data/samples";
 import { useQueryState } from "nuqs";
 import { Fragment, useEffect, useState } from "react";
 import { Button } from "./ui/button";

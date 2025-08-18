@@ -7,7 +7,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ProfileForm } from "../forms/profile";
 import { Button } from "../ui/button";
 
 type ProfileData = {
@@ -32,8 +31,6 @@ export function EditProfileModal({ data }: { data: ProfileData }) {
         <DialogHeader>
           <DialogTitle>Edit Profile</DialogTitle>
         </DialogHeader>
-
-        <ProfileForm data={data} />
       </DialogContent>
     </Dialog>
   );

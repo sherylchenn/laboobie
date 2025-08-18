@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { createClient } from "@/utils/supabase/client";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -23,34 +22,8 @@ type User = {
 export function MobileMenu() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const supabase = createClient();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function getUser() {
-      setIsLoading(true);
-      const session = await supabase.auth.getSession();
-
-      if (!session.data.session) {
-        setIsLoading(false);
-        return;
-      }
-
-      const { data } = await supabase
-        .from("users")
-        .select("*")
-        .eq("id", session.data.session?.user?.id)
-        .single();
-
-      setUser(data);
-      setIsLoading(false);
-    }
-
-    if (!user) {
-      getUser();
-    }
-  }, [pathname]);
 
   useEffect(() => {
     if (isOpen) {
@@ -62,12 +35,6 @@ export function MobileMenu() {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setIsOpen(false);
-  };
 
   return (
     <>
@@ -127,48 +94,6 @@ export function MobileMenu() {
                   </Link>
                 </motion.div>
               ))}
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="mt-12"
-                transition={{
-                  delay: navigationLinks.length * 0.02 + 0.05,
-                  duration: 0.1,
-                }}
-              >
-                {user ? (
-                  <>
-                    <Link
-                      href={`/u/${user?.slug}`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <Button
-                        variant="outline"
-                        className="h-8 rounded-full w-full mb-4 border-border"
-                      >
-                        Profile
-                      </Button>
-                    </Link>
-                    <Button
-                      variant="outline"
-                      className="bg-white text-black h-8 rounded-full w-full"
-                      onClick={handleSignOut}
-                    >
-                      Sign Out
-                    </Button>
-                  </>
-                ) : (
-                  <Link href="/login" onClick={() => setIsOpen(false)}>
-                    <Button
-                      variant="outline"
-                      className="bg-white text-black h-8 rounded-full w-full"
-                    >
-                      Sign In
-                    </Button>
-                  </Link>
-                )}
-              </motion.div>
             </div>
           </motion.div>
         )}

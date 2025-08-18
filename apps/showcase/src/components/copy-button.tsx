@@ -1,6 +1,5 @@
 "use client";
 
-import { voteAction } from "@/actions/vote-action";
 import { cn } from "@/lib/utils";
 import { Check, Copy } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
@@ -17,10 +16,8 @@ export function CopyButton({
   small?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
-  const { execute } = useAction(voteAction);
 
   const handleCopy = () => {
-    execute({ slug });
     navigator.clipboard.writeText(content);
     setCopied(true);
     toast("Copied to clipboard");

@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { getSession } from "@/utils/supabase/auth-client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ElevenLabs } from "../ui/elevenlabs";
@@ -60,14 +59,6 @@ export function GenerateInput({
       handleSubmit(e as unknown as React.FormEvent);
     }
   };
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const session = await getSession();
-      setIsAuth(!!session);
-    };
-    checkAuth();
-  }, []);
 
   return (
     <div className="relative h-full">

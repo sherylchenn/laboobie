@@ -7,7 +7,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { parseAsBoolean, useQueryStates } from "nuqs";
-import { CompanyForm } from "../forms/company";
 
 export function CreateCompanyModal() {
   const [{ addCompany, redirect }, setQueryStates] = useQueryStates({
@@ -24,8 +23,6 @@ export function CreateCompanyModal() {
         <DialogHeader>
           <DialogTitle>Add Company</DialogTitle>
         </DialogHeader>
-
-        <CompanyForm redirect={redirect} />
       </DialogContent>
     </Dialog>
   );

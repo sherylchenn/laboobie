@@ -1,6 +1,6 @@
 import { Menu } from "@/components/menu";
 import { SampleCard } from "@/components/sample-card";
-import { getSampleBySlug, samples } from "@directories/data/samples";
+import { getSampleBySlug, samples } from "@showcase/data/samples";
 
 type Params = Promise<{ slug: string }>;
 

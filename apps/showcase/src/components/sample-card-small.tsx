@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import type { Sample } from "@directories/data/samples";
+import type { Sample } from "@showcase/data/samples";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { CopyButton } from "./copy-button";
@@ -30,20 +30,20 @@ export function SampleCardSmall({
     <Card
       className={cn(
         "bg-background max-h-[calc(100vh-8rem)] flex flex-col",
-        small ? "p-2" : "p-4 aspect-square"
+        small ? "p-2" : "p-4 aspect-square",
       )}
     >
       <CardContent
         className={cn(
           "bg-card h-full mb-2 font-mono pr-1 text-sm opacity-50 hover:opacity-100 transition-opacity group relative flex-grow",
           small ? "p-2" : "p-4",
-          isPage && "opacity-100"
+          isPage && "opacity-100",
         )}
       >
         <div
           className={cn(
             "group-hover:flex hidden right-4 bottom-4 absolute z-10 space-x-2",
-            small ? "right-2 bottom-2" : "right-4 bottom-4"
+            small ? "right-2 bottom-2" : "right-4 bottom-4",
           )}
         >
           <ShareButton slug={sample.slug} small={small} />
