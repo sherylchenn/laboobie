@@ -1,4 +1,4 @@
-title: "Gibberlink"
+title: "xtovoice"
 shortDescription: "A real-time shopping assistant powered by ElevenLabs Conversational AI."
 longDescription: |
   This demo shows how to build a latency-sensitive voice agent for product search.
