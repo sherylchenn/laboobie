@@ -1,27 +1,24 @@
-import { getPopularSamples } from "@showcase/data/popular";
+import { getPopularProjects } from "@showcase/data/popular";
 import { NextResponse } from "next/server";
 
 export const revalidate = 86400; // Revalidate once every day
 export const dynamic = "force-static";
 
-const popularSamples = await getPopularSamples();
+const popularProjects = await getPopularProjects();
 
 export async function GET() {
-  const allSamples = popularSamples.flatMap((section) => section.samples);
+  const allProjects = popularProjects.flatMap((section) => section.projects);
 
-  // Create a Set to track unique slugs and an array for unique samples
-  const uniqueSlugs = new Set();
-  const uniqueSamples = [];
+  const uniqueSlugs = new Set<string>();
+  const uniqueProjects: typeof allProjects = [];
 
-  for (const sample of allSamples) {
-    if (uniqueSlugs.has(sample.slug)) continue; // Skip if slug is already in the Set
-    uniqueSlugs.add(sample.slug); // Add slug to the Set
-    uniqueSamples.push(sample); // Keep the sample
+  for (const project of allProjects) {
+    if (uniqueSlugs.has(project.slug)) continue;
+    uniqueSlugs.add(project.slug);
+    uniqueProjects.push(project);
   }
 
-  const sortedSamples = uniqueSamples.sort((a, b) => b.count - a.count);
-
-  return new NextResponse(JSON.stringify({ data: sortedSamples }), {
+  return new NextResponse(JSON.stringify({ data: uniqueProjects }), {
     status: 200,
     headers: {
       "Content-Type": "application/json",

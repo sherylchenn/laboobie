@@ -1,9 +1,9 @@
 "use client";
 
-import type { Sample } from "@showcase/data/samples";
 import { motion } from "motion/react";
+import type { Project } from "../../../../packages/data/src/projects";
 
-export function GenerateList({ samples }: { samples: Sample[] }) {
+export function GenerateList({ projects }: { projects: Project[] }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -25,7 +25,7 @@ export function GenerateList({ samples }: { samples: Sample[] }) {
           }}
           className="flex flex-row gap-2 sm:gap-4"
         >
-          {[...samples, ...samples].map((item, index) => (
+          {[...projects, ...projects].map((item, index) => (
             <motion.div
               key={`${item}-${index.toString()}`}
               className="px-2 py-2 border border-border w-[180px] sm:w-[240px] h-full"

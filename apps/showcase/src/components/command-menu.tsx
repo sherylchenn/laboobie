@@ -5,21 +5,25 @@ import { useEffect, useState } from "react";
 import { CommandEmpty, CommandInput } from "./ui/command";
 import { CommandDialog, CommandItem, CommandList } from "./ui/command";
 
-interface Sample {
+interface ProjectItem {
   title: string;
-  slug: string; // Added slug property for navigation
-  // Add other properties that a sample might have
+  slug: string;
 }
 
-const getSamples = async () => {
-  const samples = await import("@showcase/data/samples").then(
-    (mod) => mod.samples,
-  );
-  // Filter out duplicates based on title
-  const uniqueSamples = Array.from(
-    new Map(samples.map((sample) => [sample.title, sample])).values(),
-  );
-  return uniqueSamples;
+const getProjects = async (): Promise<ProjectItem[]> => {
+  try {
+    const res = await fetch("/api/popular", { cache: "force-cache" });
+    if (!res.ok) return [];
+    const json = await res.json();
+    const list: any[] = Array.isArray(json?.data) ? json.data : [];
+    const unique = Array.from(new Map(list.map((p) => [p.slug, p])).values());
+    return unique.map((p: any) => ({
+      title: String(p.title),
+      slug: String(p.slug),
+    }));
+  } catch {
+    return [];
+  }
 };
 
 export function CommandMenu({
@@ -29,12 +33,11 @@ export function CommandMenu({
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const [samples, setSamples] = useState<Sample[]>([]);
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
   const router = useRouter();
 
   useEffect(() => {
-    // Load rules when component mounts
-    getSamples().then((loadedSamples) => setSamples(loadedSamples));
+    getProjects().then((loaded) => setProjects(loaded));
   }, []);
 
   useEffect(() => {
@@ -50,18 +53,18 @@ export function CommandMenu({
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search for a sample..." />
+      <CommandInput placeholder="Search for a project..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        {samples.map((sample, index) => (
+        {projects.map((item) => (
           <CommandItem
-            key={sample.title}
+            key={item.slug}
             onSelect={() => {
-              router.push(`/${sample.slug}`);
+              router.push(`/${item.slug}`);
               setOpen(false);
             }}
           >
-            {sample.title}
+            {item.title}
           </CommandItem>
         ))}
       </CommandList>

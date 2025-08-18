@@ -1,0 +1,27 @@
+title: "Gibberlink"
+shortDescription: "A real-time shopping assistant powered by ElevenLabs Conversational AI."
+longDescription: |
+  This demo shows how to build a latency-sensitive voice agent for product search.
+  It uses the **Realtime API** for turn-taking, and the **Voice Library** for a branded voice.
+coverImage: "/images/projects/voice-agent-shop/cover.jpg"
+isFeatured: true
+galleryImages:
+  - "/images/projects/gibberlink/1.png"
+  - "/images/projects/gibberlink/2.png"
+date: "2025-08-01"
+platform: "web"
+externalTech:
+  - "Next.js"
+  - "Vercel"
+  - "WebRTC"
+tags:
+  - "agent"
+authors:
+  - name: "Jane Doe"
+    url: "https://example.com"
+    avatar: "https://example.com/jane.jpg"
+demoUrl: "https://www.gbrl.ai"
+repoUrl: "https://github.com/PennyroyalTea/gibberlink"
+videoUrl: "https://www.youtube.com/watch?v=EtNagNezo8w"
+xUrl: "https://x.com/ggerganov/status/1894057587441566081"
+useCases: ["customer support", "shopping assistant"]

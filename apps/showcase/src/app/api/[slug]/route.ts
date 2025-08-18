@@ -1,14 +1,8 @@
-import { getSampleBySlug, samples } from "@showcase/data/samples";
+import { getProjectBySlug } from "@showcase/data/projects";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-static";
 export const revalidate = 86400; // Revalidate once every day
-
-export async function generateStaticParams() {
-  return samples.map((sample) => ({
-    slug: sample.slug,
-  }));
-}
 
 type Params = Promise<{ slug: string }>;
 
@@ -19,13 +13,13 @@ export async function GET(_: Request, segmentData: { params: Params }) {
     return NextResponse.json({ error: "No slug provided" }, { status: 400 });
   }
 
-  const sample = getSampleBySlug(slug);
+  const project = getProjectBySlug(slug);
 
-  if (!sample) {
-    return NextResponse.json({ error: "Sample not found" }, { status: 404 });
+  if (!project) {
+    return NextResponse.json({ error: "Project not found" }, { status: 404 });
   }
 
-  return new Response(JSON.stringify({ data: sample }), {
+  return new NextResponse(JSON.stringify({ data: project }), {
     status: 200,
     headers: {
       "Content-Type": "application/json",

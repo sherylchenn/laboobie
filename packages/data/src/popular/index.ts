@@ -1,32 +1,7 @@
-import { getSections } from "../samples";
+import { getSections } from "../projects";
 
-export async function getPopularSamples() {
+export async function getPopularProjects() {
   const sections = getSections();
-
-  const sectionsWithCounts = await Promise.all(
-    sections.map(async (section) => {
-      const samplesWithCounts = await Promise.all(
-        section.samples.map(async (sample) => {
-          return {
-            ...sample,
-            count: 0,
-          };
-        }),
-      );
-
-      const sortedSamples = samplesWithCounts.sort((a, b) => b.count - a.count);
-      const totalCount = sortedSamples.reduce(
-        (sum, sample) => sum + sample.count,
-        0,
-      );
-
-      return {
-        ...section,
-        samples: sortedSamples,
-        totalCount,
-      };
-    }),
-  );
-
-  return sectionsWithCounts.sort((a, b) => b.totalCount - a.totalCount);
+  // For now, simply return sections sorted by project count (already sorted in getSections)
+  return sections;
 }

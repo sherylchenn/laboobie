@@ -15,7 +15,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Speech Directory | ElevenLabs",
-  description: "Listen to the best speech samples by ElevenLabs v3",
+  description: "Listen to the best speech projects by ElevenLabs v3",
   icons: [
     {
       rel: "icon",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Speech Directory | ElevenLabs",
-    description: "Listen to the best speech samples by ElevenLabs v3",
+    description: "Listen to the best speech projects by ElevenLabs v3",
     url: "https://speech.directory",
     locale: "en_US",
     type: "website",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Speech Directory | ElevenLabs",
-    description: "Listen to the best speech samples by ElevenLabs v3",
+    description: "Listen to the best speech projects by ElevenLabs v3",
     images: [
       {
         url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/og.png",
@@ -93,29 +93,14 @@ export default function RootLayout({
         >
           <NuqsAdapter>
             {/* Fixed global background layers */}
-            <div
-              aria-hidden
-              className="hero-aurora pointer-events-none fixed inset-0 z-0"
-            />
-            <div
-              aria-hidden
-              className="hero-noise pointer-events-none fixed inset-0 z-0"
-            />
-            <div
-              aria-hidden
-              className="hero-vignette pointer-events-none fixed inset-0 z-0"
-            />
 
-            {/* Foreground content */}
-            <div className="relative z-10">
-              <Header />
-              {children}
+            <Header />
+            {children}
 
-              <Banner />
-              <Toaster />
-              <GlobalModals />
-              <SimpleAudioPlayer />
-            </div>
+            <Banner />
+            <Toaster />
+            <GlobalModals />
+            <SimpleAudioPlayer />
           </NuqsAdapter>
         </ThemeProvider>
       </body>

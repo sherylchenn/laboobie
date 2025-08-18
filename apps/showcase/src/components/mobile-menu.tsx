@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
-const navigationLinks = [{ href: "/samples", label: "Samples" }] as const;
+const navigationLinks = [{ href: "/projects", label: "Projects" }] as const;
 
 type User = {
   id: string;

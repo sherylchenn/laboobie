@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "images:sync": "node ./scripts/sync-images.cjs",
+    "images:watch": "node ./scripts/sync-images.cjs --watch",
+    "dev": "run-p images:watch next:dev",
+    "next:dev": "next dev --turbopack",
+    "build": "run-s images:sync next:build",
+    "next:build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
@@ -72,6 +76,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
     "react-email": "3.0.7",
-    "typescript": "^5"
+    "typescript": "^5",
+    "npm-run-all": "^4.1.5"
   }
 }

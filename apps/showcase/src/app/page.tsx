@@ -1,6 +1,5 @@
 import { Startpage } from "@/components/startpage";
-import { elevenLabsSamplesSections } from "@/data/elevenlabs";
-import { getPopularSamples } from "@showcase/data/popular";
+import { getPopularProjects } from "@showcase/data/popular";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,15 +13,12 @@ export const dynamic = "force-static";
 export const revalidate = 86400; // Revalidate once every day
 
 export default async function Page() {
-  const popularSamples = await getPopularSamples();
+  const popularProjects = await getPopularProjects();
 
   return (
     <div className="flex justify-center min-h-screen w-full md:px-0 px-6 mt-[10%]">
       <div className="w-full max-w-6xl">
-        <Startpage
-          sections={popularSamples}
-          elevenLabsSamplesSections={elevenLabsSamplesSections}
-        />
+        <Startpage sections={popularProjects} />
       </div>
     </div>
   );

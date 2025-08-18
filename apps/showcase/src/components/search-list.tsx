@@ -1,11 +1,11 @@
 "use client";
 
-import type { Sample } from "@showcase/data/samples";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
 import slugify from "slugify";
+import type { Project } from "../../../../packages/data/src/projects";
 
-export function SearchList({ data }: { data: Sample[] }) {
+export function SearchList({ data }: { data: Project[] }) {
   const [search] = useQueryState("q");
 
   const filteredData = data.filter((item) => {
@@ -21,7 +21,7 @@ export function SearchList({ data }: { data: Sample[] }) {
       {filteredData.map((item) => (
         <div key={item.slug}>
           <Link
-            href={`/samples/${slugify(item.slug, { lower: true })}`}
+            href={`/projects/${slugify(item.slug, { lower: true })}`}
             className="flex h-full items-center p-4 transition-colors border border-border hover:bg-accent"
           >
             <div className="flex items-start gap-4 w-full">

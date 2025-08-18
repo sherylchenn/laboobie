@@ -17,8 +17,12 @@ import { MobileMenu } from "./mobile-menu";
 import { Button } from "./ui/button";
 
 const navigationLinks = [
-  { href: "/samples", label: "Explore" },
-  { href: "/generate", label: "Generate" },
+  { href: "/projects", label: "Explore" },
+  {
+    href: "https://github.com/elevenlabs/showcase",
+    label: "Submit",
+    target: "_blank",
+  },
 ] as const;
 
 export function Header() {

@@ -1,19 +1,59 @@
 "use client";
 
-import type { Section } from "@showcase/data/samples";
 import { motion } from "motion/react";
-import { GenerateInline } from "./generate/inline";
+import * as React from "react";
+import type { Section } from "../../../../packages/data/src/projects";
 import { HeroTitle } from "./hero-title";
-import { SampleList } from "./sample-list";
+import { ProjectList } from "./project-list";
+import { BeautifulSearch } from "./ui/beautiful-search";
 import { ElevenLabs } from "./ui/elevenlabs";
+import { ShowcaseTabs } from "./ui/showcase-tabs";
 
 export function Startpage({
   sections,
-  elevenLabsSamplesSections,
 }: {
   sections: Section[];
-  elevenLabsSamplesSections: Section[];
 }) {
+  const [activeTab, setActiveTab] = React.useState("featured");
+  const filteredSections = React.useMemo(() => {
+    if (activeTab === "featured") {
+      const all = sections.flatMap((s) => s.projects);
+      const featured = all
+        .filter((p) => p.isFeatured)
+        .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+      const toShow =
+        featured.length > 0
+          ? featured
+          : all.sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+      return [
+        {
+          tag: featured.length > 0 ? "Featured" : "Latest",
+          slug: featured.length > 0 ? "featured" : "latest",
+          projects: toShow,
+        },
+      ];
+    }
+    const keywordMap: Record<string, string[]> = {
+      "conversational-ai": ["conversation", "chat", "assistant"],
+      "voice-cloning": ["voice", "clone", "cloning"],
+      audiobooks: ["book", "audiobook", "narration", "story"],
+      video: ["video", "visual"],
+      music: ["music", "song", "audio"],
+      multilingual: [
+        "multilingual",
+        "language",
+        "translate",
+        "translation",
+        "multi",
+      ],
+      api: ["api", "sdk", "developer"],
+    };
+    const keywords = keywordMap[activeTab] ?? [];
+    return sections.filter((section) => {
+      const tag = section.tag.toLowerCase();
+      return keywords.some((k) => tag.includes(k));
+    });
+  }, [sections, activeTab]);
   return (
     <div>
       <div className="flex flex-col gap-4 w-full relative mx-auto h-screen">
@@ -30,10 +70,6 @@ export function Startpage({
 
           <HeroTitle />
 
-          <div className="w-full mb-14">
-            <GenerateInline />
-          </div>
-
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,22 +78,27 @@ export function Startpage({
             <div className="flex flex-col gap-4 w-full">
               <div className="transition-all duration-1000">
                 <motion.div
-                  className="mb-0"
+                  className="mb-8"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+                >
+                  <BeautifulSearch />
+                </motion.div>
+                <motion.div
+                  className="mb-6"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
                 >
-                  <h2 className="text-left text-lg font-medium mb-2">
-                    Trending V3 Samples
-                  </h2>
-                  <p className="text-left text-sm text-[#878787] mb-8">
-                    Click any sample to listen, view prompts & vote for your
-                    favorites
-                  </p>
+                  <ShowcaseTabs
+                    value={activeTab}
+                    onValueChange={setActiveTab}
+                  />
                 </motion.div>
               </div>
             </div>
-            <SampleList sections={sections} />
+            <ProjectList sections={filteredSections} />
           </motion.div>
           <motion.div
             className="text-center py-12 border-[#E5E5E5] dark:border-[#262626]"

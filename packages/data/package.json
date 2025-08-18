@@ -4,10 +4,12 @@
   "description": "Showcase data",
   "main": "src/index.ts",
   "exports": {
-    "./samples": "./src/samples/index.ts",
+    "./projects": "./src/projects/index.ts",
     "./popular": "./src/popular/index.ts"
   },
   "dependencies": {
-    "@showcase/kv": "workspace:*"
+    "@showcase/kv": "workspace:*",
+    "slugify": "^1.6.6",
+    "yaml": "^2.6.0"
   }
 }
