@@ -90,7 +90,7 @@ export function Banner() {
   return (
     <a href={currentBanner.href} target="_blank" rel="noreferrer">
       <div
-        className={`fixed overflow-hidden ${slideClass} z-50 bottom-4 md:bottom-4 left-4 md:left-auto right-4 md:right-4 w-[calc(100vw-32px)] md:w-[calc(100vw-16px)] md:max-w-[370px] border border-border p-4 transition-all bg-background h-[88px] group`}
+        className={`fixed overflow-hidden ${slideClass} z-50 bottom-4 md:bottom-4 left-4 md:left-auto right-4 md:right-4 w-[calc(100vw-32px)] md:w-[calc(100vw-16px)] md:max-w-[370px] border border-border rounded-lg p-4 transition-all bg-background h-[88px] group`}
       >
         {currentBanner.logo}
 

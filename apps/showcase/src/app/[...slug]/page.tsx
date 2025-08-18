@@ -6,13 +6,14 @@ import {
   getSections,
 } from "../../../../../packages/data/src/projects";
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string[] }>;
 
 export async function generateMetadata({
   params,
 }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const joined = slug.join("/");
+  const project = getProjectBySlug(joined);
 
   if (!project) {
     return {
@@ -59,7 +60,8 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const joined = slug.join("/");
+  const project = getProjectBySlug(joined);
   const sections = getSections();
 
   if (!project) {
@@ -79,4 +81,5 @@ export default async function Page({ params }: { params: Params }) {
   );
 }
 
-export const revalidate = 86400; // Revalidate every 24 hours (86400 seconds)
+export const dynamic = "force-static";
+export const revalidate = 86400;

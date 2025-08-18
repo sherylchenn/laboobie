@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useQueryState } from "nuqs";
 import * as React from "react";
 import type { Section } from "../../../../packages/data/src/projects";
 import { HeroTitle } from "./hero-title";
 import { ProjectList } from "./project-list";
-import { BeautifulSearch } from "./ui/beautiful-search";
 import { ElevenLabs } from "./ui/elevenlabs";
+import { SearchBar } from "./ui/search-bar";
 import { ShowcaseTabs } from "./ui/showcase-tabs";
 
 export function Startpage({
@@ -15,6 +16,7 @@ export function Startpage({
   sections: Section[];
 }) {
   const [activeTab, setActiveTab] = React.useState("featured");
+  const [search, setSearch] = useQueryState("q");
   const filteredSections = React.useMemo(() => {
     if (activeTab === "featured") {
       const all = sections.flatMap((s) => s.projects);
@@ -83,7 +85,10 @@ export function Startpage({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
                 >
-                  <BeautifulSearch />
+                  <SearchBar
+                    onSearch={(val) => setSearch(val || null)}
+                    defaultValue={search ?? ""}
+                  />
                 </motion.div>
                 <motion.div
                   className="mb-6"
@@ -98,7 +103,13 @@ export function Startpage({
                 </motion.div>
               </div>
             </div>
-            <ProjectList sections={filteredSections} />
+            <ProjectList
+              sections={filteredSections}
+              onReset={() => {
+                setSearch(null);
+                setActiveTab("featured");
+              }}
+            />
           </motion.div>
           <motion.div
             className="text-center py-12 border-[#E5E5E5] dark:border-[#262626]"

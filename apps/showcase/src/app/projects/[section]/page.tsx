@@ -1,6 +1,5 @@
 import { Menu } from "@/components/menu";
 import { ProjectList } from "@/components/project-list";
-import { Tabs } from "@/components/tabs";
 import { getSectionBySlug, getSections } from "@showcase/data/projects";
 
 type Params = Promise<{ section: string }>;
@@ -38,7 +37,6 @@ export default async function Page({ params }: { params: Params }) {
       </div>
 
       <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
-        <Tabs />
         <ProjectList sections={data ? [data] : []} />
       </main>
     </div>

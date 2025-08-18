@@ -1,14 +1,22 @@
 "use client";
 
+import { getCategoryMeta } from "@/lib/category";
 import { useQueryState } from "nuqs";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import type { Section } from "../../../../packages/data/src/projects";
 import { ProjectCard } from "./project-card";
 import { Button } from "./ui/button";
+import { CategoryIcon } from "./ui/category-icon";
 
 const ITEMS_PER_PAGE = 6;
 
-export function ProjectList({ sections }: { sections: Section[] }) {
+export function ProjectList({
+  sections,
+  onReset,
+}: {
+  sections: Section[];
+  onReset?: () => void;
+}) {
   const [search, setSearch] = useQueryState("q");
   const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
 
@@ -54,16 +62,26 @@ export function ProjectList({ sections }: { sections: Section[] }) {
 
   if (!filteredSections.length) {
     return (
-      <div className="flex justify-center items-center h-full">
-        <div className="flex-col gap-4 flex items-center">
-          <p className="text-[#878787] text-sm">No projects found</p>
-          <Button
-            variant="outline"
-            className="mt-2 border-border rounded-full"
-            onClick={() => setSearch(null)}
-          >
-            Clear search
-          </Button>
+      <div className="w-full">
+        <div className="flex items-center justify-center">
+          <div className="flex w-full flex-col items-center justify-center rounded-xl border border-[#E5E5E5] dark:border-[#262626] bg-white/60 dark:bg-black/30 text-center min-h-[50vh] p-8">
+            <img
+              src="/icons/not-found.svg"
+              alt="No projects found"
+              className="h-16 w-16 mb-3"
+            />
+            <h3 className="text-base font-semibold">No projects found</h3>
+            <p className="text-sm text-[#878787] mt-1">
+              We couldn't find any projects for this search and filter
+            </p>
+            <Button
+              variant="outline"
+              className="mt-4 border-border rounded-full"
+              onClick={() => (onReset ? onReset() : setSearch(null))}
+            >
+              Clear search
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -71,18 +89,27 @@ export function ProjectList({ sections }: { sections: Section[] }) {
 
   return (
     <>
-      {filteredSections.slice(0, visibleItems).map((section, idx) => (
-        <section key={section.tag} id={section.tag}>
-          <h3 className="text-lg font-regular mb-4">{section.tag}</h3>
-          <div className="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-2 xl:grid-cols-3">
-            {section.projects.map((project, idx2) => (
-              <Fragment key={`${idx}-${idx2.toString()}`}>
-                <ProjectCard project={project} />
-              </Fragment>
-            ))}
-          </div>
-        </section>
-      ))}
+      {filteredSections.slice(0, visibleItems).map((section, idx) => {
+        const meta = getCategoryMeta(section.slug);
+        return (
+          <section key={section.tag} id={section.tag}>
+            <h3 className="text-lg font-regular mb-4 flex items-center gap-2">
+              <CategoryIcon
+                meta={meta}
+                className="h-4 w-4 text-[#666] dark:text-[#999]"
+              />
+              {meta.label}
+            </h3>
+            <div className="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-2 xl:grid-cols-3">
+              {section.projects.map((project, idx2) => (
+                <Fragment key={`${idx}-${idx2.toString()}`}>
+                  <ProjectCard project={project} />
+                </Fragment>
+              ))}
+            </div>
+          </section>
+        );
+      })}
 
       {visibleItems < filteredSections.length && (
         <div className="flex justify-center mt-8">

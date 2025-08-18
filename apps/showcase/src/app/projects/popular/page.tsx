@@ -1,6 +1,5 @@
 import { Menu } from "@/components/menu";
 import { ProjectList } from "@/components/project-list";
-import { Tabs } from "@/components/tabs";
 import { getPopularProjects } from "@showcase/data/popular";
 import { getSections } from "@showcase/data/projects";
 
@@ -23,7 +22,6 @@ export default async function Page() {
       </div>
 
       <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
-        <Tabs />
         <ProjectList sections={popularProjects} />
       </main>
     </div>

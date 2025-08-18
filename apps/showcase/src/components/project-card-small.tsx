@@ -33,10 +33,15 @@ export function ProjectCardSmall({
   return (
     <Card
       className={cn(
-        "bg-background max-h-[calc(100vh-8rem)] flex flex-col",
+        "bg-background max-h-[calc(100vh-8rem)] flex flex-col relative group",
         small ? "p-2" : "p-4 aspect-square",
       )}
     >
+      <Link
+        href={`/${sample.slug}`}
+        className="absolute inset-0 z-[1]"
+        aria-label={sample.title}
+      />
       <CardContent
         className={cn(
           "bg-card h-full mb-2 font-mono pr-1 text-sm opacity-50 hover:opacity-100 transition-opacity group relative flex-grow",
@@ -53,13 +58,11 @@ export function ProjectCardSmall({
           <ShareButton slug={sample.slug} small={small} />
         </div>
 
-        <Link href={`/${sample.slug}`}>
-          <div className="h-full overflow-y-auto">
-            <code className={cn("block pr-3", small ? "text-xs" : "text-sm")}>
-              {small ? truncate(preview, small ? 70 : 200) : preview}
-            </code>
-          </div>
-        </Link>
+        <div className="h-full overflow-y-auto">
+          <code className={cn("block pr-3", small ? "text-xs" : "text-sm")}>
+            {small ? truncate(preview, small ? 70 : 200) : preview}
+          </code>
+        </div>
       </CardContent>
 
       <CardHeader className="p-0 space-y-1">

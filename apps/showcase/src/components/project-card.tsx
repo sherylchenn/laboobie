@@ -7,7 +7,12 @@ import type { Project } from "../../../../packages/data/src/projects";
 export function ProjectCard({ project }: { project: Project }) {
   const cover = project.coverImage ?? "/card.png";
   return (
-    <Card className="bg-background p-4 flex flex-col rounded-lg">
+    <Card className="bg-background p-4 flex flex-col rounded-lg relative group">
+      <Link
+        href={`/${project.slug}`}
+        className="absolute inset-0 z-[1]"
+        aria-label={project.title}
+      />
       <div className="w-full aspect-video mb-3 overflow-hidden rounded-md bg-[#0A0A0A]">
         <img
           src={cover}
@@ -29,7 +34,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {(project.externalTech ?? project.tags ?? []).slice(0, 3).map((t) => (
             <span
               key={t}
-              className="px-2 py-1 bg-[#F5F5F5] dark:bg-[#1A1A1A] rounded text-[#666] dark:text-[#999] text-xs"
+              className="px-2 py-1 bg-[#F5F5F5] dark:bg-[#1A1A1A] rounded text-[#666] dark:text-[#999] text-xs relative z-10"
             >
               {t}
             </span>
@@ -41,7 +46,7 @@ export function ProjectCard({ project }: { project: Project }) {
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#878787] hover:text-black dark:hover:text-white"
+              className="text-[#878787] hover:text-black dark:hover:text-white relative z-10"
             >
               Live demo
             </Link>
@@ -51,7 +56,7 @@ export function ProjectCard({ project }: { project: Project }) {
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#878787] hover:text-black dark:hover:text-white"
+              className="text-[#878787] hover:text-black dark:hover:text-white relative z-10"
             >
               Source code
             </Link>
@@ -61,7 +66,7 @@ export function ProjectCard({ project }: { project: Project }) {
               href={project.videoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#878787] hover:text-black dark:hover:text-white"
+              className="text-[#878787] hover:text-black dark:hover:text-white relative z-10"
             >
               Video
             </Link>
