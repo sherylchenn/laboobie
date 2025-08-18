@@ -1,6 +1,6 @@
 "use server";
 
-import { redis } from "@directories/kv/redis";
+import { redis } from "@showcase/kv/redis";
 import { headers } from "next/headers";
 import { z } from "zod";
 import { actionClient } from "./safe-action";

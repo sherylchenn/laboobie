@@ -1,4 +1,4 @@
-import { redis } from "@directories/kv/redis";
+import { redis } from "@showcase/kv/redis";
 import { getSections } from "../samples";
 
 export async function getPopularSamples() {
