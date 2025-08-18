@@ -14,8 +14,8 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Speech Directory | ElevenLabs",
-  description: "Listen to the best speech projects by ElevenLabs v3",
+  title: "Showcase | ElevenLabs",
+  description: "The best projects built with ElevenLabs",
   icons: [
     {
       rel: "icon",
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     },
   ],
   openGraph: {
-    title: "Speech Directory | ElevenLabs",
-    description: "Listen to the best speech projects by ElevenLabs v3",
-    url: "https://speech.directory",
+    title: "Showcase | ElevenLabs",
+    description: "The best projects built with ElevenLabs",
+    url: "https://showcase.elevenlabs.io",
     locale: "en_US",
     type: "website",
     images: [
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Speech Directory | ElevenLabs",
-    description: "Listen to the best speech projects by ElevenLabs v3",
+    title: "Showcase | ElevenLabs",
+    description: "The best projects built with ElevenLabs",
     images: [
       {
         url: "https://storage.googleapis.com/eleven-public-cdn/images/speech-directory/og.png",
