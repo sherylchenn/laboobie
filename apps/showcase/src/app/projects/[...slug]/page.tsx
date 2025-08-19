@@ -1,3 +1,4 @@
+import { DitheredImage } from "@/components/dithered-image";
 import { Markdown } from "@/components/markdown";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getProjectBySlug, getSections } from "@showcase/data/projects";
@@ -133,11 +134,7 @@ export default async function Page({ params }: { params: Params }) {
 
           {project.image && (
             <div className="w-full mb-8 overflow-hidden rounded-md bg-[#0A0A0A]">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-auto object-cover"
-              />
+              <DitheredImage src={project.image} alt={project.title} />
             </div>
           )}
 

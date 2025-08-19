@@ -13,7 +13,7 @@ import { CategoryIcon } from "./ui/category-icon";
 export function Menu({ sections }: { sections: Section[] }) {
   const pathname = usePathname();
   return (
-    <aside className="w-64 h-[calc(100vh-3.5rem)] pt-12 px-6 pb-4 flex flex-col md:fixed md:top-14 md:left-[var(--menu-left,theme(spacing.6))]">
+    <aside className="w-64 h-[calc(100vh-3.5rem)] pt-12 pr-6 pb-4 flex flex-col md:fixed md:top-14 md:left-[var(--menu-left,theme(spacing.6))]">
       <div className="mb-3">
         <div className="pl-3">
           <span className="text-[15px] font-semibold tracking-tight text-primary">
