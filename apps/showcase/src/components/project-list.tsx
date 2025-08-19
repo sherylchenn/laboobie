@@ -92,11 +92,15 @@ export function ProjectList({
         const meta = getCategoryMeta(section.slug);
         return (
           <section key={section.tag} id={section.tag}>
-            <h3 className="text-lg font-regular mb-4 flex items-center gap-2">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-[#2A2A2B]/80 text-white">
-                <CategoryIcon meta={meta} className="h-3.5 w-3.5" />
-              </span>
+            <h3 className="text-md font-regular mb-4 flex items-center gap-2 text-foreground/80">
+              <CategoryIcon
+                meta={meta}
+                className="h-3.5 w-3.5 text-[#666] dark:text-[#999]"
+              />
               {meta.label}
+              <span className="ml-2 text-[#878787] text-sm">
+                {section.projects.length}
+              </span>
             </h3>
             <div className="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-2 xl:grid-cols-3">
               {section.projects.map((project, idx2) => (

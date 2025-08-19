@@ -32,8 +32,8 @@ export function Header() {
   const mainNavItems = navigationLinks.slice(0, 5);
 
   return (
-    <div className="flex justify-between items-center mt-2 md:mt-0">
-      <div className="md:fixed z-20 flex justify-between items-center top-0 px-6 py-2 w-full bg-background/20 backdrop-filter backdrop-blur-sm bg-opacity-30">
+    <header className="sticky top-0 z-20 h-14 bg-background/20 backdrop-filter backdrop-blur-sm bg-opacity-30">
+      <div className="flex items-center justify-between h-full px-6">
         <Link href="/">
           <div className="relative w-[100px] h-[40px]">
             <Image
@@ -45,7 +45,7 @@ export function Header() {
           </div>
         </Link>
 
-        <div className="hidden md:flex items-center gap-5">
+        <div className="flex items-center gap-5">
           {mainNavItems.map((link) => (
             <Link
               key={link.href}
@@ -62,8 +62,6 @@ export function Header() {
           ))}
         </div>
       </div>
-      <MobileMenu />
-      <CommandMenu open={open} setOpen={setOpen} />
-    </div>
+    </header>
   );
 }

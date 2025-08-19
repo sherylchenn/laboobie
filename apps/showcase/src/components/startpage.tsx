@@ -105,30 +105,6 @@ export function Startpage({
               }}
             />
           </motion.div>
-          <motion.div
-            className="text-center py-12 border-[#E5E5E5] dark:border-[#262626]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <p className="text-sm text-[#878787] mb-4">
-              Integrate ElevenLabs into your projects
-            </p>
-            <div className="flex gap-4 justify-center">
-              <a
-                href="https://elevenlabs.io/developers"
-                className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-md hover:opacity-90 transition-opacity text-sm"
-              >
-                Use the API
-              </a>
-              <a
-                href="https://elevenlabs.io/docs"
-                className="px-4 py-2 border border-[#E5E5E5] dark:border-[#262626] rounded-md hover:border-[#878787] dark:hover:border-[#404040] transition-colors text-sm"
-              >
-                View Documentation
-              </a>
-            </div>
-          </motion.div>
         </div>
       </div>
     </div>

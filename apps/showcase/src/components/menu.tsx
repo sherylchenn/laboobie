@@ -15,8 +15,8 @@ export function Menu({ sections }: { sections: Section[] }) {
   return (
     <aside className="w-64 px-6 pt-0 pb-4 flex flex-col">
       <div className="mb-3">
-        <div className="pl-3 flex items-center gap-2 text-md font-regular text-[#666] dark:text-[#999]">
-          <span className="text-primary">Showcase</span>
+        <div className="pl-3">
+          <span className="text-[15px] font-semibold tracking-tight text-primary">Showcase</span>
         </div>
       </div>
       <ScrollArea className="flex-grow">
