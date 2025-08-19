@@ -58,6 +58,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+  metadataBase: new URL("https://showcase.elevenlabs.io"),
 };
 
 export const viewport = {

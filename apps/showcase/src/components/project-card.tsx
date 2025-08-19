@@ -20,7 +20,9 @@ export function ProjectCard({ project }: { project: Project }) {
         href={`/projects/${project.slug}`}
         className="absolute inset-0 z-[1]"
         aria-label={project.title}
-      />
+      >
+        <span className="sr-only">View {project.title} project</span>
+      </Link>
       <div className="w-full aspect-video mb-3 overflow-hidden rounded-md bg-[#0A0A0A]">
         <DitheredImage src={cover} alt={project.title} />
       </div>
