@@ -4,6 +4,7 @@ import { getProjectBySlug, getSections } from "@showcase/data/projects";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Markdown } from "@/components/markdown";
+import { ArrowLeft } from "lucide-react";
 
 function formatDate(input?: string): string | undefined {
   if (!input) return undefined;
@@ -79,21 +80,9 @@ export default async function Page({ params }: { params: Params }) {
   const backHref = `/projects/${project.category.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
-    <div className="flex w-full h-full pt-4 md:pt-16">
-      <div className="hidden md:flex sticky top-4 md:top-0 h-[calc(100vh-3rem)]">
-        <Menu sections={sections} />
-      </div>
-
-      <main className="flex-1 p-6 pt-0">
-        <div className="mx-auto w-full max-w-3xl mt-6 md:mt-10">
-          <div className="mb-6">
-            <Link
-              href={backHref}
-              className="text-sm text-[#878787] hover:text-foreground"
-            >
-              ← Back to {project.category}
-            </Link>
-          </div>
+    <div className="flex w-full h-full pt-4">
+      <main className="flex-1 pt-0">
+        <div className="mx-auto w-full max-w-3xl">
 
           <header className="mb-8">
             <h1 className="text-3xl font-bold mb-3 leading-tight">

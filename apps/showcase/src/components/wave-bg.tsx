@@ -60,6 +60,11 @@ export function WaveBg({ className }: { className?: string }) {
     return () => cancelAnimationFrame(raf);
   }, []);
 
+  // Typed ref setter that returns void
+  const setPathRef = (index: number) => (el: SVGPathElement | null): void => {
+    pathsRef.current[index] = el;
+  };
+
   return (
     <div
       className={cn(
@@ -142,11 +147,11 @@ export function WaveBg({ className }: { className?: string }) {
 
         <g mask="url(#fadeMask)" filter="url(#bloom)">
           {/* back wave (broad, darkest) */}
-          <path ref={(el) => (pathsRef.current[0] = el)} fill="url(#waveGrad3)" />
+          <path ref={setPathRef(0)} fill="url(#waveGrad3)" />
           {/* mid wave */}
-          <path ref={(el) => (pathsRef.current[1] = el)} fill="url(#waveGrad2)" />
+          <path ref={setPathRef(1)} fill="url(#waveGrad2)" />
           {/* front wave (brightest) */}
-          <path ref={(el) => (pathsRef.current[2] = el)} fill="url(#waveGrad1)" />
+          <path ref={setPathRef(2)} fill="url(#waveGrad1)" />
         </g>
 
         {/* Smoke overlay layer with screen blend */}
