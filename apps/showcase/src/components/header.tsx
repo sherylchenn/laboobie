@@ -18,6 +18,7 @@ import { Button } from "./ui/button";
 
 const navigationLinks = [
   { href: "/projects", label: "Explore" },
+  { href: "/members", label: "Members" },
   {
     href: "https://github.com/elevenlabs/showcase",
     label: "Submit",

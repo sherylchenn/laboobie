@@ -1,10 +1,8 @@
-import { Menu } from "@/components/menu";
-import type { Metadata } from "next";
-import { getProjectBySlug, getSections } from "@showcase/data/projects";
-import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Markdown } from "@/components/markdown";
-import { ArrowLeft } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getProjectBySlug, getSections } from "@showcase/data/projects";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 function formatDate(input?: string): string | undefined {
   if (!input) return undefined;
@@ -19,7 +17,9 @@ function formatDate(input?: string): string | undefined {
 
 type Params = Promise<{ slug: string[] }>;
 
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const joined = slug.join("/");
   const project = getProjectBySlug(joined);
@@ -77,13 +77,10 @@ export default async function Page({ params }: { params: Params }) {
   }
 
   const date = formatDate(project.date);
-  const backHref = `/projects/${project.category.replace(/\s+/g, "-").toLowerCase()}`;
-
   return (
     <div className="flex w-full h-full pt-4">
       <main className="flex-1 pt-0">
         <div className="mx-auto w-full max-w-3xl">
-
           <header className="mb-8">
             <h1 className="text-3xl font-bold mb-3 leading-tight">
               {project.title}
@@ -94,9 +91,9 @@ export default async function Page({ params }: { params: Params }) {
               </p>
             )}
 
-            <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-foreground">
               {project.authors?.length ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center">
                   {project.authors.slice(0, 3).map((a) => {
                     const initials = a.name
                       .split(" ")
@@ -114,7 +111,11 @@ export default async function Page({ params }: { params: Params }) {
                           )}
                         </Avatar>
                         {a.url ? (
-                          <Link href={a.url} target="_blank" className="hover:underline">
+                          <Link
+                            href={a.url}
+                            target="_blank"
+                            className="hover:underline"
+                          >
                             {a.name}
                           </Link>
                         ) : (
@@ -125,7 +126,8 @@ export default async function Page({ params }: { params: Params }) {
                   })}
                 </div>
               ) : null}
-              {date && <span>• {date}</span>}
+              {date && <span>•</span>}
+              {date && <span>{date}</span>}
             </div>
           </header>
 
@@ -147,4 +149,4 @@ export default async function Page({ params }: { params: Params }) {
 }
 
 export const dynamic = "force-static";
-export const revalidate = 86400; 
+export const revalidate = 86400;

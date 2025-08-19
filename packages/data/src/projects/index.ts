@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import slugify from "slugify";
+import { getAllProfiles } from "../profiles";
 
 // Resolve workspace root
 const WORKSPACE_ROOT = process.env.WORKSPACE_ROOT
@@ -49,6 +50,9 @@ export interface Project {
   technologies?: string[];
   apis?: string[];
   tags?: string[];
+
+  // Alias property for clarity with new frontmatter
+  authorIds?: string[];
 }
 
 export type Section = {
@@ -74,10 +78,10 @@ interface ParsedFrontmatter {
   repoUrl?: unknown;
   videoUrl?: unknown;
   xUrl?: unknown;
-  authors?: unknown;
   technologies?: unknown;
   apis?: unknown;
   tags?: unknown;
+  authorIds?: unknown;
 }
 
 function toStringIf(val: unknown): string | undefined {
@@ -107,15 +111,19 @@ function parseProject(filePath: string): Project | null {
     // Generate slug from category and filename
     const slug = `${slugify(category, { lower: true })}/${slugify(basename, { lower: true })}`;
 
-    // Parse authors
-    const authorsRaw = Array.isArray(frontmatter.authors)
-      ? (frontmatter.authors as Array<Record<string, unknown>>)
-      : [];
-    const authors: ProjectAuthor[] = authorsRaw.map((author) => ({
-      name: toStringIf(author.name) ?? "",
-      url: toStringIf(author.url),
-      avatar: toStringIf(author.avatar),
-    }));
+    // Resolve authors from user ids
+    const preferredIds = toStringArrayIf(frontmatter.authorIds);
+
+    let authors: ProjectAuthor[] = [];
+    const authorIds: string[] | undefined = preferredIds;
+
+    if (preferredIds && preferredIds.length > 0) {
+      const allProfiles = getAllProfiles();
+      authors = preferredIds
+        .map((id) => allProfiles.find((p) => p.slug === id))
+        .filter(Boolean)
+        .map((u) => ({ name: u!.name, url: u!.url, avatar: u!.avatar }));
+    }
 
     return {
       // Core fields
@@ -144,6 +152,8 @@ function parseProject(filePath: string): Project | null {
       technologies: toStringArrayIf(frontmatter.technologies),
       apis: toStringArrayIf(frontmatter.apis),
       tags: toStringArrayIf(frontmatter.tags),
+
+      authorIds,
     };
   } catch (error) {
     console.error(`Failed to parse project file ${filePath}:`, error);

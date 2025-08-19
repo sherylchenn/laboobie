@@ -1,10 +1,15 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import type { Project } from "@showcase/data/projects";
 import Link from "next/link";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 function VisionDitheredImage({
   src,
@@ -22,7 +27,7 @@ function VisionDitheredImage({
       <img
         src={src}
         alt={alt}
-        className={className + " w-full h-full object-cover select-none"}
+        className={`${className ?? ""} w-full h-full object-cover select-none`}
         loading="lazy"
         style={{ filter: "saturate(0.85) contrast(1.06) brightness(1.02)" }}
       />
@@ -78,7 +83,8 @@ function VisionDitheredImage({
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.00) 35%)",
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.00) 35%)",
         }}
       />
 
@@ -124,14 +130,16 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
         <div className="mt-auto flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 flex-wrap">
-            {(project.technologies ?? project.tags ?? []).slice(0, 3).map((t) => (
-              <span
-                key={t}
-                className="px-2 py-1 bg-[#F5F5F5] dark:bg-[#1A1A1A] rounded text-[#666] dark:text-[#999] text-xs relative z-10"
-              >
-                {t}
-              </span>
-            ))}
+            {(project.technologies ?? project.tags ?? [])
+              .slice(0, 3)
+              .map((t) => (
+                <span
+                  key={t}
+                  className="px-2 py-1 bg-[#F5F5F5] dark:bg-[#1A1A1A] rounded text-[#666] dark:text-[#999] text-xs relative z-10"
+                >
+                  {t}
+                </span>
+              ))}
           </div>
           {project.authors && project.authors.length > 0 && (
             <TooltipProvider>
@@ -149,13 +157,13 @@ export function ProjectCard({ project }: { project: Project }) {
                       <Tooltip key={`${a.name}-${i.toString()}`}>
                         <TooltipTrigger asChild>
                           <div className="relative z-10 rounded-full overflow-hidden">
-                          <Avatar className="h-7 w-7">
-                          {a.avatar ? (
-                            <AvatarImage src={a.avatar} alt={a.name} />
-                          ) : (
-                            <AvatarFallback>{initials}</AvatarFallback>
-                          )}
-                        </Avatar>
+                            <Avatar className="h-7 w-7">
+                              {a.avatar ? (
+                                <AvatarImage src={a.avatar} alt={a.name} />
+                              ) : (
+                                <AvatarFallback>{initials}</AvatarFallback>
+                              )}
+                            </Avatar>
                           </div>
                         </TooltipTrigger>
                         <TooltipContent>{a.name}</TooltipContent>

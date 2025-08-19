@@ -117,7 +117,7 @@ export const MusicBanner = memo(function MusicBanner() {
   // --- Player state ---
   const playlist = useMemo(
     () => [
-      { src: "/music/song-80s.mp3", title: "ElevenLabs - 80s vibes" },
+      { src: "/music/song-80s.mp3", title: "ElevenLabs - 80s" },
       { src: "/music/song-ethereal.mp3", title: "ElevenLabs - Ethereal" },
       { src: "/music/song-glitch-1.mp3", title: "ElevenLabs - Dubstep 1" },
       { src: "/music/song-rap-1.mp3", title: "ElevenLabs - Rap 1" },

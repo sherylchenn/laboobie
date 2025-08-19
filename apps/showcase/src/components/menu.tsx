@@ -13,10 +13,12 @@ import { CategoryIcon } from "./ui/category-icon";
 export function Menu({ sections }: { sections: Section[] }) {
   const pathname = usePathname();
   return (
-    <aside className="w-64 px-6 pt-0 pb-4 flex flex-col">
+    <aside className="w-64 h-[calc(100vh-3.5rem)] pt-12 px-6 pb-4 flex flex-col md:fixed md:top-14 md:left-[var(--menu-left,theme(spacing.6))]">
       <div className="mb-3">
         <div className="pl-3">
-          <span className="text-[15px] font-semibold tracking-tight text-primary">Showcase</span>
+          <span className="text-[15px] font-semibold tracking-tight text-primary">
+            Showcase
+          </span>
         </div>
       </div>
       <ScrollArea className="flex-grow">
@@ -31,10 +33,14 @@ export function Menu({ sections }: { sections: Section[] }) {
                   : "text-foreground/80",
               )}
             >
-              <Sparkles className={cn(
-                      "h-3.5 w-3.5",
-                      pathname === "/projects" ? "text-white" : "text-[#666] dark:text-[#999]",
-                    )}/>
+              <Sparkles
+                className={cn(
+                  "h-3.5 w-3.5",
+                  pathname === "/projects"
+                    ? "text-white"
+                    : "text-[#666] dark:text-[#999]",
+                )}
+              />
               Featured
             </div>
           </Link>
