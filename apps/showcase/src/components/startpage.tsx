@@ -1,9 +1,9 @@
 "use client";
 
+import type { Section } from "@showcase/data/projects";
 import { motion } from "motion/react";
 import { useQueryState } from "nuqs";
 import * as React from "react";
-import type { Section } from "../../../../packages/data/src/projects";
 import { HeroTitle } from "./hero-title";
 import { ProjectList } from "./project-list";
 import { ElevenLabs } from "./ui/elevenlabs";
@@ -78,17 +78,12 @@ export function Startpage({
           >
             <div className="flex flex-col gap-4 w-full">
               <div className="transition-all duration-1000">
-                <motion.div
-                  className="mb-8"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
-                >
+                <div className="mb-8">
                   <SearchBar
                     onSearch={(val) => setSearch(val || null)}
                     defaultValue={search ?? ""}
                   />
-                </motion.div>
+                </div>
                 <motion.div
                   className="mb-6"
                   initial={{ opacity: 0, y: 10 }}

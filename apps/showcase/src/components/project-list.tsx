@@ -33,9 +33,8 @@ export function ProjectList({
           const q = search.toLowerCase();
           return (
             p.title.toLowerCase().includes(q) ||
-            (p.shortDescription ?? "").toLowerCase().includes(q) ||
-            (p.longDescription ?? "").toLowerCase().includes(q) ||
-            (p.externalTech ?? []).some((t) => t.toLowerCase().includes(q)) ||
+            (p.description ?? "").toLowerCase().includes(q) ||
+            (p.technologies ?? []).some((t) => t.toLowerCase().includes(q)) ||
             (p.tags ?? []).some((t) => t.toLowerCase().includes(q))
           );
         }),

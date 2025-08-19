@@ -33,7 +33,7 @@ export function Header() {
 
   return (
     <div className="flex justify-between items-center mt-2 md:mt-0">
-      <div className="md:fixed z-20 flex justify-between items-center top-0 px-6 py-2 w-full bg-background backdrop-filter backdrop-blur-sm bg-opacity-30">
+      <div className="md:fixed z-20 flex justify-between items-center top-0 px-6 py-2 w-full bg-background/20 backdrop-filter backdrop-blur-sm bg-opacity-30">
         <Link href="/">
           <div className="relative w-[100px] h-[40px]">
             <Image

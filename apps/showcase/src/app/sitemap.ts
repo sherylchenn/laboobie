@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getSections } from "../../../../packages/data/src/projects";
+import { getSections } from "@showcase/data/projects";
 
 const BASE_URL = "https://speech.directory";
 
@@ -29,11 +29,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Add routes for each projects section
+  // Add routes for each project detail under /projects
   for (const section of sections) {
     for (const sample of section.projects) {
       routes.push({
-        url: `${BASE_URL}/${sample.slug}`,
+        url: `${BASE_URL}/projects/${sample.slug}`,
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.7,

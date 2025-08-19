@@ -5,9 +5,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import type { Project } from "@showcase/data/projects";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import type { Project } from "../../../../packages/data/src/projects";
 import { ShareButton } from "./share-button";
 
 function truncate(text: string, limit: number) {
@@ -24,7 +24,7 @@ export function ProjectCardSmall({
   isPage?: boolean;
   small?: boolean;
 }) {
-  const preview = sample.shortDescription ?? sample.longDescription ?? "";
+  const preview = sample.description ?? "";
   const byline =
     sample.authors && sample.authors.length > 0
       ? sample.authors[0]?.name
@@ -38,7 +38,7 @@ export function ProjectCardSmall({
       )}
     >
       <Link
-        href={`/${sample.slug}`}
+        href={`/projects/${sample.slug}`}
         className="absolute inset-0 z-[1]"
         aria-label={sample.title}
       />

@@ -80,9 +80,38 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            p: { marginTop: "0.4em", marginBottom: "0.4em" },
+            h1: { marginTop: "1em", marginBottom: "0.4em" },
+            h2: { marginTop: "0.9em", marginBottom: "0.4em" },
+            h3: { marginTop: "0.8em", marginBottom: "0.35em" },
+            h4: { marginTop: "0.7em", marginBottom: "0.3em" },
+            ul: { marginTop: "0.4em", marginBottom: "0.4em" },
+            ol: { marginTop: "0.4em", marginBottom: "0.4em" },
+            li: { marginTop: "0.15em", marginBottom: "0.15em" },
+            blockquote: { marginTop: "0.5em", marginBottom: "0.5em" },
+            pre: { marginTop: "0.6em", marginBottom: "0.6em" },
+            img: { marginTop: "0.5em", marginBottom: "0.5em" },
+            table: { marginTop: "0.6em", marginBottom: "0.6em" },
+            hr: { marginTop: "0.9em", marginBottom: "0.9em" },
+
+            // Collapse leading/trailing whitespace
+            ["> :first-child"]: { marginTop: "0" },
+            ["> :last-child"]: { marginBottom: "0" },
+
+            // Tighten paragraph-to-list gap
+            "p + ul": { marginTop: "0.3em" },
+            "p + ol": { marginTop: "0.3em" },
+            "ul + p": { marginTop: "0.3em" },
+            "ol + p": { marginTop: "0.3em" },
+          },
+        },
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
 
 export default config;

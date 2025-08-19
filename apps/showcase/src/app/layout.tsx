@@ -12,6 +12,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
+import { GlobalBg } from "@/components/global-bg";
 
 export const metadata: Metadata = {
   title: "Showcase | ElevenLabs",
@@ -92,15 +93,19 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NuqsAdapter>
-            {/* Fixed global background layers */}
+            {/* Background */}
+            <GlobalBg />
 
-            <Header />
-            {children}
+            {/* Foreground content */}
+            <div className="relative z-10">
+              <Header />
+              {children}
 
-            <MusicBanner />
-            <Toaster />
-            <GlobalModals />
-            <SimpleAudioPlayer />
+              <MusicBanner />
+              <Toaster />
+              <GlobalModals />
+              <SimpleAudioPlayer />
+            </div>
           </NuqsAdapter>
         </ThemeProvider>
       </body>

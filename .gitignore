@@ -6,4 +6,4 @@ node_modules
 apps/showcase/tsconfig.tsbuildinfo
 
 # Generated public images (synced from packages/data/src/projects)
-apps/showcase/public/images/projects/
+apps/showcase/public/images/

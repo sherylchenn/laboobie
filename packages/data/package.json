@@ -10,6 +10,6 @@
   "dependencies": {
     "@showcase/kv": "workspace:*",
     "slugify": "^1.6.6",
-    "yaml": "^2.6.0"
+    "gray-matter": "^4.0.3"
   }
 }

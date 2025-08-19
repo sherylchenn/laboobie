@@ -1,9 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
 import slugify from "slugify";
-import YAML from "yaml";
 
-// Resolve workspace root and projects dir robustly in monorepo/dev
+// Resolve workspace root
 const WORKSPACE_ROOT = process.env.WORKSPACE_ROOT
   ? path.resolve(process.env.WORKSPACE_ROOT)
   : path.resolve(
@@ -11,213 +11,180 @@ const WORKSPACE_ROOT = process.env.WORKSPACE_ROOT
       process.cwd().includes(`${path.sep}apps${path.sep}`) ? "../.." : ".",
     );
 
-// Public assets root for Next.js app
-const PUBLIC_DIR = path.resolve(WORKSPACE_ROOT, "apps/showcase/public");
-
-// Allow overriding via env; default to monorepo path
-const PROJECTS_BASE_DIR = process.env.PROJECTS_DIR
+// Projects directory is now at the root
+const PROJECTS_DIR = process.env.PROJECTS_DIR
   ? path.resolve(process.env.PROJECTS_DIR)
-  : path.resolve(WORKSPACE_ROOT, "packages/data/src/projects");
+  : path.resolve(WORKSPACE_ROOT, "projects");
 
 export type ProjectAuthor = {
   name: string;
-  url?: string | null;
-  avatar?: string | null;
+  url?: string;
+  avatar?: string;
 };
 
 export interface Project {
+  // Core fields
   title: string;
-  shortDescription?: string;
-  longDescription?: string;
-  coverImage?: string;
-  galleryImages?: string[];
+  description?: string;
+  category: string; // Now from frontmatter
+  slug: string;
+
+  // Content
+  markdown: string; // The actual markdown content
+
+  // Metadata
+  date?: string;
   isFeatured?: boolean;
-  date?: string; // ISO string (from YAML)
-  platform?: string;
-  externalTech?: string[];
-  tags?: string[];
-  authors?: ProjectAuthor[];
+  image?: string;
+  galleryImages?: string[];
+
+  // Links
   demoUrl?: string;
   repoUrl?: string;
   videoUrl?: string;
   xUrl?: string;
-  useCases?: string[];
-  category: string; // derived from folder name
-  slug: string; // category/filename (slugified)
+
+  // Authors and tech
+  authors: ProjectAuthor[];
+  technologies?: string[];
+  apis?: string[];
+  tags?: string[];
 }
 
 export type Section = {
-  tag: string; // category label (folder name)
-  slug: string; // slugified tag
+  tag: string; // category label
+  slug: string; // slugified category
   projects: Project[];
 };
 
-function isYamlFile(filename: string) {
-  return filename.endsWith(".yml") || filename.endsWith(".yaml");
+function isMarkdownFile(filename: string): boolean {
+  return filename.endsWith(".md") || filename.endsWith(".mdx");
 }
 
-function readYamlFile(filePath: string): Record<string, unknown> | null {
+// Strongly type the frontmatter to avoid `any`
+interface ParsedFrontmatter {
+  title?: unknown;
+  category?: unknown;
+  description?: unknown;
+  date?: unknown;
+  isFeatured?: unknown;
+  image?: unknown;
+  galleryImages?: unknown;
+  demoUrl?: unknown;
+  repoUrl?: unknown;
+  videoUrl?: unknown;
+  xUrl?: unknown;
+  authors?: unknown;
+  technologies?: unknown;
+  apis?: unknown;
+  tags?: unknown;
+}
+
+function toStringIf(val: unknown): string | undefined {
+  return typeof val === "string" ? val : undefined;
+}
+
+function toStringArrayIf(val: unknown): string[] | undefined {
+  return Array.isArray(val) ? (val.map(String) as string[]) : undefined;
+}
+
+function parseProject(filePath: string): Project | null {
   try {
-    const raw = fs.readFileSync(filePath, "utf8");
-    return YAML.parse(raw) as Record<string, unknown>;
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn(`Failed to read YAML file at ${filePath}:`, e);
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    const { data, content } = matter(fileContent);
+    const frontmatter = data as ParsedFrontmatter;
+
+    // Get filename without extension for slug
+    const basename = path.basename(filePath, path.extname(filePath));
+
+    const title = toStringIf(frontmatter.title);
+    const category = toStringIf(frontmatter.category);
+    if (!title || !category) {
+      console.warn(`Missing required fields in ${filePath}`);
+      return null;
+    }
+
+    // Generate slug from category and filename
+    const slug = `${slugify(category, { lower: true })}/${slugify(basename, { lower: true })}`;
+
+    // Parse authors
+    const authorsRaw = Array.isArray(frontmatter.authors)
+      ? (frontmatter.authors as Array<Record<string, unknown>>)
+      : [];
+    const authors: ProjectAuthor[] = authorsRaw.map((author) => ({
+      name: toStringIf(author.name) ?? "",
+      url: toStringIf(author.url),
+      avatar: toStringIf(author.avatar),
+    }));
+
+    return {
+      // Core fields
+      title,
+      description: toStringIf(frontmatter.description),
+      category,
+      slug,
+
+      // Content
+      markdown: content.trim(),
+
+      // Metadata
+      date: toStringIf(frontmatter.date),
+      isFeatured: Boolean(frontmatter.isFeatured),
+      image: toStringIf(frontmatter.image),
+      galleryImages: toStringArrayIf(frontmatter.galleryImages),
+
+      // Links
+      demoUrl: toStringIf(frontmatter.demoUrl),
+      repoUrl: toStringIf(frontmatter.repoUrl),
+      videoUrl: toStringIf(frontmatter.videoUrl),
+      xUrl: toStringIf(frontmatter.xUrl),
+
+      // Authors and tech
+      authors,
+      technologies: toStringArrayIf(frontmatter.technologies),
+      apis: toStringArrayIf(frontmatter.apis),
+      tags: toStringArrayIf(frontmatter.tags),
+    };
+  } catch (error) {
+    console.error(`Failed to parse project file ${filePath}:`, error);
     return null;
   }
 }
 
-function isExistingPublicPath(publicPath: string): boolean {
-  const rel = publicPath.startsWith("/") ? publicPath.slice(1) : publicPath;
-  const abs = path.join(PUBLIC_DIR, rel);
-  return fs.existsSync(abs);
-}
-
-function getPublicPathFromAbsolute(absolutePath: string): string | undefined {
-  const normalizedPublic = PUBLIC_DIR.endsWith(path.sep)
-    ? PUBLIC_DIR
-    : `${PUBLIC_DIR}${path.sep}`;
-  const normalizedAbs = absolutePath;
-  if (!normalizedAbs.startsWith(normalizedPublic)) return undefined;
-  const rel = normalizedAbs
-    .slice(normalizedPublic.length)
-    .split(path.sep)
-    .join("/");
-  return `/${rel}`;
-}
-
-function resolveCoverImageFallback(
-  category: string,
-  projectBaseName: string,
-): string | undefined {
-  const cat = slugify(category, { lower: true });
-  const proj = slugify(projectBaseName, { lower: true });
-  const exts = ["png", "jpg", "jpeg", "webp", "avif"];
-  const candidates: string[] = [];
-  for (const ext of exts) {
-    candidates.push(
-      path.join(PUBLIC_DIR, "images", "projects", cat, proj, `cover.${ext}`),
-      path.join(PUBLIC_DIR, "projects", proj, `cover.${ext}`),
-      path.join(PUBLIC_DIR, "projects", cat, proj, `cover.${ext}`),
-    );
-  }
-  for (const abs of candidates) {
-    if (fs.existsSync(abs)) {
-      const pub = getPublicPathFromAbsolute(abs);
-      if (pub) return pub;
-    }
-  }
-  return undefined;
-}
-
-function toProject(
-  category: string,
-  projectBaseName: string,
-  data: Record<string, unknown>,
-): Project {
-  const projectSlug = `${slugify(category, { lower: true })}/${slugify(
-    projectBaseName,
-    {
-      lower: true,
-    },
-  )}`;
-
-  let cover: string | undefined;
-  const coverVal = (data as Record<string, unknown>).coverImage;
-  if (typeof coverVal === "string") cover = coverVal as string;
-
-  return {
-    title: String(data.title ?? projectBaseName),
-    shortDescription: data.shortDescription
-      ? String(data.shortDescription)
-      : undefined,
-    longDescription: data.longDescription
-      ? String(data.longDescription)
-      : undefined,
-    coverImage: cover,
-    galleryImages: Array.isArray(data.galleryImages)
-      ? (data.galleryImages as unknown[]).map(String)
-      : undefined,
-    isFeatured:
-      typeof data.isFeatured === "boolean"
-        ? (data.isFeatured as boolean)
-        : undefined,
-    date: data.date ? String(data.date) : undefined,
-    platform: data.platform ? String(data.platform) : undefined,
-    externalTech: Array.isArray(data.externalTech)
-      ? (data.externalTech as unknown[]).map(String)
-      : undefined,
-    tags: Array.isArray(data.tags)
-      ? (data.tags as unknown[]).map(String)
-      : undefined,
-    authors: Array.isArray(data.authors)
-      ? (data.authors as Array<Record<string, unknown>>).map((a) => ({
-          name: String(a.name ?? ""),
-          url: a.url != null ? String(a.url) : undefined,
-          avatar: a.avatar != null ? String(a.avatar) : undefined,
-        }))
-      : undefined,
-    demoUrl: data.demoUrl ? String(data.demoUrl) : undefined,
-    repoUrl: data.repoUrl ? String(data.repoUrl) : undefined,
-    videoUrl: data.videoUrl ? String(data.videoUrl) : undefined,
-    xUrl: data.xUrl ? String(data.xUrl) : undefined,
-    useCases: Array.isArray(data.useCases)
-      ? (data.useCases as unknown[]).map(String)
-      : undefined,
-    category,
-    slug: projectSlug,
-  };
-}
-
-function findProjectYamlFile(
-  projectDir: string,
-  projectFolderName: string,
-): string | null {
-  const candidates = [
-    path.join(projectDir, "meta.yml"),
-    path.join(projectDir, "meta.yaml"),
-  ];
-  for (const p of candidates) {
-    if (fs.existsSync(p) && fs.statSync(p).isFile()) return p;
-  }
-  return null;
-}
-
 function loadAllProjects(): Project[] {
-  if (!fs.existsSync(PROJECTS_BASE_DIR)) return [];
+  if (!fs.existsSync(PROJECTS_DIR)) {
+    console.warn(`Projects directory not found: ${PROJECTS_DIR}`);
+    return [];
+  }
 
-  const categories = fs
-    .readdirSync(PROJECTS_BASE_DIR, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
+  const files = fs.readdirSync(PROJECTS_DIR);
+  const projects: Project[] = [];
 
-  const all: Project[] = [];
-  for (const category of categories) {
-    const categoryDir = path.join(PROJECTS_BASE_DIR, category);
-    if (!fs.existsSync(categoryDir)) continue;
-    const entries = fs.readdirSync(categoryDir, { withFileTypes: true });
+  for (const file of files) {
+    if (!isMarkdownFile(file)) continue;
 
-    // Only project subdirectories with meta.yml/meta.yaml
-    for (const entry of entries) {
-      if (!entry.isDirectory()) continue;
-      const projectFolderName = entry.name;
-      const projectDir = path.join(categoryDir, projectFolderName);
-      const yamlPath = findProjectYamlFile(projectDir, projectFolderName);
-      if (!yamlPath) continue;
-      const raw = readYamlFile(yamlPath);
-      if (!raw) continue;
-      all.push(toProject(category, projectFolderName, raw));
+    const filePath = path.join(PROJECTS_DIR, file);
+    const stat = fs.statSync(filePath);
+
+    if (!stat.isFile()) continue;
+
+    const project = parseProject(filePath);
+    if (project) {
+      projects.push(project);
     }
   }
-  return all;
+
+  return projects;
 }
 
+// Cache projects
 const cachedProjects: Project[] = loadAllProjects();
 
 export function getSections(): Section[] {
   const byCategory = new Map<string, Project[]>();
+
   for (const project of cachedProjects) {
-    const arr = byCategory.get(project.category) ?? [];
+    const arr = byCategory.get(project.category) || [];
     arr.push(project);
     byCategory.set(project.category, arr);
   }
@@ -227,7 +194,7 @@ export function getSections(): Section[] {
       tag: category,
       slug: slugify(category, { lower: true }),
       projects: items.sort((a, b) =>
-        (b.date ?? "").localeCompare(a.date ?? ""),
+        (b.date || "").localeCompare(a.date || ""),
       ),
     }),
   );
@@ -241,4 +208,8 @@ export function getSectionBySlug(slug: string): Section | undefined {
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return cachedProjects.find((p) => p.slug === slug);
+}
+
+export function getAllProjects(): Project[] {
+  return cachedProjects;
 }

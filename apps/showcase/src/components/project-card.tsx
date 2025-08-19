@@ -1,15 +1,15 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+import type { Project } from "@showcase/data/projects";
 import Link from "next/link";
-import type { Project } from "../../../../packages/data/src/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
-  const cover = project.coverImage ?? "/card.png";
+  const cover = project.image ?? "/card.png";
   return (
     <Card className="bg-background p-4 flex flex-col rounded-lg relative group">
       <Link
-        href={`/${project.slug}`}
+        href={`/projects/${project.slug}`}
         className="absolute inset-0 z-[1]"
         aria-label={project.title}
       />
@@ -25,13 +25,13 @@ export function ProjectCard({ project }: { project: Project }) {
         <h3 className="font-medium text-base leading-tight truncate">
           {project.title}
         </h3>
-        {project.shortDescription && (
+        {project.description && (
           <p className="text-sm text-[#878787] line-clamp-2">
-            {project.shortDescription}
+            {project.description}
           </p>
         )}
         <div className="mt-auto flex items-center gap-2 flex-wrap">
-          {(project.externalTech ?? project.tags ?? []).slice(0, 3).map((t) => (
+          {(project.technologies ?? project.tags ?? []).slice(0, 3).map((t) => (
             <span
               key={t}
               className="px-2 py-1 bg-[#F5F5F5] dark:bg-[#1A1A1A] rounded text-[#666] dark:text-[#999] text-xs relative z-10"

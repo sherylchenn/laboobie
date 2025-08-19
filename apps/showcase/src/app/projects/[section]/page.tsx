@@ -31,12 +31,12 @@ export default async function Page({ params }: { params: Params }) {
   const sections = getSections();
 
   return (
-    <div className="flex w-full h-full">
-      <div className="hidden md:flex mt-12 sticky top-12 h-[calc(100vh-3rem)]">
+    <div className="flex w-full h-full pt-4 md:pt-16">
+      <div className="hidden md:flex sticky top-4 md:top-0 h-[calc(100vh-3rem)]">
         <Menu sections={sections} />
       </div>
 
-      <main className="flex-1 p-6 pt-4 md:pt-16 space-y-8">
+      <main className="flex-1 p-6 pt-0 space-y-8">
         <ProjectList sections={data ? [data] : []} />
       </main>
     </div>

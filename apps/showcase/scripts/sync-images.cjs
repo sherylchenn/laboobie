@@ -5,106 +5,58 @@ const path = require("node:path");
 
 const SCRIPT_DIR = __dirname;
 const WORKSPACE_ROOT = path.resolve(SCRIPT_DIR, "../../../");
-const SOURCE_DIR = path.resolve(WORKSPACE_ROOT, "packages/data/src/projects");
-const DEST_BASE = path.resolve(
-  WORKSPACE_ROOT,
-  "apps/showcase/public/images/projects",
-);
+const SOURCE_DIR = path.resolve(WORKSPACE_ROOT, "projects/images");
+const DEST_BASE = path.resolve(WORKSPACE_ROOT, "apps/showcase/public/images");
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
-function copyDir(src, dest) {
+function syncDir(src, dest) {
   ensureDir(dest);
+
+  // Copy and update from src -> dest
   const entries = fs.readdirSync(src, { withFileTypes: true });
   for (const entry of entries) {
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
+
     if (entry.isDirectory()) {
-      copyDir(srcPath, destPath);
-    } else if (entry.isFile()) {
+      syncDir(srcPath, destPath);
+      continue;
+    }
+
+    if (entry.isFile()) {
+      // Ensure parent exists and copy (overwrite)
+      ensureDir(path.dirname(destPath));
       fs.copyFileSync(srcPath, destPath);
     }
   }
-}
 
-function hasMetaYaml(dir) {
-  return (
-    fs.existsSync(path.join(dir, "meta.yml")) ||
-    fs.existsSync(path.join(dir, "meta.yaml"))
-  );
-}
+  // Remove files/dirs in dest that no longer exist in src
+  const destEntries = fs.readdirSync(dest, { withFileTypes: true });
+  for (const dEntry of destEntries) {
+    const srcPath = path.join(src, dEntry.name);
+    const destPath = path.join(dest, dEntry.name);
 
-function syncOnce() {
-  if (!fs.existsSync(SOURCE_DIR)) return;
-  ensureDir(DEST_BASE);
-  const categories = fs
-    .readdirSync(SOURCE_DIR, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name);
-
-  for (const category of categories) {
-    const catDir = path.join(SOURCE_DIR, category);
-    const entries = fs.readdirSync(catDir, { withFileTypes: true });
-
-    // Case A: legacy layout (YAML file at category root)
-    for (const entry of entries) {
-      if (entry.isFile() && /\.(ya?ml)$/i.test(entry.name)) {
-        const base = path.basename(entry.name, path.extname(entry.name));
-        const projectDir = path.join(catDir, base);
-        const imagesDir = path.join(projectDir, "images");
-        // Copy images subdir
-        if (fs.existsSync(imagesDir) && fs.statSync(imagesDir).isDirectory()) {
-          const destDir = path.join(DEST_BASE, category, base);
-          copyDir(imagesDir, destDir);
-        }
-        // Copy cover.* directly under project dir
-        if (
-          fs.existsSync(projectDir) &&
-          fs.statSync(projectDir).isDirectory()
-        ) {
-          const files = fs.readdirSync(projectDir);
-          const cover = files.find((f) =>
-            /^cover\.(png|jpe?g|webp|avif)$/i.test(f),
-          );
-          if (cover) {
-            const destDir = path.join(DEST_BASE, category, base);
-            ensureDir(destDir);
-            fs.copyFileSync(
-              path.join(projectDir, cover),
-              path.join(destDir, cover),
-            );
-          }
-        }
-      }
-    }
-
-    // Case B: strict layout (<project-id>/meta.yml next to images/)
-    for (const entry of entries) {
-      if (!entry.isDirectory()) continue;
-      const projectId = entry.name;
-      const projectDir = path.join(catDir, projectId);
-      if (!hasMetaYaml(projectDir)) continue;
-      const imagesDir = path.join(projectDir, "images");
-      if (fs.existsSync(imagesDir) && fs.statSync(imagesDir).isDirectory()) {
-        const destDir = path.join(DEST_BASE, category, projectId);
-        copyDir(imagesDir, destDir);
-      }
-      const files = fs.readdirSync(projectDir);
-      const cover = files.find((f) =>
-        /^cover\.(png|jpe?g|webp|avif)$/i.test(f),
-      );
-      if (cover) {
-        const destDir = path.join(DEST_BASE, category, projectId);
-        ensureDir(destDir);
-        fs.copyFileSync(
-          path.join(projectDir, cover),
-          path.join(destDir, cover),
-        );
+    if (!fs.existsSync(srcPath)) {
+      // Remove stale
+      if (dEntry.isDirectory()) {
+        fs.rmSync(destPath, { recursive: true, force: true });
+      } else {
+        fs.rmSync(destPath, { force: true });
       }
     }
   }
+}
+
+function syncOnce() {
+  if (!fs.existsSync(SOURCE_DIR)) {
+    console.warn(`[images] source directory not found: ${SOURCE_DIR}`);
+    return;
+  }
+  ensureDir(DEST_BASE);
+  syncDir(SOURCE_DIR, DEST_BASE);
 }
 
 function debounce(fn, delay) {

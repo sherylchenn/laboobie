@@ -1,217 +1,155 @@
+"use client";
+
+import { cn } from "@/lib/utils";
+import { useMemo } from "react";
+
 export function ElevenLabs({
-  width = 78,
-  height = 78,
-}: { width?: number; height?: number }) {
+  size = 96,
+  pixel = 5, // pixel size in SVG units (logo viewBox = 229)
+  gap = 1, // spacing between pixels
+  edgeFeather = 0,
+  className,
+}: {
+  size?: number;
+  pixel?: number;
+  gap?: number;
+  edgeFeather?: number;
+  className?: string;
+}) {
+  function mulberry32(a: number) {
+    return function () {
+      let t = (a += 0x6d2b79f5);
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  const maskUrl = useMemo(() => {
+    const vb = 229;
+    const barW = 47.881;
+    const barH = 228;
+    const r = 8;
+    const leftX = 43;
+    const rightX = 138.119;
+    const topY = 1;
+
+    const rng = mulberry32(11);
+
+    function insideBar(x: number, y: number, barX: number) {
+      const withinX = x >= barX && x <= barX + barW;
+      const withinY = y >= topY && y <= topY + barH;
+      if (!withinX || !withinY) return false;
+      const relX = Math.min(x - barX, barX + barW - x);
+      const relY = Math.min(y - topY, topY + barH - y);
+      if (relX < r && relY < r) {
+        const dx = r - relX;
+        const dy = r - relY;
+        return dx * dx + dy * dy <= r * r;
+      }
+      return true;
+    }
+
+    function distToEdge(x: number, y: number, barX: number) {
+      const dx = Math.min(Math.abs(x - barX), Math.abs(barX + barW - x));
+      const dy = Math.min(Math.abs(y - topY), Math.abs(topY + barH - y));
+      return Math.min(dx, dy);
+    }
+
+    let rects: string[] = [];
+
+    for (let gy = 0; gy <= vb; gy += pixel) {
+      for (let gx = 0; gx <= vb; gx += pixel) {
+        const cx = gx + pixel / 2;
+        const cy = gy + pixel / 2;
+
+        let inLeft = insideBar(cx, cy, leftX);
+        let inRight = insideBar(cx, cy, rightX);
+        if (!(inLeft || inRight)) continue;
+
+        const barX = inLeft ? leftX : rightX;
+        const d = distToEdge(cx, cy, barX);
+
+        let op = 1;
+        if (d < edgeFeather) {
+          const t = d / edgeFeather;
+          const dropChance = 0.5 * (1 - t); // lowered drop chance
+          if (rng() < dropChance) continue;
+          op = 0.8 + 0.2 * t; // raised base opacity
+        }
+
+        const w = Math.max(1, pixel - gap);
+        const h = Math.max(1, pixel - gap);
+        const x = gx + (pixel - w) / 2;
+        const y = gy + (pixel - h) / 2;
+
+        rects.push(
+          `<rect x='${x.toFixed(2)}' y='${y.toFixed(2)}' width='${w}' height='${h}' fill='white' opacity='${op.toFixed(
+            2
+          )}' />`
+        );
+      }
+    }
+
+    const svg = `<?xml version='1.0'?>\n<svg xmlns='http://www.w3.org/2000/svg' width='${vb}' height='${vb}' viewBox='0 0 ${vb} ${vb}'>\n  ${rects.join("\n  ")}\n</svg>`;
+
+    return `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
+  }, [pixel, gap, edgeFeather]);
+
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 229 229"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="ElevenLabs pause logo"
+    <div
+      className={cn("relative select-none", className)}
+      style={{ width: size, height: size }}
+      aria-hidden
     >
-      <defs>
-        {/* Base vertical gradient for the bars */}
-        <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="229">
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="40%" stopColor="#F0F0F0" />
-          <stop offset="70%" stopColor="#D9D9D9" />
-          <stop offset="100%" stopColor="#BFBFBF" />
-        </linearGradient>
+      <div
+        className={cn(
+          "absolute inset-0",
+          "[mask-image:var(--mask-url)] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]",
+          "supports-[backdrop-filter]:backdrop-blur-xl supports-[backdrop-filter]:backdrop-saturate-150 supports-[backdrop-filter]:backdrop-contrast-115",
+          "supports-[backdrop-filter]:shadow-[0_0_0_1px_rgba(255,255,255,0.3)]"
+        )}
+        style={{
+          // @ts-ignore
+          "--mask-url": maskUrl,
+          WebkitBackdropFilter: "blur(18px) saturate(1.5) contrast(1.15)",
+          backdropFilter: "blur(18px) saturate(1.5) contrast(1.15)",
+        }}
+      />
 
-        {/* Darken the side edges to simulate curvature */}
-        <linearGradient
-          id="edgeShade"
-          x1="0"
-          y1="0"
-          x2="229"
-          y2="0"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="rgba(0,0,0,0.38)" />
-          <stop offset="15%" stopColor="rgba(0,0,0,0.18)" />
-          <stop offset="50%" stopColor="rgba(0,0,0,0.00)" />
-          <stop offset="85%" stopColor="rgba(0,0,0,0.18)" />
-          <stop offset="100%" stopColor="rgba(0,0,0,0.38)" />
-        </linearGradient>
+      <div
+        className={cn(
+          "absolute inset-0 supports-[backdrop-filter]:hidden",
+          "[mask-image:var(--mask-url)] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]",
+          "bg-white/95 shadow-[0_0_0_1px_rgba(255,255,255,0.28),0_10px_30px_rgba(0,0,0,0.2)]"
+        )}
+        style={{
+          // @ts-ignore
+          "--mask-url": maskUrl,
+        }}
+      />
 
-        {/* Soft top bevel highlight */}
-        <linearGradient id="topBevel" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.65)" />
-          <stop offset="100%" stopColor="rgba(255,255,255,0.00)" />
-        </linearGradient>
+      <div
+        className={cn(
+          "absolute inset-0 pointer-events-none mix-blend-screen opacity-55",
+          "[mask-image:var(--mask-url)] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]"
+        )}
+        style={{
+          // @ts-ignore
+          "--mask-url": maskUrl,
+          background:
+            "linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.00) 100%)",
+          backgroundSize: "200% 100%",
+          animation: "elv-shimmer 8s linear infinite",
+        }}
+      />
 
-        {/* Soft bottom bevel/ambient occlusion */}
-        <linearGradient id="bottomBevel" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="rgba(0,0,0,0.00)" />
-          <stop offset="100%" stopColor="rgba(0,0,0,0.22)" />
-        </linearGradient>
-
-        {/* Narrow bright stripe to fake specular reflection */}
-        <linearGradient id="specularStripe" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.70)" />
-          <stop offset="100%" stopColor="rgba(255,255,255,0.00)" />
-        </linearGradient>
-
-        {/* Subtle horizontal sheen across each bar */}
-        <linearGradient id="sheen" x1="0" y1="0" x2="229" y2="0">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.00)" />
-          <stop offset="50%" stopColor="rgba(255,255,255,0.16)" />
-          <stop offset="100%" stopColor="rgba(255,255,255,0.00)" />
-        </linearGradient>
-
-        {/* Small specular glint near the top-left area of each bar */}
-        <radialGradient
-          id="glint"
-          cx="0"
-          cy="0"
-          r="1"
-          gradientUnits="userSpaceOnUse"
-          gradientTransform="translate(0 0) rotate(0) scale(1 1)"
-        >
-          <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
-          <stop offset="55%" stopColor="rgba(255,255,255,0.45)" />
-          <stop offset="100%" stopColor="rgba(255,255,255,0.00)" />
-        </radialGradient>
-
-        {/* Soft group shadow */}
-        <filter id="softDrop" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.22" />
-          <feDropShadow dx="0" dy="12" stdDeviation="16" floodOpacity="0.10" />
-        </filter>
-      </defs>
-
-      <g filter="url(#softDrop)">
-        {/* LEFT BAR */}
-        <g>
-          {/* Base shape */}
-          <rect
-            x="43"
-            y="1"
-            width="47.8809"
-            height="228"
-            rx="8"
-            fill="url(#barGradient)"
-            stroke="rgba(0,0,0,0.06)"
-            strokeWidth="1"
-          />
-          {/* Edge curvature shading */}
-          <rect
-            x="43"
-            y="1"
-            width="47.8809"
-            height="228"
-            rx="8"
-            fill="url(#edgeShade)"
-            opacity="0.20"
-          />
-          {/* Top bevel */}
-          <rect
-            x="43"
-            y="1"
-            width="47.8809"
-            height="18"
-            rx="8"
-            fill="url(#topBevel)"
-          />
-          {/* Bottom bevel */}
-          <rect
-            x="43"
-            y="211"
-            width="47.8809"
-            height="18"
-            rx="8"
-            fill="url(#bottomBevel)"
-          />
-          {/* Vertical center sheen */}
-          <rect
-            x="43"
-            y="1"
-            width="47.8809"
-            height="228"
-            rx="8"
-            fill="url(#sheen)"
-            opacity="0.30"
-          />
-          {/* Specular narrow stripe */}
-          <rect
-            x="54"
-            y="10"
-            width="9"
-            height="208"
-            fill="url(#specularStripe)"
-            opacity="0.55"
-          />
-          {/* Small glint */}
-          <circle cx="58" cy="24" r="10" fill="url(#glint)" />
-        </g>
-
-        {/* RIGHT BAR */}
-        <g>
-          {/* Base shape */}
-          <rect
-            x="138.119"
-            y="1"
-            width="47.881"
-            height="228"
-            rx="8"
-            fill="url(#barGradient)"
-            stroke="rgba(0,0,0,0.06)"
-            strokeWidth="1"
-          />
-          {/* Edge curvature shading */}
-          <rect
-            x="138.119"
-            y="1"
-            width="47.881"
-            height="228"
-            rx="8"
-            fill="url(#edgeShade)"
-            opacity="0.20"
-          />
-          {/* Top bevel */}
-          <rect
-            x="138.119"
-            y="1"
-            width="47.881"
-            height="18"
-            rx="8"
-            fill="url(#topBevel)"
-          />
-          {/* Bottom bevel */}
-          <rect
-            x="138.119"
-            y="211"
-            width="47.881"
-            height="18"
-            rx="8"
-            fill="url(#bottomBevel)"
-          />
-          {/* Vertical center sheen */}
-          <rect
-            x="138.119"
-            y="1"
-            width="47.881"
-            height="228"
-            rx="8"
-            fill="url(#sheen)"
-            opacity="0.30"
-          />
-          {/* Specular narrow stripe */}
-          <rect
-            x="149"
-            y="10"
-            width="9"
-            height="208"
-            fill="url(#specularStripe)"
-            opacity="0.55"
-          />
-          {/* Small glint */}
-          <circle cx="153" cy="24" r="10" fill="url(#glint)" />
-        </g>
-      </g>
-    </svg>
+      <style jsx>{`
+        @keyframes elv-shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
+    </div>
   );
 }
