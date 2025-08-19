@@ -1,7 +1,7 @@
 import { SimpleAudioPlayer } from "@/components/audio-player/simple-audio-player";
-import { Banner } from "@/components/banner";
 import { Header } from "@/components/header";
 import { GlobalModals } from "@/components/modals/global-modals";
+import { MusicBanner } from "@/components/music-banner";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Waldenburg, WaldenburgHF } from "@/utils/fonts";
@@ -97,7 +97,7 @@ export default function RootLayout({
             <Header />
             {children}
 
-            <Banner />
+            <MusicBanner />
             <Toaster />
             <GlobalModals />
             <SimpleAudioPlayer />
