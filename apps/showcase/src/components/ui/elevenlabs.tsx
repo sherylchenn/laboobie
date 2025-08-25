@@ -106,14 +106,14 @@ export function ElevenLabs({
         className={cn(
           "absolute inset-0",
           "[mask-image:var(--mask-url)] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]",
-          "supports-[backdrop-filter]:backdrop-blur-xl supports-[backdrop-filter]:backdrop-saturate-150 supports-[backdrop-filter]:backdrop-contrast-115",
-          "supports-[backdrop-filter]:shadow-[0_0_0_1px_rgba(255,255,255,0.3)]"
+          "supports-[backdrop-filter]:backdrop-blur-xl supports-[backdrop-filter]:backdrop-saturate-200 supports-[backdrop-filter]:backdrop-contrast-125 supports-[backdrop-filter]:backdrop-brightness-110",
+          "supports-[backdrop-filter]:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.1)]"
         )}
         style={{
           // @ts-ignore
           "--mask-url": maskUrl,
-          WebkitBackdropFilter: "blur(18px) saturate(1.5) contrast(1.15)",
-          backdropFilter: "blur(18px) saturate(1.5) contrast(1.15)",
+          WebkitBackdropFilter: "blur(24px) saturate(2) contrast(1.25) brightness(1.1)",
+          backdropFilter: "blur(24px) saturate(2) contrast(1.25) brightness(1.1)",
         }}
       />
 
@@ -131,7 +131,7 @@ export function ElevenLabs({
 
       <div
         className={cn(
-          "absolute inset-0 pointer-events-none mix-blend-screen opacity-55",
+          "absolute inset-0 pointer-events-none mix-blend-screen opacity-70",
           "[mask-image:var(--mask-url)] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]"
         )}
         style={{
@@ -140,7 +140,7 @@ export function ElevenLabs({
           background:
             "linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.00) 100%)",
           backgroundSize: "200% 100%",
-          animation: "elv-shimmer 8s linear infinite",
+          animation: "elv-shimmer 12s ease-in-out infinite",
         }}
       />
 

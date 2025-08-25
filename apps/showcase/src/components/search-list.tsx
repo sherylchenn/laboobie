@@ -7,7 +7,7 @@ import { ShareButton } from "./share-button";
 export function SearchList({ results }: { results: Project[] }) {
   if (!results.length) return null;
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
       {results.map((item) => (
         <div key={item.slug} className="border border-border p-3 rounded-md">
           <div className="flex justify-between items-start">

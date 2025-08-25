@@ -71,6 +71,17 @@
   }
 }
 
+/* Hide scrollbar for horizontal scroll */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Tight prose spacing overrides */
 @layer components {
   .prose :where(p):not(:where(.not-prose *)) {

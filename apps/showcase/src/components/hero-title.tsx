@@ -1,11 +1,8 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-
 export function HeroTitle() {
   return (
     <div className="relative isolate mx-auto max-w-3xl text-center mb-12 px-6">
-
       <p
         className="text-white/70 text-[15px] leading-7 max-w-[640px] mx-auto"
         style={{

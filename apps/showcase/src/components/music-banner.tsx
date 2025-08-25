@@ -76,6 +76,7 @@ export const MusicBanner = memo(function MusicBanner() {
 
   // Visibility / entrance animation (keeps your original behavior)
   const [isVisible, setIsVisible] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [isAnimating, setIsAnimating] = useState(true);
   const [animateDirection, setAnimateDirection] = useState<"up" | "down">("up");
 
@@ -98,7 +99,16 @@ export const MusicBanner = memo(function MusicBanner() {
     setIsAnimating(true);
     setAnimateDirection("down");
     setTimeout(() => {
-      setIsVisible(false);
+      setIsMinimized(true);
+      setIsAnimating(false);
+    }, 260);
+  };
+
+  const handleReopen = () => {
+    setIsMinimized(false);
+    setIsAnimating(true);
+    setAnimateDirection("up");
+    setTimeout(() => {
       setIsAnimating(false);
     }, 260);
   };
@@ -445,6 +455,36 @@ export const MusicBanner = memo(function MusicBanner() {
 
   if (!isVisible) return null;
 
+  // Show minimized button when closed
+  if (isMinimized) {
+    return (
+      <button
+        onClick={handleReopen}
+        className="fixed bottom-4 right-6 z-50 p-3 rounded-full bg-background/80 backdrop-blur-xl border border-border shadow-lg hover:bg-background/90 transition-all hover:scale-105 active:scale-95 group"
+        aria-label="Open music player"
+      >
+        <div className="relative">
+          <svg
+            className="w-5 h-5 text-foreground group-hover:scale-110 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+            />
+          </svg>
+          {isPlaying && (
+            <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          )}
+        </div>
+      </button>
+    );
+  }
+
   // Choose the best-known duration (metadata or decoded) for slider max/right time
   const targetDuration =
     (Number.isFinite(duration) && duration > 0 ? duration : Number.NaN) ||
@@ -462,10 +502,9 @@ export const MusicBanner = memo(function MusicBanner() {
 
   return (
     <div
-      className={`fixed ${slideClass} z-50 bottom-0 left-0 right-0 md:bottom-4 md:left-auto md:right-6 w-full md:w-[380px] overflow-hidden border border-neutral-800/70 rounded-t-2xl md:rounded-2xl text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)]`}
+      className={`fixed ${slideClass} z-50 bottom-0 left-0 right-0 md:bottom-4 md:left-auto md:right-6 w-full md:w-[380px] overflow-hidden border border-border rounded-t-2xl md:rounded-2xl shadow-2xl backdrop-blur-2xl`}
       style={{
-        fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-        background: "linear-gradient(to bottom, #171717 0%, #121212 100%)",
+        background: "rgba(var(--background), 0.85)",
       }}
     >
       {/* Top bar */}
@@ -474,7 +513,7 @@ export const MusicBanner = memo(function MusicBanner() {
           type="button"
           onClick={handleClose}
           aria-label="Close"
-          className="absolute right-2 top-2 opacity-60 hover:opacity-100 transition-opacity"
+          className="absolute right-2 top-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <XIcon className="w-4 h-4" />
         </button>
@@ -482,7 +521,7 @@ export const MusicBanner = memo(function MusicBanner() {
         <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
           {/* Visualizer */}
           <div className="relative flex items-center justify-center">
-            <div className="h-[100px] w-[100px] overflow-hidden bg-transparent">
+            <div className="h-[84px] w-[84px] overflow-hidden bg-transparent rounded-full">
               <BannerVisualizer analyser={analyzer} isPlaying={isPlaying} />
             </div>
           </div>
@@ -494,12 +533,12 @@ export const MusicBanner = memo(function MusicBanner() {
                 href="https://elevenlabs.io/music"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="truncate text-[10px] uppercase tracking-[0.1em] text-neutral-400 hover:text-neutral-300 transition-colors"
+                className="truncate text-[10px] uppercase tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors"
               >
                 ElevenLabs Music API
               </Link>
             </div>
-            <div className="truncate font-medium leading-tight">
+            <div className="truncate font-medium leading-tight text-foreground">
               {playlist[trackIndex]?.title}
             </div>
 
@@ -509,7 +548,7 @@ export const MusicBanner = memo(function MusicBanner() {
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous"
-                className="h-7 w-7 rounded-xl border border-neutral-700 hover:border-neutral-500 active:scale-[0.98] grid place-items-center"
+                className="h-7 w-7 rounded-lg bg-background/50 border border-border hover:bg-background hover:border-foreground/20 active:scale-[0.98] grid place-items-center text-muted-foreground hover:text-foreground transition-all"
               >
                 <SkipBackIcon className="h-4 w-4" />
               </button>
@@ -517,7 +556,7 @@ export const MusicBanner = memo(function MusicBanner() {
                 type="button"
                 onClick={togglePlay}
                 aria-label={isPlaying ? "Pause" : "Play"}
-                className="h-8 px-3 rounded-xl border border-neutral-300 text-black bg-white hover:bg-neutral-100 active:scale-[0.98] inline-flex items-center gap-1"
+                className="h-8 px-3 rounded-lg bg-foreground text-background hover:bg-foreground/90 active:scale-[0.98] inline-flex items-center gap-1 font-medium transition-all"
               >
                 {isPlaying ? (
                   <>
@@ -535,14 +574,14 @@ export const MusicBanner = memo(function MusicBanner() {
                 type="button"
                 onClick={() => void handleNext()}
                 aria-label="Next"
-                className="h-7 w-7 rounded-xl border border-neutral-700 hover:border-neutral-500 active:scale-[0.98] grid place-items-center"
+                className="h-7 w-7 rounded-lg bg-background/50 border border-border hover:bg-background hover:border-foreground/20 active:scale-[0.98] grid place-items-center text-muted-foreground hover:text-foreground transition-all"
               >
                 <SkipForwardIcon className="h-4 w-4" />
               </button>
 
               {/* Volume */}
               <div className="ml-auto flex items-center gap-1">
-                <Volume2Icon className="h-3.5 w-3.5 text-neutral-500" />
+                <Volume2Icon className="h-3.5 w-3.5 text-muted-foreground" />
                 <input
                   aria-label="Volume"
                   type="range"
@@ -551,7 +590,7 @@ export const MusicBanner = memo(function MusicBanner() {
                   step={0.01}
                   value={volume}
                   onChange={(e) => setVolume(Number(e.target.value))}
-                  className="h-1.5 w-20 accent-white cursor-pointer"
+                  className="h-1.5 w-20 cursor-pointer [&::-webkit-slider-thumb]:bg-foreground [&::-moz-range-thumb]:bg-foreground opacity-60 hover:opacity-100 transition-opacity"
                 />
               </div>
             </div>
@@ -566,10 +605,10 @@ export const MusicBanner = memo(function MusicBanner() {
                 step={0.01}
                 value={Math.min(currentTime, effectiveMax)}
                 onChange={handleSeek}
-                className="w-full h-1.5 accent-white cursor-pointer"
+                className="w-full h-1.5 cursor-pointer [&::-webkit-slider-thumb]:bg-foreground [&::-moz-range-thumb]:bg-foreground opacity-80 hover:opacity-100 transition-opacity"
                 aria-label="Seek"
               />
-              <div className="mt-1 flex justify-between text-[10px] text-neutral-500">
+              <div className="mt-1 flex justify-between text-[10px] text-muted-foreground">
                 <span>{prettyTime(currentTime)}</span>
                 <span>{prettyTime(effectiveRightTime)}</span>
               </div>

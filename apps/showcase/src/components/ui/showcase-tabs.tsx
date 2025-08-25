@@ -2,7 +2,7 @@
 
 import { getCategoryMeta } from "@/lib/category";
 import { cn } from "@/lib/utils";
-import type * as React from "react";
+import { useEffect, useRef } from "react";
 import { CategoryIcon } from "./category-icon";
 import { Tabs, TabsList, TabsTrigger } from "./tabs";
 
@@ -39,10 +39,35 @@ export function ShowcaseTabs({
   onTabChange,
   className,
 }: ShowcaseTabsProps) {
+  const tabsListRef = useRef<HTMLDivElement>(null);
+  const activeTabRef = useRef<HTMLButtonElement>(null);
+
   const handleChange = (next: string) => {
     onValueChange?.(next);
     onTabChange?.(next);
   };
+
+  // Auto-scroll to center the selected tab on mobile
+  useEffect(() => {
+    if (
+      activeTabRef.current &&
+      tabsListRef.current &&
+      window.innerWidth < 768
+    ) {
+      const container = tabsListRef.current;
+      const activeTab = activeTabRef.current;
+
+      const containerWidth = container.offsetWidth;
+      const tabLeft = activeTab.offsetLeft;
+      const tabWidth = activeTab.offsetWidth;
+      const scrollLeft = tabLeft - containerWidth / 2 + tabWidth / 2;
+
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: "smooth",
+      });
+    }
+  }, [value]);
 
   return (
     <Tabs
@@ -51,28 +76,39 @@ export function ShowcaseTabs({
       onValueChange={handleChange}
       className={cn("w-full", className)}
     >
-      <TabsList
-        className={cn(
-          "flex flex-wrap justify-start gap-1 sm:gap-2 bg-transparent p-0 rounded-none h-auto mb-2 animate-in fade-in-0 slide-in-from-bottom-1",
-        )}
+      <div
+        ref={tabsListRef}
+        className="w-full overflow-x-auto scrollbar-hide md:overflow-visible"
+        style={{
+          WebkitOverflowScrolling: "touch",
+        }}
       >
-        {tabs.map((tab) => {
-          const meta = getCategoryMeta(tab.id);
-          return (
-            <TabsTrigger
-              key={tab.id}
-              value={tab.id}
-              className={cn("gap-2 cursor-pointer")}
-            >
-              <CategoryIcon
-                meta={meta}
-                className="h-4 w-4 text-[#666] dark:text-[#999]"
-              />
-              <span>{tab.label ?? meta.label}</span>
-            </TabsTrigger>
-          );
-        })}
-      </TabsList>
+        <TabsList
+          className={cn(
+            "inline-flex gap-1 sm:gap-2 bg-transparent p-0 rounded-none h-auto mb-2 animate-in fade-in-0 slide-in-from-bottom-1",
+            "min-w-max",
+            "md:w-full md:justify-center md:flex-wrap",
+          )}
+        >
+          {tabs.map((tab) => {
+            const meta = getCategoryMeta(tab.id);
+            const isActive = (value || defaultTab) === tab.id;
+            return (
+              <TabsTrigger
+                key={tab.id}
+                ref={isActive ? activeTabRef : null}
+                value={tab.id}
+                className={cn(
+                  "gap-2 cursor-pointer flex-shrink-0 whitespace-nowrap text-white/60",
+                )}
+              >
+                <CategoryIcon meta={meta} className="h-4 w-4 opacity-80" />
+                <span>{tab.label ?? meta.label}</span>
+              </TabsTrigger>
+            );
+          })}
+        </TabsList>
+      </div>
     </Tabs>
   );
 }

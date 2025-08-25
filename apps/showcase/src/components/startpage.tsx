@@ -6,9 +6,10 @@ import { useQueryState } from "nuqs";
 import * as React from "react";
 import { HeroTitle } from "./hero-title";
 import { ProjectList } from "./project-list";
-import { ElevenLabs } from "./ui/elevenlabs";
+import { ElevenLabsCreative } from "./ui/elevenlabs-creative";
 import { SearchBar } from "./ui/search-bar";
 import { ShowcaseTabs } from "./ui/showcase-tabs";
+import { WaveBg } from "./wave-bg";
 
 export function Startpage({
   sections,
@@ -57,17 +58,16 @@ export function Startpage({
   }, [sections, activeTab]);
   return (
     <div>
-      <div className="flex flex-col gap-4 w-full relative mx-auto h-screen">
+      <div className="flex flex-col gap-4 w-full relative mx-auto h-screen px-4 md:px-8 lg:px-12 xl:px-16">
         <div className="transition-all duration-1000 relative z-10">
-          <div
-            className="flex justify-center items-center mb-8"
-            style={{
-              opacity: 0,
-              animation: "fadeIn 1s ease forwards",
-            }}
+          <motion.div
+            className="flex justify-center items-center mb-8 relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <ElevenLabs />
-          </div>
+            <ElevenLabsCreative className="relative z-10" size={100} />
+          </motion.div>
 
           <HeroTitle />
 

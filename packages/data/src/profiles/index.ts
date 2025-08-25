@@ -24,6 +24,7 @@ export type Profile = {
   url?: string;
   bio?: string;
   location?: string;
+  isElevenLabs?: boolean; // Official ElevenLabs employee
 
   // Socials
   socials?: Array<{

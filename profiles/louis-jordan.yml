@@ -3,6 +3,7 @@ avatar: "https://avatars.githubusercontent.com/u/132601011?s=400&u=f0565d9a7db44
 url: "https://louisjordan.dev"
 bio: "Builder of delightful AI voice experiences."
 location: "London, UK"
+isElevenLabs: true
 socials:
   - label: X
     url: "https://x.com/louisjordan"

@@ -102,7 +102,7 @@ export function ProjectList({
                 {section.projects.length}
               </span>
             </h3>
-            <div className="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
               {section.projects.map((project, idx2) => (
                 <Fragment key={`${idx}-${idx2.toString()}`}>
                   <ProjectCard project={project} />
