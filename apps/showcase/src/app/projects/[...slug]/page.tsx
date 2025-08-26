@@ -45,7 +45,8 @@ export async function generateMetadata({
     ...(project.technologies ?? []),
   ].filter(Boolean);
 
-  return {
+  // Add Smart App Banner for 11.ai mobile app
+  const metadata: Metadata = {
     title,
     description,
     keywords,
@@ -65,6 +66,14 @@ export async function generateMetadata({
       images: [cover],
     },
   };
+
+  if (joined === "conversational-ai/11ai-mobile") {
+    metadata.other = {
+      "apple-itunes-app": "app-id=6748470575",
+    };
+  }
+
+  return metadata;
 }
 
 export default async function Page({ params }: { params: Params }) {

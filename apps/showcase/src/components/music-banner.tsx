@@ -581,7 +581,7 @@ export const MusicBanner = memo(function MusicBanner() {
 
               {/* Volume */}
               <div className="ml-auto flex items-center gap-1">
-                <Volume2Icon className="h-3.5 w-3.5 text-muted-foreground" />
+                <Volume2Icon className="h-3.5 w-3.5 text-foreground" />
                 <input
                   aria-label="Volume"
                   type="range"
