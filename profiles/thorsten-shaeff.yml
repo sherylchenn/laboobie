@@ -1,0 +1,11 @@
+name: Thorsten (雷神) Schaeff
+avatar: "https://media.licdn.com/dms/image/v2/D5603AQEXdijz_27alQ/profile-displayphoto-crop_800_800/B56Zef56r6G0AY-/0/1750734449866?e=1759363200&v=beta&t=BLKZhZBFL7_2RQm5QArOxplMbUI-twBENLcJMhvQTlI"
+url: "https://thorweb.dev"
+bio: "Developer Relations @ ElevenLabs"
+location: "New York, USA"
+isElevenLabs: true
+socials:
+  - label: X
+    url: "https://x.com/thorwebdev"
+  - label: GitHub
+    url: "https://github.com/thorwebdev"

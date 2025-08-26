@@ -83,15 +83,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         `${GeistSans.variable} ${GeistMono.variable} ${Waldenburg.variable} ${WaldenburgHF.variable}`,
-        "whitespace-pre-line antialiased bg-background text-foreground !dark",
+        "whitespace-pre-line antialiased bg-background text-foreground dark",
       )}
     >
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
+          forcedTheme="dark"
         >
           <NuqsAdapter>
             {/* Background */}

@@ -65,13 +65,6 @@ export default function Page({ params }: { params: { slug: string } }) {
                   </div>
                 )}
               </div>
-              {user.isElevenLabs && (
-                <div className="absolute -bottom-2 -right-2 px-2 py-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg shadow-purple-500/25">
-                  <span className="text-[10px] font-medium text-white">
-                    ELEVENLABS
-                  </span>
-                </div>
-              )}
             </div>
 
             {/* Info */}
@@ -95,14 +88,6 @@ export default function Page({ params }: { params: { slug: string } }) {
                     />
                   )}
                 </h1>
-                {user.isElevenLabs && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-purple-500/20">
-                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
-                    <span className="text-xs font-medium text-white/80">
-                      ElevenLabs Team
-                    </span>
-                  </div>
-                )}
               </div>
 
               {user.bio && (

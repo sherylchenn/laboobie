@@ -52,7 +52,7 @@ export function WaveBg({ className }: { className?: string }) {
       {
         amp: 16,
         freq: 0.01,
-        speed: 1.0,
+        speed: 0.2,
         lift: -6,
         alpha: 0.75,
         grad: "wave1" as const,
@@ -60,7 +60,7 @@ export function WaveBg({ className }: { className?: string }) {
       {
         amp: 12,
         freq: 0.014,
-        speed: 1.4,
+        speed: 0.3,
         lift: 0,
         alpha: 0.85,
         grad: "wave2" as const,
@@ -68,7 +68,7 @@ export function WaveBg({ className }: { className?: string }) {
       {
         amp: 10,
         freq: 0.018,
-        speed: 1.8,
+        speed: 0.1,
         lift: 6,
         alpha: 0.95,
         grad: "wave3" as const,
@@ -277,7 +277,7 @@ export function WaveBg({ className }: { className?: string }) {
     // Push static uniforms
     gl.uniform2f(u_view, W, H);
     gl.uniform1f(u_opacity, 0.65); // balanced opacity for visibility
-    gl.uniform1f(u_blurPx, 60.0); // softer edges for subtler effect
+    gl.uniform1f(u_blurPx, 10.0); // softer edges for subtler effect
 
     gl.uniform3f(u_w1a, wave1a[0], wave1a[1], wave1a[2]);
     gl.uniform3f(u_w1b, wave1b[0], wave1b[1], wave1b[2]);
