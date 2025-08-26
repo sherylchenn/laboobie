@@ -65,6 +65,8 @@ function parseProfile(filePath: string): Profile | null {
     const bio = typeof data.bio === "string" ? data.bio : undefined;
     const location =
       typeof data.location === "string" ? data.location : undefined;
+    const isElevenLabs =
+      typeof data.isElevenLabs === "boolean" ? data.isElevenLabs : undefined;
 
     const socials = Array.isArray((data as any).socials)
       ? (((data as any).socials as Array<Record<string, unknown>>)
@@ -92,6 +94,7 @@ function parseProfile(filePath: string): Profile | null {
       url,
       bio,
       location,
+      isElevenLabs,
       socials,
       projects,
       tags,

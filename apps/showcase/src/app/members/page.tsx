@@ -69,17 +69,12 @@ export default function Page() {
                           )}
                         </div>
                       </div>
+
                       {/* Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2 mb-1">
                           <h3 className="font-medium text-[15px] text-white truncate group-hover:text-white transition-colors flex items-center gap-1">
                             {u.name}
-                            <svg
-                              className="w-4 h-4 inline-block text-blue-500 fill-current"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z" />
-                            </svg>
                             {u.isElevenLabs && (
                               <img
                                 src="/assets/badges/organisation.jpg"
@@ -87,17 +82,14 @@ export default function Page() {
                                 className="w-4 h-4 inline-block"
                               />
                             )}
+                            <svg
+                              className="w-4 h-4 inline-block text-blue-500 fill-current"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z" />
+                            </svg>
                           </h3>
                         </div>
-
-                        {u.isElevenLabs && (
-                          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-purple-500/20 mb-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
-                            <span className="text-[10px] font-medium text-white/70">
-                              TEAM
-                            </span>
-                          </div>
-                        )}
 
                         {u.bio && (
                           <p className="text-xs text-white/40 line-clamp-2 mb-2">
