@@ -223,11 +223,11 @@ export function WaveBg({ className }: { className?: string }) {
     `;
 
     function makeShader(type: number, src: string) {
-      const sh = gl.createShader(type)!;
-      gl.shaderSource(sh, src);
-      gl.compileShader(sh);
-      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
-        console.error(gl.getShaderInfoLog(sh));
+      const sh = gl?.createShader(type)!;
+      gl?.shaderSource(sh, src);
+      gl?.compileShader(sh);
+      if (!gl?.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+        console.error(gl?.getShaderInfoLog(sh));
       }
       return sh;
     }
