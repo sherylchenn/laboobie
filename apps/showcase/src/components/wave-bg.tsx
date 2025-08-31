@@ -277,7 +277,7 @@ export function WaveBg({ className }: { className?: string }) {
     // Push static uniforms
     gl.uniform2f(u_view, W, H);
     gl.uniform1f(u_opacity, 0.65); // balanced opacity for visibility
-    gl.uniform1f(u_blurPx, 10.0); // softer edges for subtler effect
+    gl.uniform1f(u_blurPx, 50.0); // softer edges for subtler effect
 
     gl.uniform3f(u_w1a, wave1a[0], wave1a[1], wave1a[2]);
     gl.uniform3f(u_w1b, wave1b[0], wave1b[1], wave1b[2]);
@@ -349,6 +349,20 @@ export function WaveBg({ className }: { className?: string }) {
       )}
       aria-hidden
     >
+      {/* Background image at the top with smooth blending */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.6] dark:opacity-[0.4]"
+          style={{
+            backgroundImage: "url('/background.avif')",
+            maskImage:
+              "linear-gradient(to bottom, black 0%, black 40%, transparent 70%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 0%, black 40%, transparent 70%)",
+          }}
+        />
+      </div>
+
       {/* Soft vignette behind everything - slightly more visible */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_0%,hsl(220_40%_15%/0.4),transparent_60%)]" />

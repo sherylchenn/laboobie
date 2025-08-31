@@ -1,8 +1,10 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import AudioMotionAnalyzer from "audiomotion-analyzer";
 import { type MotionValue, motionValue } from "framer-motion";
 import {
+  ArrowUpRightIcon,
   PauseIcon,
   PlayIcon,
   SkipBackIcon,
@@ -10,7 +12,6 @@ import {
   Volume2Icon,
   XIcon,
 } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { BannerVisualizer } from "./audio-visualizer/banner-visualizer";
@@ -502,10 +503,7 @@ export const MusicBanner = memo(function MusicBanner() {
 
   return (
     <div
-      className={`fixed ${slideClass} z-50 bottom-0 left-0 right-0 md:bottom-4 md:left-auto md:right-6 w-full md:w-[380px] overflow-hidden border border-border rounded-t-2xl md:rounded-2xl shadow-2xl backdrop-blur-2xl`}
-      style={{
-        background: "rgba(var(--background), 0.85)",
-      }}
+      className={`fixed ${slideClass} z-50 bottom-0 left-0 right-0 md:bottom-4 md:left-auto md:right-6 w-full md:w-[380px] overflow-hidden border border-border rounded-t-2xl md:rounded-2xl shadow-2xl backdrop-blur-2xl bg-background opacity-95`}
     >
       {/* Top bar */}
       <div className="relative">
@@ -528,15 +526,17 @@ export const MusicBanner = memo(function MusicBanner() {
 
           {/* Meta & Controls */}
           <div className="min-w-0">
-            <div className="flex items-center justify-between gap-2">
-              <Link
-                href="https://elevenlabs.io/music"
-                target="_blank"
+            <div className="flex items-center justify-start gap-2">
+              <Button
+                variant={"link"}
+                onClick={() => {
+                  window.open("https://www.elevenlabs.io/music");
+                }}
                 rel="noopener noreferrer"
-                className="truncate text-[10px] uppercase tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors"
+                className="truncate text-[10px] pl-0 ml-0 flex gap-1 uppercase tracking-[0.1em] text-muted-foreground hover:text-foreground transition-colors"
               >
-                ElevenLabs Music API
-              </Link>
+                ElevenLabs Music API <ArrowUpRightIcon className="w-3 h-3" />
+              </Button>
             </div>
             <div className="truncate font-medium leading-tight text-foreground">
               {playlist[trackIndex]?.title}
