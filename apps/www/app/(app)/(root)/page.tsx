@@ -10,7 +10,7 @@ import { ShowcaseCTA } from "@/components/showcase-cta"
 
 const title = "Explore"
 const description =
-  "Explore a curated gallery of voice and audio experiences powered by ElevenLabs. Discover what creators and teams are shipping today."
+  "Explore a curated gallery of voice and audio experiences powered by ElevenLabs. Discover what developers and teams are shipping today."
 
 export const dynamic = "force-static"
 export const revalidate = false

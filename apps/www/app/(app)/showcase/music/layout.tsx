@@ -11,7 +11,7 @@ export const revalidate = false
 
 const title = "Music"
 const description =
-  "Explore a curated gallery of voice and audio experiences powered by ElevenLabs Music. Discover what creators and teams are shipping today."
+  "Explore a curated gallery of voice and audio experiences powered by ElevenLabs Music. Discover what developers and teams are shipping today."
 
 export const metadata: Metadata = {
   title,

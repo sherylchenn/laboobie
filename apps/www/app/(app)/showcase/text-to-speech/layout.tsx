@@ -11,7 +11,7 @@ export const revalidate = false
 
 const title = "Text to Speech"
 const description =
-  "Explore a curated gallery of experiences powered by ElevenLabs Text to Speech. Discover what creators and teams are shipping today."
+  "Explore a curated gallery of experiences powered by ElevenLabs Text to Speech. Discover what developers and teams are shipping today."
 
 export const metadata: Metadata = {
   title,

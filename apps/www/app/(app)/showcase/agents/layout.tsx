@@ -11,7 +11,7 @@ export const revalidate = false
 
 const title = "Agents"
 const description =
-  "Explore a curated gallery of voice and audio experiences powered by ElevenLabs Agents. Discover what creators and teams are shipping today."
+  "Explore a curated gallery of voice and audio experiences powered by ElevenLabs. Discover what developers and teams are shipping today."
 
 export const metadata: Metadata = {
   title,
@@ -45,7 +45,7 @@ export default function ExamplesLayout({
   return (
     <>
       <PageHeader>
-        <ElevenLabsLogo text={title} />
+        <ElevenLabsLogo text="Showcase" />
         <PageHeaderDescription>{description}</PageHeaderDescription>
         <ShowcaseCTA />
       </PageHeader>
