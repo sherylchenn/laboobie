@@ -2,16 +2,68 @@
 title: X to Voice
 description: "Creating voice clones from X profiles"
 image: "/images/x-to-voice.png"
-isFeatured: true
+isFeatured: false
 date: "2025-08-01"
 categories:
   - voices
   - text-to-speech
-demoUrl: "https://xtovoice.com"
-repoUrl: "https://github.com/PennyroyalTea/gibberlink"
-videoUrl: "https://www.youtube.com/watch?v=EtNagNezo8w"
-xUrl: "https://x.com/ggerganov/status/1894057587441566081"
+demoUrl: "https://xtovoice.elevenlabs.io/"
+repoUrl: "https://github.com/elevenlabs/elevenlabs-examples/tree/main/examples/text-to-voice/x-to-voice"
+videoUrl: "https://www.youtube.com/watch?v=oQXnkvBLBAg"
+xUrl: "https://x.com/elevenlabsio/status/1852035812176577018"
 authorIds:
   - louis-jordan
   - jonatan-von-martens
 ---
+
+To demonstrate what's possible with the Voice Design API, we built [xtovoice.elevenlabs.io](https://xtovoice.elevenlabs.io) which generates a unique voice and avatar based on your X (twitter) profile.
+
+### How it works:
+
+1. **Visit** [xtovoice.elevenlabs.io](https://xtovoice.elevenlabs.io)
+2. **Connect your X profile** or enter a username
+3. **LLM analyzes your profile** to understand your personality and tone
+4. **Voice Design API generates** a unique voice based on your profile characteristics
+5. **Listen and interact** with your personalized AI voice
+
+## API Endpoints
+
+The Voice Design API provides two main endpoints:
+
+### Generate Voice Previews
+
+```http
+POST /v1/voice-design/create
+```
+
+This endpoint generates three unique voice previews from a text prompt describing the desired voice characteristics.
+
+### Save Voice to Library
+
+```http
+POST /v1/voice-design/save
+```
+
+This endpoint allows you to save your favorite voice previews to your personal voice library for future use.
+
+## Open Source Example
+
+You can find the open source example project [here](https://github.com/elevenlabs/elevenlabs-examples). The repository includes:
+
+- **Complete implementation** of the X to Voice application
+- **API integration examples** for Voice Design endpoints
+- **Frontend components** for voice generation and playback
+- **Backend services** for X profile analysis
+
+## Getting Started
+
+To start using the Voice Design API:
+
+1. **Sign up** for an ElevenLabs account
+2. **Generate an API key** with Voice Design permissions
+3. **Explore the documentation** and example implementations
+4. **Try the X to Voice demo** to see the technology in action
+
+## What's Next?
+
+The Voice Design API opens up endless possibilities for creating unique, personalized voices at scale. Whether you're building conversational AI agents, creating content, or developing innovative audio experiences, this API provides the flexibility to generate exactly the voice you need.
