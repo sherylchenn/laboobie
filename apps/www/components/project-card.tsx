@@ -71,29 +71,29 @@ export function ProjectCard({ project }: { project: Project }) {
         : "grid-cols-1"
 
   return (
-    <Card className="group relative isolate overflow-hidden hover:cursor-pointer">
+    <Card className="group relative isolate overflow-hidden rounded-lg pt-0 pb-6 hover:cursor-pointer">
       {/* Overlay link across the card, content layers above via z-index */}
       <Link
         href={`/projects/p/${project.slug}`}
         aria-label={project.title}
-        className="focus-visible:ring-ring absolute inset-0 z-10 rounded-xl focus-visible:ring-2 focus-visible:outline-none"
+        className="focus-visible:ring-ring absolute inset-0 z-10 rounded-lg focus-visible:ring-2 focus-visible:outline-none"
       >
         <span className="sr-only">View {project.title} project</span>
       </Link>
 
       {/* Header */}
-      <CardHeader className="relative gap-3">
+      <CardHeader className="relative gap-3 px-1 pt-1 pb-0">
         <LoadingImage
           src={cover}
           alt={project.title}
-          containerClassName="ring-border ring-1"
+          containerClassName="ring-border ring-1 rounded overflow-hidden"
           className="group-hover:scale-[1.02]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </CardHeader>
 
       {/* Content */}
-      <CardContent className="relative space-y-4">
+      <CardContent className="relative space-y-4 pt-0">
         <div className="min-w-0">
           <CardTitle className="text-xl leading-tight tracking-tight">
             <span className="relative inline-flex items-center gap-2">
@@ -222,7 +222,7 @@ export function ProjectCard({ project }: { project: Project }) {
       )}
 
       {/* Card hover ring accent */}
-      <div className="group-hover:ring-ring pointer-events-none absolute inset-0 rounded-xl ring-0 transition-[box-shadow] ring-inset group-hover:ring-1" />
+      <div className="group-hover:ring-ring pointer-events-none absolute inset-0 rounded-lg ring-0 transition-[box-shadow] ring-inset group-hover:ring-1" />
     </Card>
   )
 }
