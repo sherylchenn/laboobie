@@ -1,0 +1,11 @@
+name: Angelo Giacco
+avatar: "https://pbs.twimg.com/profile_images/1658578678408724480/jBF-JOtn_400x400.jpg"
+url: "http://www.angelo.sh/"
+bio: "Agents Growth @ ElevenLabs"
+location: "London, UK"
+isElevenLabs: true
+socials:
+  - label: X
+    url: "https://x.com/giaccoangelo"
+  - label: GitHub
+    url: "https://github.com/AngeloGiacco"

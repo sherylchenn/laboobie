@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "!apps/showcase"
+  - "!**/test/**"
+  - "!**/fixtures/**"
+  - "!**/temp/**"
+  - "!packages/tests/temp/**"

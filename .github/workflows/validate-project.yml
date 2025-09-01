@@ -1,0 +1,185 @@
+name: Validate Project Submission
+
+on:
+  pull_request:
+    paths:
+      - 'projects/**.mdx'
+      - 'authors/**.yml'
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Project Submission
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: |
+            projects/**.mdx
+            authors/**.yml
+
+      - name: Validate MDX frontmatter
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "Validating project submissions..."
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "Checking $file"
+            
+            if [[ $file == projects/*.mdx ]]; then
+              echo "Validating project file: $file"
+              
+              # Extract frontmatter
+              frontmatter=$(sed -n '/^---$/,/^---$/p' "$file")
+              
+              # Check required fields
+              required_fields=("title:" "description:" "authorIds:" "categories:" "date:" "image:")
+              
+              for field in "${required_fields[@]}"; do
+                if ! echo "$frontmatter" | grep -q "^$field"; then
+                  echo "ERROR: Missing required field '$field' in $file"
+                  exit 1
+                fi
+              done
+              
+              # Validate date format (YYYY-MM-DD)
+              if ! echo "$frontmatter" | grep -E "date: \"[0-9]{4}-[0-9]{2}-[0-9]{2}\""; then
+                echo "ERROR: Invalid date format in $file. Use YYYY-MM-DD format."
+                exit 1
+              fi
+              
+              # Validate categories
+              valid_categories="agents|text-to-speech|speech-to-text|music|voices"
+              categories=$(echo "$frontmatter" | sed -n '/categories:/,/^[^ ]/p' | grep "^  - " | sed 's/^  - //')
+              
+              while IFS= read -r category; do
+                if ! echo "$category" | grep -qE "^($valid_categories)$"; then
+                  echo "ERROR: Invalid category '$category' in $file"
+                  echo "Valid categories: agents, text-to-speech, speech-to-text, music, voices"
+                  exit 1
+                fi
+              done <<< "$categories"
+              
+              # Extract author IDs
+              author_ids=$(echo "$frontmatter" | sed -n '/authorIds:/,/^[^ ]/p' | grep "^  - " | sed 's/^  - //')
+              
+              # Check if author files exist
+              while IFS= read -r author_id; do
+                author_file="authors/${author_id}.yml"
+                if [[ ! -f "$author_file" ]]; then
+                  echo "ERROR: Author file '$author_file' not found for author ID '$author_id'"
+                  echo "Please create the author file or check the author ID spelling"
+                  exit 1
+                fi
+              done <<< "$author_ids"
+              
+              echo "✓ Project file $file is valid"
+            fi
+            
+            if [[ $file == authors/*.yml ]]; then
+              echo "Validating author file: $file"
+              
+              # Check required fields in author file
+              required_author_fields=("name:" "avatar:" "bio:")
+              
+              for field in "${required_author_fields[@]}"; do
+                if ! grep -q "^$field" "$file"; then
+                  echo "ERROR: Missing required field '$field' in $file"
+                  exit 1
+                fi
+              done
+              
+              echo "✓ Author file $file is valid"
+            fi
+          done
+          
+          echo "✅ All validations passed!"
+
+      - name: Check image files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $file == projects/*.mdx ]]; then
+              # Extract image path from frontmatter
+              image_path=$(grep "^image:" "$file" | sed 's/image: //' | tr -d '"' | sed 's/^/public/')
+              
+              if [[ ! -f "$image_path" ]]; then
+                echo "WARNING: Image file '$image_path' not found for $file"
+                echo "Please add the image file to the PR or update the image path"
+              else
+                echo "✓ Image file found: $image_path"
+              fi
+            fi
+          done
+
+      - name: Comment on PR
+        if: success() && steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const message = `## ✅ Project Submission Validated
+            
+            Thank you for submitting your project to the ElevenLabs Showcase!
+            
+            **What happens next:**
+            1. Our team will review your submission
+            2. We may request changes or additional information
+            3. Once approved, your project will be merged and appear on the showcase
+            4. Featured projects will receive information about claiming exclusive swag!
+            
+            **Review criteria:**
+            - Clear demonstration of ElevenLabs technology usage
+            - Project quality and innovation
+            - Documentation completeness
+            - Working demo or video
+            
+            We'll review your submission within 2-3 business days. Thank you for building with ElevenLabs!`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+
+      - name: Comment on PR (Failure)
+        if: failure() && steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const message = `## ❌ Project Submission Validation Failed
+            
+            Please check the workflow logs above for specific errors and fix them before we can review your submission.
+            
+            **Common issues:**
+            - Missing required fields in frontmatter
+            - Invalid date format (use YYYY-MM-DD)
+            - Invalid category (use: agents, text-to-speech, speech-to-text, music, voices)
+            - Missing author file
+            - Missing image file
+            
+            Please refer to our [contribution guide](.github/CONTRIBUTING.md) for detailed instructions.
+            
+            Need help? Feel free to ask questions in this PR!`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });

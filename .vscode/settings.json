@@ -1,27 +1,17 @@
 {
-  "editor.defaultFormatter": "biomejs.biome",
-  "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  },
-  "editor.formatOnSave": true,
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.preferences.autoImportFileExcludePatterns": [
-    "next/router.d.ts",
-    "next/dist/client/router.d.ts"
+  "eslint.workingDirectories": [
+    { "pattern": "apps/*/" },
+    { "pattern": "packages/*/" }
   ],
-  "terminal.integrated.localEchoStyle": "dim",
+  "tailwindCSS.classFunctions": ["cva", "cn"],
+  "vitest.debugExclude": [
+    "<node_internals>/**",
+    "**/node_modules/**",
+    "**/fixtures/**"
+  ],
   "search.exclude": {
-    "**/node_modules": true
+    "**/.next": true,
+    "**/.turbo": true,
+    "**/.pnpm-store": true
   }
 }
