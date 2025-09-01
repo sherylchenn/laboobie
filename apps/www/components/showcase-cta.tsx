@@ -23,7 +23,7 @@ export function ShowcaseCTA() {
         <DialogContent className="overflow-hidden p-0 sm:max-w-[525px]">
           <div className="relative h-48 w-full">
             <Image
-              src="/swag.jpeg"
+              src="/swag.png"
               alt="ElevenLabs Swag - Backpack, T-shirt, and accessories"
               fill
               className="object-cover"
