@@ -40,5 +40,4 @@ tsconfig.tsbuildinfo
 .fleet
 .vscode
 
-# synced images (generated at build time)
-apps/www/public/images
+
