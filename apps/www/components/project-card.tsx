@@ -47,7 +47,7 @@ export function ProjectCard({ project }: { project: Project }) {
         icon: Globe,
       },
       project.repoUrl && {
-        label: "Source code",
+        label: "Code",
         href: project.repoUrl,
         icon: Code2,
       },
@@ -71,7 +71,7 @@ export function ProjectCard({ project }: { project: Project }) {
         : "grid-cols-1"
 
   return (
-    <Card className="group relative isolate overflow-hidden rounded-lg pt-0 pb-6 hover:cursor-pointer">
+    <Card className="group relative isolate flex h-full flex-col overflow-hidden rounded-lg pt-0 hover:cursor-pointer">
       {/* Overlay link across the card, content layers above via z-index */}
       <Link
         href={`/projects/p/${project.slug}`}
@@ -93,7 +93,7 @@ export function ProjectCard({ project }: { project: Project }) {
       </CardHeader>
 
       {/* Content */}
-      <CardContent className="relative space-y-4 pt-0">
+      <CardContent className="relative flex-1 space-y-4 pt-0">
         <div className="min-w-0">
           <CardTitle className="text-xl leading-tight tracking-tight">
             <span className="relative inline-flex items-center gap-2">
@@ -195,7 +195,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
       {/* Footer (Segmented Actions like original) */}
       {actions.length > 0 && (
-        <div className="relative z-30 -mb-6 border-t">
+        <div className="relative z-30 mt-auto -mb-6 border-t">
           <div
             className={cn(
               "text-muted-foreground grid w-full text-xs sm:text-sm",
