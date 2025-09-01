@@ -33,6 +33,8 @@ export function CategoryIcon({
       <Image
         src={src}
         alt={alt}
+        width={32}
+        height={32}
         className="h-full w-full dark:brightness-0 dark:invert"
       />
     </span>
