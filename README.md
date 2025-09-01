@@ -2,7 +2,7 @@
 
 ![hero](apps/www/public/opengraph-image.png)
 
-A curated collection of projects built with ElevenLabs. Builds who submit PR's to this repository & get it approved will receive a reward.
+A curated collection of projects built with ElevenLabs. Submit the best of what you've built with ElevenLabs here - if it's approved we'll give rewards.
 
 ## Submit Your Project
 
