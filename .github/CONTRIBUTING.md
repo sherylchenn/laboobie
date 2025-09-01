@@ -15,7 +15,7 @@ Welcome to the ElevenLabs Showcase. We're excited to feature amazing projects bu
 1. Fork this repository to your GitHub account
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/elevenlabsshowcase.git
+   git clone https://github.com/elevenlabs/showcase.git
    cd showcase
    ```
 
