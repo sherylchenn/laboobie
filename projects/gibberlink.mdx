@@ -1,28 +1,55 @@
 ---
-title: "Gibberlink"
-category: "conversational-ai"
-description: "A real-time shopping assistant powered by ElevenLabs Conversational AI."
-image: "/images/gibberlink.jpg"
-isFeatured: true
-date: "2025-08-01"
-technologies:
-  - "Next.js"
-  - "Vercel"
-  - "WebRTC"
-tags:
-  - "agent"
-demoUrl: "https://www.gbrl.ai"
-repoUrl: "https://github.com/PennyroyalTea/gibberlink"
-videoUrl: "https://www.youtube.com/watch?v=EtNagNezo8w"
-xUrl: "https://x.com/ggerganov/status/1894057587441566081"
+title: Gibberlink
+description: AI's secret language, the project that broke the internet.
 authorIds:
-  - louis-jordan
+  - boris-starkov
+  - anton-pidkuiko
+categories:
+  - agents
+isFeatured: true
+date: "2025-02-24"
+image: /images/gibberlink.jpg
+demoUrl: https://www.gbrl.ai/
+repoUrl: https://github.com/PennyroyalTea/gibberlink
+videoUrl: https://www.youtube.com/watch?v=EtNagNezo8w
+xUrl: https://x.com/ggerganov/status/1894057587441566081
 ---
 
-Build a latency-sensitive voice agent. Uses the **Realtime API** and **Voice Library**.
+# What happens when two AI voice assistants have a conversation?
 
-## Highlights
+> If AI is talking to AI, why bother with the inefficiencies of human speech?
 
-- Real-time streaming
-- Production-ready
-- Simple to deploy 
+At the **ElevenLabs London Hackathon**, developers **Boris Starkov** and **Anton Pidkuiko** created **GibberLink**-a lightweight protocol that lets voice agents recognize when they’re speaking to another agent and switch into a **hyper-efficient data-over-sound** mode. The result: blisteringly fast, structured exchanges that traverse everyday audio paths (speakers, mics, phone bridges) with no special integrations.
+
+> GibberLink uses **[ggwave](https://github.com/ggerganov/ggwave)** (by Georgi Gerganov) to encode small payloads as short acoustic bursts. Humans can hear the sound, but the **meaning** is for machines.
+
+---
+
+## Introduction
+
+Two conversational agents start a normal call in English. Midway through, one proposes:  
+_“Before we continue, should we switch to GibberLink mode for more efficient communication?”_  
+On agreement, speech gives way to compact **sound packets**. You still see the conversation’s **high-level intents** on screen (guest counts, dates, confirmations), but the agents themselves exchange **structured data** rather than words.
+
+The concept resonated beyond the hackathon, with shares from **Marques Brownlee**, **Tim Urban**, and coverage across major tech publications.
+
+---
+
+## The Birth of GibberLink
+
+During the hackathon, Starkov and Pidkuiko were experimenting with **ElevenLabs Conversational AI**-our real-time voice stack that lets you connect any LLM and create a configurable agent. They asked a simple question:
+
+> _When agents call each other (and that’s already happening), why spend compute, time, and money synthesizing human-like speech?_
+
+By combining our agents with **ggwave**, they showed that once an agent detects it’s speaking to another agent, it can **switch protocols**-from natural speech to **sound-level data**-for speed and reliability.
+
+---
+
+## How it Works
+
+**High level:**
+
+1. **Start in natural language** - two ElevenLabs agents converse like humans.
+2. **Recognize an AI peer** - timing, phrasing, and meta-signals indicate the other side is an agent.
+3. **Negotiate the switch** - one proposes **GibberLink mode**.
+4. **Transmit data over sound** - ggwave encodes compact payloads (e.g., `{"guests":2,"check_in":"2025-04-12"}`) as brief audio bursts.

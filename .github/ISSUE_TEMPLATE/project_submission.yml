@@ -1,0 +1,162 @@
+name: Project Submission
+description: Submit your project to the ElevenLabs Showcase
+title: "[Project] "
+labels: ["project-submission", "pending-review"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Submit Your Project to ElevenLabs Showcase
+        
+        Thank you for sharing your project! Featured projects are eligible for exclusive ElevenLabs swag.
+        
+        **Before submitting:**
+        - Your project must use ElevenLabs technology
+        - You must have rights to share the project publicly
+        - Follow the contribution guide for the best chance of approval
+
+  - type: input
+    id: project-name
+    attributes:
+      label: Project Name
+      description: What's the name of your project?
+      placeholder: "My Awesome Voice App"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Project Description
+      description: Briefly describe what your project does (max 160 characters)
+      placeholder: "An AI-powered voice assistant that helps users practice languages with native pronunciation"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: categories
+    attributes:
+      label: Project Categories
+      description: Select all that apply
+      multiple: true
+      options:
+        - Agents (Conversational AI)
+        - Text-to-Speech
+        - Speech-to-Text
+        - Music Generation
+        - Voice Cloning/Synthesis
+    validations:
+      required: true
+
+  - type: input
+    id: demo-url
+    attributes:
+      label: Demo URL
+      description: Link to live demo or hosted version
+      placeholder: "https://my-project.com"
+    validations:
+      required: false
+
+  - type: input
+    id: repo-url
+    attributes:
+      label: Repository URL
+      description: Link to source code (if open source)
+      placeholder: "https://github.com/username/project"
+    validations:
+      required: false
+
+  - type: input
+    id: video-url
+    attributes:
+      label: Video Demo URL
+      description: Link to demo video (YouTube, Loom, etc.)
+      placeholder: "https://youtube.com/watch?v=..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: elevenlabs-usage
+    attributes:
+      label: How does your project use ElevenLabs?
+      description: Describe which ElevenLabs features/APIs you're using
+      placeholder: |
+        - Text-to-Speech API for voice generation
+        - Voice cloning for custom character voices
+        - Conversational AI for real-time interactions
+    validations:
+      required: true
+
+  - type: textarea
+    id: key-features
+    attributes:
+      label: Key Features
+      description: List 3-5 main features of your project
+      placeholder: |
+        - Real-time voice conversations
+        - Multiple language support
+        - Custom voice training
+    validations:
+      required: true
+
+  - type: input
+    id: author-name
+    attributes:
+      label: Your Name
+      description: How should we credit you?
+      placeholder: "Jane Doe"
+    validations:
+      required: true
+
+  - type: input
+    id: github-username
+    attributes:
+      label: GitHub Username
+      description: Your GitHub username (for author profile)
+      placeholder: "janedoe"
+    validations:
+      required: true
+
+  - type: input
+    id: twitter-handle
+    attributes:
+      label: X/Twitter Handle
+      description: Optional - for announcement if featured
+      placeholder: "@janedoe"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Information
+      description: Anything else you'd like us to know?
+      placeholder: "Built at ElevenLabs London Hackathon, winner of Best Voice App category..."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Submission Requirements
+      description: Please confirm the following
+      options:
+        - label: I have the rights to share this project publicly
+          required: true
+        - label: This project uses ElevenLabs technology
+          required: true
+        - label: I have read the contribution guidelines
+          required: true
+        - label: I understand that not all submissions will be featured
+          required: true
+
+  - type: checkboxes
+    id: pr-preference
+    attributes:
+      label: Submission Method
+      description: How would you like to submit your project?
+      options:
+        - label: I will submit a Pull Request with the complete project files
+        - label: Please help me create the project files based on this information
