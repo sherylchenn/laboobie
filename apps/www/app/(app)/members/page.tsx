@@ -1,15 +1,10 @@
 import { Metadata } from "next"
-import Link from "next/link"
 import { getAuthorSectionsByInitial } from "@showcase/data/api/authors-list"
 
 import { AuthorListWithSections } from "@/components/author-list-with-sections"
 import { ElevenLabsLogo } from "@/components/elevenlabs-logo"
-import {
-  PageActions,
-  PageHeader,
-  PageHeaderDescription,
-} from "@/components/page-header"
-import { Button } from "@/registry/new-york-v4/ui/button"
+import { PageHeader, PageHeaderDescription } from "@/components/page-header"
+import { ShowcaseCTA } from "@/components/showcase-cta"
 
 const title = "Community Members"
 const description =
@@ -50,14 +45,7 @@ export default function MembersPage() {
       <PageHeader>
         <ElevenLabsLogo text={title} />
         <PageHeaderDescription>{description}</PageHeaderDescription>
-        <PageActions>
-          <Button asChild size="sm">
-            <Link href="/projects/installation">Become a Member</Link>
-          </Button>
-          <Button asChild size="sm" variant="ghost">
-            <Link href="/projects">View Projects</Link>
-          </Button>
-        </PageActions>
+        <ShowcaseCTA />
       </PageHeader>
       <div className="container-wrapper section-soft flex-1 pb-6">
         <div className="container overflow-hidden">
