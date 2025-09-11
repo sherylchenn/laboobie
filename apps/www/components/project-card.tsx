@@ -142,21 +142,16 @@ export function ProjectCard({ project }: { project: Project }) {
                         .toUpperCase()
 
                       const avatarNode = (
-                        <div className="ring-border bg-muted relative h-7 w-7 overflow-hidden rounded-full ring-1">
-                          <Avatar className="h-7 w-7">
-                            {a.avatar ? (
-                              <AvatarImage
-                                src={a.avatar}
-                                alt={a.name}
-                                className="object-cover"
-                              />
-                            ) : (
-                              <AvatarFallback className="bg-muted text-[10px]">
-                                {initials}
-                              </AvatarFallback>
-                            )}
-                          </Avatar>
-                        </div>
+                        <Avatar className="ring-border h-7 w-7 ring-1">
+                          <AvatarImage
+                            src={a.avatar}
+                            alt={a.name}
+                            className="object-cover"
+                          />
+                          <AvatarFallback className="bg-muted text-[10px]">
+                            {initials}
+                          </AvatarFallback>
+                        </Avatar>
                       )
 
                       return (

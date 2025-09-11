@@ -284,9 +284,9 @@ export function CommandMenu({
                           .toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="flex-1">{member.name}</span>
+                    <span className="flex-1 truncate">{member.name}</span>
                     {member.bio && (
-                      <span className="text-muted-foreground ml-auto text-xs font-normal">
+                      <span className="text-muted-foreground ml-auto max-w-[200px] truncate text-xs font-normal">
                         {member.bio}
                       </span>
                     )}
