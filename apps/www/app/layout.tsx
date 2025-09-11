@@ -25,6 +25,8 @@ export const metadata: Metadata = {
     "AI",
     "Voice",
     "Text to Speech",
+    "TTS",
+    "Sound effects",
     "Speech to Text",
     "Music",
     "Agents",

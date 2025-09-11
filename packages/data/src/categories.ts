@@ -41,6 +41,14 @@ export const categories = [
     iconSrc: "/icons/speech-to-text.svg",
     hidden: false,
   },
+  {
+    id: "sound-effects",
+    name: "Sound effects",
+    href: "/showcase/sound-effects",
+    extHref: `https://elevenlabs.io/sound-effects${UTM}`,
+    iconSrc: "/icons/sound-effects.svg",
+    hidden: false,
+  },
 ] as const
 
 export type CategoryId = (typeof categories)[number]["id"]

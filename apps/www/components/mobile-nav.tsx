@@ -33,8 +33,16 @@ const TOP_LEVEL_SECTIONS = [
     href: "/projects/category/speech-to-text",
   },
   {
+    name: "Sound effects",
+    href: "/projects/category/sound-effects",
+  },
+  {
     name: "Voices",
     href: "/projects/category/voices",
+  },
+  {
+    name: "Sound effects",
+    href: "/projects/category/sound-effects",
   },
 ]
 

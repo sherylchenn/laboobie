@@ -1,0 +1,125 @@
+---
+title: SB1 - Infinite Soundboard
+description: An infinite soundboard with ElevenLabs SFX API
+authorIds:
+  - dul-zorigoo
+  - gergely-bihary
+  - james-mcaulay
+categories:
+  - sound-effects
+isFeatured: true
+date: "2025-09-11"
+image: /images/infinite-soundboard.png
+demoUrl: https://elevenlabs.io/sound-effects/soundboard
+videoUrl: https://www.youtube.com/watch?v=ZWDfN2Slgwc
+---
+
+# How we created a soundboard using ElevenLabs SFX API
+
+Learn how ElevenLabs created SB1, an infinite soundboard powered by their text-to-sound effects AI audio model, allowing users to generate any sound on demand.
+
+## Introduction
+
+Imagine a soundboard that can generate unlimited sounds on demand. That's exactly what we built at ElevenLabs — meet SB1, our [infinite soundboard](https://elevenlabs.io/sound-effects/soundboard). On the surface, it looks like a typical grid of pads you trigger with clicks or keyboard shortcuts. Under the hood, it's powered by our text-to-sound effects AI audio model.
+
+To use it you simply describe any sound you can think of, and SB1 will generate it. There are also some predefined default sounds, but even they can be replaced.
+
+## From idea to prototype
+
+We started with a simple question: what if you could type a description, like "soft ambient forest sounds" or "dramatic audience gasp," and get a ready-to-use sound effect?
+
+Traditional soundboards rely on static MP3 libraries you have to hunt down online. Even if you find a suitable sound, often it isn't 'exactly' what you wanted. But with generative AI, that's no longer a problem. You're no longer limited.
+
+### SB1 Prototype
+
+Before jumping in to the code we turned to Lovable to create a basic prototype version of what would become SB1. Not connected to the API yet, it gave us a chance to experiment with design choices and button placements, before our brilliant team created the final UI and code.
+
+We wanted dynamic content — any sound, generated on the fly. The core of our solution is the ElevenLabs SFX API. The API sits behind a single endpoint:
+
+```
+POST https://api.elevenlabs.io/v1/sound-generation
+```
+
+You send a JSON payload with your prompt, the number of variations you want (we default to four), and your API key in the Authorization header.
+
+The response returns an array of URLs pointing to generated WAV files. From there, you can stream or download and assign each clip to a pad. You can even set looping. Use descriptive prompts for more detail.
+
+### Key API details
+
+- **Endpoint**: `/v1/sound-effects/generate`
+- **Method**: POST
+- **Headers**:
+  - `Authorization: Bearer YOUR_API_KEY`
+  - `Content-Type: application/json`
+- **Body parameters**:
+  - `prompt` (string): description of the sound
+  - `n` (integer): number of variations (1–10)
+  - `format` (string, optional): wav or mp3 (defaults to wav)
+
+A sample request looks like this:
+
+```json
+{
+  "prompt": "rain hitting the roof of a tent",
+  "n": 4,
+  "format": "wav"
+}
+```
+
+And you'll receive back an array of four URLs. We designed the API so that it scales to any use case — from ad hoc soundboard creation to bulk generation for game assets.
+
+## Building the SB1 interface
+
+With the API in place, we turned to the front-end. SB1 is a web app built with React and Tailwind CSS. Each pad component has two modes:
+
+- **Preset**: loads from a saved set of sound URLs
+- **Custom**: user-generated via the SFX API
+
+When you click an empty pad in custom mode, a prompt dialog appears. You type your description, hit Generate, and the API returns four options. You audition them inline, pick your favorite, and the pad updates immediately. Keyboard bindings let you trigger pads with key presses, so you can play rhythms or sound cues live.
+
+We also added looping controls. Simply press the loop button, tap the sound you want to loop and it will keep playing until you release it. That makes SB1 useful not only for jokes — think drum machines and ambient atmospheres — but also for podcasting, livestream sound cues, and guided meditations.
+
+## Examples in action
+
+### Ambient soundscape
+
+- **Light rain**: "light rain dripping on leaves"
+- **Heavy rain**: "heavy rain falling on a tin roof"
+- **Ocean waves**: "soft waves rolling onto a shore"
+
+We generated each by sending prompts like "light rain dripping on leaves" and "soft waves rolling onto a shore." Then we set those pads to loop, creating a backdrop for focus or meditation.
+
+### Drum machine
+
+- **808 kick**: "super bassy 808 kick"
+- **Snare hit**: "tight snare snap"
+- **Open cymbal**: "open cymbal ringing out"
+
+You don't need audio samples from a drum library. Just describe "super bassy 808 kick" or "tight snare snap," and the API gives you four versions to audition. We mapped them to the A, S, and D keys for a live performance demo.
+
+If you really want to push the model, you can also use it to create short voice snippets in the sound of a character. You just specify the character then put the words in brackets.
+
+- **Hyped up DJ**: Hyped up DJ saying "Lets get the party started"
+- **Orc on a mission**: Orc in a gruff voice saying: "This room is over capacity"
+- **Siren song**: Haunting female vocal singing: "Time to go home to bed, party is over"
+
+### Custom presets
+
+You can save and name your own presets—say, "Livestream FX" with gasp, laugh, and applause. After building your board, click Share to copy a link or post directly to social media. Anyone with the link loads your SB1 configuration and can play your curated sounds.
+
+## Developer takeaways
+
+- **Stateless generation**: Each API call is independent. You don't need to manage a training pipeline or store large sample libraries—just cache the URLs you use in your UI.
+- **Low latency**: Typical generation time is under two seconds, which feels instant when you're demoing the feature.
+- **Scalable**: You can batch-generate hundreds of sounds in parallel, then store them in your own CDN for high-traffic use.
+- **Flexible formats**: WAV for highest fidelity, MP3 if you need smaller files.
+
+To get started yourself, check out our [docs](https://elevenlabs.io/docs). You'll find code samples in JavaScript, Python, and cURL that show how to integrate the SFX API into your projects.
+
+## What's next?
+
+SB1 is just one demo of what our sound-effect model can do. We're exploring plugins for OBS and digital audio workstations, so you can generate new sounds without leaving your streaming or production software. We're also fine-tuning the model to improve performance on music-related prompts — think exotic percussion or synth textures.
+
+If you build something cool, we want to see it. Tag us on social media or share your preset link. Whether you're a streamer, podcaster, game developer, or just someone who loves to play with sound, SB1 and the SFX API put unlimited audio creativity at your fingertips.
+
+Give it a try for free today — no MP3 library required.

@@ -44,6 +44,13 @@ const categories = [
     iconSrc: "/icons/speech-to-text.svg",
     hidden: false,
   },
+  {
+    id: "sound-effects",
+    name: "Sound effects",
+    href: "/showcase/sound-effects",
+    iconSrc: "/icons/sound-effects.svg",
+    hidden: false,
+  },
 ]
 
 export function FeaturedNav({
