@@ -33,6 +33,7 @@ The guide covers:
 - Must use ElevenLabs technology (API, SDK, or services)
 - Include working demo, repository, or video
 - Have rights to share the project publicly
+- Must be open source with publicly accessible code
 
 ### Get Help
 

@@ -36,9 +36,9 @@ export function ShowcaseCTA() {
               <DialogDescription asChild>
                 <div className="space-y-4 pt-2">
                   <p className="text-base">
-                    Share your project built with ElevenLabs and join our
-                    showcase. If your submission is approved, you will receive
-                    some limited-edition swag.
+                    Share your open-source projects built with ElevenLabs and
+                    join our showcase. If your submission is approved, you will
+                    receive some limited-edition swag.
                   </p>
                   <div className="bg-muted/50 space-y-2 rounded-lg p-4">
                     <p className="text-sm font-medium">

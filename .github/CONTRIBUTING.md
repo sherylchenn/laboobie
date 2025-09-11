@@ -9,6 +9,7 @@ Welcome to the ElevenLabs Showcase. We're excited to feature amazing projects bu
 - Your project must use ElevenLabs technology (API, SDK, or services)
 - Project should be functional with a demo, repository, or video
 - You must have rights to share the project publicly
+- Project must be open source & free to use
 
 ### Step 1: Fork and Clone
 
