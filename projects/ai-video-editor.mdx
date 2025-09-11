@@ -1,0 +1,73 @@
+---
+title: AI Caption Editor with React Native
+description: A comprehensive React Native app for AI-powered video caption editing with text-to-speech, real-time sync, and modern mobile features
+authorIds:
+  - simon-grimm
+categories:
+  - speech-to-text
+  - text-to-speech
+isFeatured: false
+date: "2025-05-27"
+image: /images/ai-video-editor.png
+demoUrl: https://www.youtube.com/watch?v=Snw0b-PMhsU
+repoUrl: https://github.com/Galaxies-dev/ai-caption-editor-react-native
+videoUrl: https://www.youtube.com/watch?v=Snw0b-PMhsU
+---
+
+# AI Caption Editor with React Native
+
+## Overview
+
+A comprehensive React Native mobile application that combines AI-powered caption generation with advanced text-to-speech capabilities using ElevenLabs. This tutorial project demonstrates how to build a modern, feature-rich mobile app with real-time data synchronization, authentication, and professional-grade error tracking.
+
+## Key Features
+
+- **AI-Powered Caption Generation** - Intelligent video caption creation and editing
+- **ElevenLabs Text-to-Speech Integration** - High-quality voice synthesis for captions
+- **Real-time Data Synchronization** - Instant updates across devices with Convex
+- **Passwordless Authentication** - Seamless user experience with Clerk
+- **Professional Error Tracking** - Comprehensive monitoring with Sentry
+- **Haptic Feedback** - Enhanced mobile user experience
+- **Video & Audio Playback** - Built-in media handling capabilities
+- **Secure Storage** - Protected user data and preferences
+
+## How It Works
+
+The app leverages modern React Native architecture with Expo for cross-platform development. At its core, ElevenLabs powers the caption generation workflow - converting text into high-quality speech audio and providing precise timestamps for each text block. This timing data enables accurate caption synchronization with video playback, creating seamless audio-visual alignment.
+
+The ElevenLabs integration handles both text-to-speech synthesis and timestamp extraction, allowing users to generate professional-quality voiceovers with frame-accurate caption timing. Convex manages real-time data synchronization across devices, while Jotai handles efficient state management and NativeWind provides utility-first styling. The app includes native features like haptic feedback and secure storage for an enhanced mobile experience.
+
+## Technologies Used
+
+- **ElevenLabs API** - Text-to-speech synthesis for caption audio
+- **React Native** - Cross-platform mobile development framework
+- **Expo** - Development platform and toolchain
+- **Convex** - Real-time database and file storage backend
+- **Clerk** - User authentication and management
+- **Sentry** - Error tracking and performance monitoring
+- **Jotai** - Modern state management library
+- **NativeWind** - Utility-first styling system
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/Galaxies-dev/ai-caption-editor-react-native
+
+# Install dependencies
+npm install
+
+# Set up environment variables for ElevenLabs, Convex, and Clerk
+# (See repository README for detailed setup instructions)
+
+# Start the development server
+npx expo start
+```
+
+### Demo
+
+![Demo](images/ai-video-editor-demo.gif)
+
+## Tutorial
+
+This project comes with a comprehensive YouTube tutorial that walks through the entire development process, from initial setup to deployment. Perfect for developers looking to learn modern React Native development with AI integration.
