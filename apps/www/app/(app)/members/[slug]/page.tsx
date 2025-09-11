@@ -206,12 +206,15 @@ export default async function MemberPage({
                       </Button>
                     ))}
                     {(author.url || author.socials?.length > 0) && (
-                      <div className="h-4 w-px bg-border" />
+                      <div className="bg-border h-4 w-px" />
                     )}
                     <ShareButtons
                       url={`${process.env.NEXT_PUBLIC_APP_URL || "https://showcase.eleven-labs.com"}/members/${author.slug}`}
                       title={author.name}
-                      description={author.bio || `View projects and contributions by ${author.name}`}
+                      description={
+                        author.bio ||
+                        `View projects and contributions by ${author.name}`
+                      }
                     />
                   </div>
                 </div>

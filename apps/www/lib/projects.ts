@@ -1,7 +1,8 @@
-import { source } from "@/lib/source"
 import { getAuthorById } from "@showcase/data/authors"
 import type { Author } from "@showcase/data/authors"
 import type { CategoryId } from "@showcase/data/categories"
+
+import { source } from "@/lib/source"
 
 export interface Project {
   title: string
@@ -22,7 +23,7 @@ export interface Project {
 
 export async function getProjects(): Promise<Project[]> {
   const pages = source.getPages()
-  
+
   const projects: Project[] = await Promise.all(
     pages.map(async (page) => {
       const authorIds = page.data.authorIds || []
@@ -32,7 +33,7 @@ export async function getProjects(): Promise<Project[]> {
           return author
         })
       )
-      
+
       return {
         title: page.data.title,
         description: page.data.description,
@@ -51,21 +52,25 @@ export async function getProjects(): Promise<Project[]> {
       }
     })
   )
-  
-  return projects.filter(p => p.title && p.description)
+
+  return projects.filter((p) => p.title && p.description)
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
   const projects = await getProjects()
-  return projects.filter(p => p.isFeatured)
+  return projects.filter((p) => p.isFeatured)
 }
 
-export async function getProjectsByCategory(categoryId: CategoryId): Promise<Project[]> {
+export async function getProjectsByCategory(
+  categoryId: CategoryId
+): Promise<Project[]> {
   const projects = await getProjects()
-  return projects.filter(p => p.categories.includes(categoryId))
+  return projects.filter((p) => p.categories.includes(categoryId))
 }
 
-export async function getProjectsByAuthor(authorId: string): Promise<Project[]> {
+export async function getProjectsByAuthor(
+  authorId: string
+): Promise<Project[]> {
   const projects = await getProjects()
-  return projects.filter(p => p.authorIds.includes(authorId))
+  return projects.filter((p) => p.authorIds.includes(authorId))
 }

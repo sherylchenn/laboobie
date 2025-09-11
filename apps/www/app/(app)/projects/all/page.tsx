@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+
 import { getProjects } from "@/lib/projects"
 import { ProjectList } from "@/components/project-list"
 
@@ -22,7 +23,7 @@ export default async function AllProjectsPage() {
             Browse all projects built with ElevenLabs APIs
           </p>
         </div>
-        
+
         <div className="w-full flex-1">
           <ProjectList projects={projects} />
         </div>

@@ -14,6 +14,7 @@ const eslintConfig = [
     extends: ["next/core-web-vitals", "next/typescript"],
     rules: {
       "@next/next/no-duplicate-head": "off",
+      "react/no-unknown-property": ["error", { ignore: ["tw"] }],
     },
   }),
 ]

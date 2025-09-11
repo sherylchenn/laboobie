@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation"
 import { Sparkles } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { ScrollArea, ScrollBar } from "@/registry/new-york-v4/ui/scroll-area"
 import { CategoryIcon } from "@/components/category-icon"
+import { ScrollArea, ScrollBar } from "@/registry/new-york-v4/ui/scroll-area"
 
 const categories = [
   {

@@ -38,7 +38,9 @@ export function MainNav({
               href={item.href}
               className={cn(
                 "transition-opacity",
-                active ? "opacity-100 font-medium" : "opacity-60 hover:opacity-100"
+                active
+                  ? "font-medium opacity-100"
+                  : "opacity-60 hover:opacity-100"
               )}
             >
               {item.label}

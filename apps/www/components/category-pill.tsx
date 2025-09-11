@@ -51,7 +51,12 @@ export function CategoryPill({
 
   if (asLink && href) {
     return (
-      <Link href={href} className={classes} target="_blank" rel="noopener noreferrer">
+      <Link
+        href={href}
+        className={classes}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {content}
       </Link>
     )
