@@ -27,11 +27,8 @@ export function AuthorCard({ author }: { author: AuthorWithProjectCount }) {
         <div className="flex items-start gap-3">
           {/* Avatar */}
           <Avatar className="ring-border h-11 w-11 ring-1">
-            {author.avatar ? (
-              <AvatarImage src={author.avatar} alt={author.name} />
-            ) : (
-              <AvatarFallback className="text-sm">{initials}</AvatarFallback>
-            )}
+            <AvatarImage src={author.avatar} alt={author.name} />
+            <AvatarFallback className="text-sm">{initials}</AvatarFallback>
           </Avatar>
 
           {/* Info */}

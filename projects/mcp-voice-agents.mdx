@@ -1,0 +1,112 @@
+---
+title: MCP Voice Agents
+description: Give Claude and Cursor access to the entire ElevenLabs AI audio platform via simple text prompts.
+authorIds:
+  - louis-jordan
+  - angelo-giacco
+  - paul-asjes
+categories:
+  - agents
+isFeatured: true
+date: "2025-07-04"
+image: /images/mcp-voice-agents.png
+repoUrl: https://github.com/elevenlabs/elevenlabs-mcp
+demoUrl: https://11.ai
+videoUrl: https://www.youtube.com/watch?v=y4RYdziCeQE
+---
+
+# Overview
+
+Give Claude and Cursor access to the entire ElevenLabs AI audio platform via simple text prompts.
+
+## Introduction
+
+Ever wanted to build a voice agent that orders you lunch? How about one that transcribes your meetings? Or reads your emails out loud in your own voice? Now, with the official ElevenLabs Model Context Protocol (MCP) server, you can.
+
+The MCP server lets you orchestrate AI tasks via local tools. Whether you're using Claude, Cursor, or a custom script, you can build Conversational AI voice agents, perform outbound calls, transcribe speech, and generate audio - all with simple API calls.
+
+In this article, we'll teach you how to get started with our MCP server using our GitHub repository and give you a few examples of what you can do once you're up and running.
+
+## What is the ElevenLabs MCP server?
+
+The ElevenLabs MCP server is an abstraction over the ElevenLabs API to provide a large language model with context to access the full ElevenLabs AI audio platform. It acts as a developer-friendly local interface that forwards requests to ElevenLabs' cloud APIs. Want to generate speech? Clone a voice? Transcribe audio from a file? The MCP server puts everything at your fingertips, running directly on your machine.
+
+The MCP server is fully compatible with Claude Desktop, Cursor, and other AI-native development environments. Spin up a voice agent, define its behavior with a system prompt, and perform outbound calls - all from within your IDE or AI assistant.
+
+While the server runs locally and manages workflows on your machine, it securely communicates with ElevenLabs' cloud APIs to perform audio generation, Voice Cloning, and transcription tasks. This makes ideal for testing experimental features. You control the data, the flow, and the experience. Just plug in and start building.
+
+Once installed, you can use the ElevenLabs MCP server to build real-world applications that talk, listen, and understand. Unlock the full spectrum of the ElevenLabs AI audio platform via simple prompts and API calls. For example, you can use the MCP server to create voice agents to perform outbound calls - whether you want to order a pizza, book an appointment, or follow up with a lead.
+
+### Example use cases
+
+Here are a few other potential use cases that we came up with:
+
+- "Create an AI agent that speaks like a film noir detective and can answer questions about classic movies"
+- "Generate three voice variations for a wise, ancient dragon character, then I will choose my favorite voice to add to my voice library"
+- "Convert this recording of my voice to sound like a medieval knight"
+- "Create a soundscape of a thunderstorm in a dense jungle with animals reacting to the weather"
+- "Turn this speech into text, identify different speakers, then convert it back using unique voices for each person"
+
+## How to get started with ElevenLabs' MCP server
+
+Getting up and running with the official ElevenLabs MCP server only takes a few minutes. Whether you're building voice agents or testing audio processing tools locally, here's the full step-by-step process to get started.
+
+### 1. Sign up for an ElevenLabs account
+
+Sign up for a [free or paid account](https://elevenlabs.io). This gives you access to the entire ElevenLabs AI audio platform, including tools for Text-to-Speech, Voice Cloning, and audio transcription.
+
+### 2. Generate your API key
+
+Once logged in, navigate to your account settings and generate a new API key. You'll need this to authenticate requests from your local MCP server to ElevenLabs' services.
+
+### 3. Clone the official MCP server repo
+
+Visit the [official ElevenLabs MCP GitHub repository](https://github.com/elevenlabs/elevenlabs-mcp) and clone it to your local machine. This repo includes everything you need to run the server locally and start experimenting.
+
+### 4. Install dependencies
+
+Follow the installation guide in the repo README. This includes installing required Python packages and setting up the runtime environment. You may also need to configure environment variables for your API key and default settings.
+
+### 5. Run the MCP server locally
+
+With everything installed, start the server using the provided CLI commands. The MCP server will spin up and start exposing endpoints for audio generation, speech transcription, and Conversational AI.
+
+### 6. Connect via Claude, Cursor, or CLI
+
+Connect tools like Claude Desktop or Cursor to interact with the MCP server via command-line prompts or HTTP calls, enabling seamless workflows between your AI assistant and the ElevenLabs platform. Spin up agents and issue prompts like "Order me a pizza" or "Read this PDF aloud."
+
+### 7. Experiment and build
+
+With the server live, you can now generate audio, clone voices, transcribe files, and create voice agents to perform outbound calls - all from your local setup. Use the provided examples in the repo or start building your own workflows.
+
+## Final thoughts
+
+The official ElevenLabs MCP server marks a turning point for developers working with voice AI. For the first time, you can access the full power of the ElevenLabs AI audio platform orchestrated from your local machine.
+
+No more restricted workflows. Just fast, flexible, fully-featured audio tooling that integrates seamlessly with your favorite dev environments like Claude Desktop and Cursor.
+
+Whether you're building the next generation of voice agents or just looking to experiment with cutting-edge audio processing, the MCP server gives you the freedom to create. Ready to build something incredible?
+
+[Sign up for ElevenLabs today](https://elevenlabs.io).
+
+## FAQs
+
+### What is the ElevenLabs MCP server?
+
+The ElevenLabs MCP server is a local interface that provides large language models with access to the entire ElevenLabs AI audio platform, enabling voice generation, transcription, and agent creation through simple API calls.
+
+### How do I use the MCP server with Claude or Cursor?
+
+After installing and running the MCP server locally, you can connect it to Claude Desktop or Cursor through their settings, allowing you to control ElevenLabs features directly from your AI assistant or IDE.
+
+### Can I generate speech and clone voices with the MCP server?
+
+Yes, the MCP server provides full access to ElevenLabs' Text-to-Speech and Voice Cloning capabilities, allowing you to generate speech in various voices and create custom voice clones.
+
+### Does the MCP server support transcribing audio files?
+
+Absolutely. The MCP server includes speech-to-text functionality, enabling you to transcribe audio files and identify different speakers in multi-speaker recordings.
+
+### Is the ElevenLabs MCP server free to use?
+
+The MCP server itself is open-source and free to use, but you'll need an ElevenLabs account (free or paid) to access the API services it connects to.
