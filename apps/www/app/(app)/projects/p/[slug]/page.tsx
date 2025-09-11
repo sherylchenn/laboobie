@@ -230,21 +230,16 @@ export default async function Page(props: {
                                   href={`/members/${authorIds[i]}`}
                                   className="flex items-center gap-3 transition-opacity hover:opacity-80"
                                 >
-                                  <div className="ring-border bg-muted relative h-8 w-8 overflow-hidden rounded-full ring-1 sm:h-10 sm:w-10">
-                                    <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
-                                      {author.avatar ? (
-                                        <AvatarImage
-                                          src={author.avatar}
-                                          alt={author.name}
-                                          className="object-cover"
-                                        />
-                                      ) : (
-                                        <AvatarFallback className="bg-muted text-xs">
-                                          {initials}
-                                        </AvatarFallback>
-                                      )}
-                                    </Avatar>
-                                  </div>
+                                  <Avatar className="ring-border h-8 w-8 ring-1 sm:h-10 sm:w-10">
+                                    <AvatarImage
+                                      src={author.avatar}
+                                      alt={author.name}
+                                      className="object-cover"
+                                    />
+                                    <AvatarFallback className="bg-muted text-xs">
+                                      {initials}
+                                    </AvatarFallback>
+                                  </Avatar>
                                   <div className="flex flex-col">
                                     <span className="text-sm font-medium">
                                       {author.name}
