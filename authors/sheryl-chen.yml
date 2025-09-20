@@ -1,0 +1,12 @@
+name: Sheryl Chen
+url: "https://sherylchenn.github.io/" # Optional: your website
+bio: "Brief description about yourself"
+location: "Menlo Park, United States"
+isElevenLabs: false # Set to true if you work at ElevenLabs
+socials:
+  - label: X
+    url: "https://x.com/sherylchen_"
+  - label: GitHub
+    url: "https://github.com/sherylchenn"
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/sheryl-chen-489b892a1/" # Optional
