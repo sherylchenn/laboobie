@@ -1,0 +1,179 @@
+---
+title: Laboobie
+description: AI Labubu calls you, dances, and chats using your public info. Hold up plushies to switch between girlfriend and boyfriend AI personas live!
+authorIds:
+  - sheryl-chen
+  - vyom-fadia
+  - tony-wang
+  - cynthia-jauregui
+categories:
+  - agents, text-to-speech, speech-to-text, voices
+isFeatured: false # Leave as false, we'll feature exceptional projects
+date: "2025-09-20" # Today's date in YYYY-MM-DD format
+image: /images/your-project.png # Upload image to /public/images/
+repoUrl: https://github.com/tonywangs/ai-valley-hackathon
+videoUrl: https://youtube.com/watch?v=... # Optional: Demo video
+---
+
+# Your Project Name
+Laboobie
+
+## Overview
+
+Our project is an AI-powered Labubu plushie that calls you, chats using your public info, and switches personas based on plushies you hold up. We use ElevenLabs to generate realistic AI voices for each persona using Text-to-Speech and Speech-to-Text, making the experience feel natural and engaging. Laboobie is fun and interactive because the Labubu dances and changes voices live. 
+
+## Key Features
+
+- Feature 1: AI Labubu calls and chats using your public info
+- Feature 2: Dancing plushie moves when AI speaks
+- Feature 3: Persona switches with pink/white Labubu plushies
+
+## How It Works
+
+Explain the technical implementation, architecture, or interesting challenges you solved.
+
+## Technologies Used
+
+- ElevenLabs API 
+- Vapi
+- Twillio
+- Spotify API
+- Google Cloud
+
+## Getting Started
+
+Installation Instructions & Getting Started
+
+This is a LABOOBIE project that appears to be an AI-powered social media analysis and live streaming application with multiple components:
+
+Project Overview
+- Frontend: Next.js React application with live streaming capabilities
+- Backend: FastAPI Python service with computer vision and detection
+- AI Services: Multiple Python scripts for social media analysis, music analysis, and text-to-speech
+- Streaming: Real-time video streaming with HLS support
+
+Prerequisites
+- Python 3.10+
+- Node.js 18+
+- npm or yarn
+- Camera access (for streaming features)
+- API Keys (see below)
+
+1. Clone and Setup
+```shell
+git clone <repository-url>
+cd ai-valley-hackathon
+```
+
+2. Backend Setup (Python Services)
+
+Install Python Dependencies
+
+Option A: Using pip (recommended for quick start)
+```shell
+pip install -r requirements.txt
+```
+
+Option B: Using uv (for workspace management)
+
+Option B: Using uv (for workspace management)
+```shell
+# Install uv if you don't have it
+pip install uv
+
+# Install dependencies
+uv sync
+```
+
+Backend API Service
+```shell
+cd services/backend
+pip install -r ../../requirements.txt
+# Additional local dependencies are in pyproject.toml
+pip install fastapi opencv-python-headless uvicorn mediapipe numpy
+```
+
+Frontend Setup (Next.js)
+```shell
+cd services/frontend
+npm install
+```
+
+Environment Configuration
+
+Create a `.env` file in the root directory:
+```shell
+# ElevenLabs API (for text-to-speech)
+ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
+
+# Grok API (for social media analysis)
+GROK_API_KEY=your_grok_api_key_here
+
+# SixtyFour AI API (for person enrichment)
+SIXTYFOUR_API_KEY=your_sixtyfour_api_key_here
+```
+
+Spotify (API for music analysis)
+```env
+SPOTIFY_CLIENT_ID=your_spotify_client_id
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+```
+
+5. API Keys Setup
+
+You’ll need to obtain API keys from these services:
+1. ElevenLabs: Get API key
+2. Grok AI: Get API key
+3. SixtyFour AI: Get API key
+4. Spotify: Create app for Client ID/Secret
+
+---
+
+6. Running the Application
+
+Start the Backend API Server
+```shell
+cd services/backend
+python api.py
+```
+The backend will run on http://localhost:8001
+
+Start the Frontend Application
+```shell
+cd services/frontend
+npm run dev
+```
+The frontend will run on http://localhost:3000
+
+---
+
+7. Using the Application
+
+Web Interface
+1. Open http://localhost:3000 in your browser
+2. User Page: Start camera streaming (requires camera permission)
+Admin Page: View live stream from users
+
+---
+
+AI Services (Command Line)
+
+Text-to-Speech (ElevenLabs)
+```shell
+python eleven_labs.py
+```
+
+Social Media Analysis (Grok)
+```shell
+python social_media_scraper.py
+```
+
+Music Analysis (Spotify)
+```shell
+python spotify_scrapper.py
+```
+
+Person Enrichment (SixtyFour)
+```shell
+python sixtyfour.py
+```
