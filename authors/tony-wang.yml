@@ -1,0 +1,12 @@
+name: Tony Wang
+url: "https://tonywang.xyz/" # Optional: your website
+bio: "Brief description about yourself"
+location: "Pleasanton, United States"
+isElevenLabs: false # Set to true if you work at ElevenLabs
+socials:
+  - label: X
+    url: "https://x.com/tonyw__"
+  - label: GitHub
+    url: "https://github.com/tonywangs"
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/tony-wang-/" # Optional
